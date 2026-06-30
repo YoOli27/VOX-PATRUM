@@ -1,701 +1,2608 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Vox Patrum: Die ultimative Ausgabe</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vox Patrum: Die ultimative Ausgabe</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const themeFromUrl = params.get('theme');
+            let storedTheme = null;
 
-    <style>
-        /* --- 1. THEME VARIABLES --- */
+            try {
+                storedTheme = localStorage.getItem('theme');
+                if (themeFromUrl === 'dark' || themeFromUrl === 'light') {
+                    localStorage.setItem('theme', themeFromUrl);
+                }
+            } catch (error) {}
+
+            if ((themeFromUrl || storedTheme) === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
+<style>
         :root {
-            --crimson: #7b1113;
-            --gold: #c5a05a;
-            --bg-body: #e8e4d9;
-            --bg-card: #ffffff;
-            --text-main: #2c2c2c;
-            --text-sub: #555;
-            --nav-bg: #1a1a1a;
-            --nav-active: #c5a05a;
-            --nav-inactive: #888;
-            --shadow: rgba(0,0,0,0.1);
-            --nav-height: 70px;
+            --ink: #221b17;
+            --muted: #6e6257;
+            --paper: #fffaf0;
+            --paper-soft: #f3eddf;
+            --vellum: #e8dcc4;
+            --oxblood: #7c1f21;
+            --oxblood-strong: #551213;
+            --gold: #b78a41;
+            --verdigris: #27645d;
+            --lapis: #253f67;
+            --line: rgba(72, 53, 34, 0.16);
+            --nav-bg: #211714;
+            --nav-active: #f4d38d;
+            --nav-inactive: #b9aa99;
+            --shadow: 0 22px 58px rgba(49, 35, 21, 0.16);
+            --shadow-tight: 0 12px 30px rgba(49, 35, 21, 0.12);
+            --nav-height: 76px;
         }
 
-        /* Dark Mode */
         [data-theme="dark"] {
-            --crimson: #ff6b6b;
-            --gold: #d4af37;
-            --bg-body: #121212;
-            --bg-card: #1e1e1e;
-            --text-main: #e0e0e0;
-            --text-sub: #aaaaaa;
-            --nav-bg: #000;
-            --nav-active: #d4af37;
-            --nav-inactive: #555;
-            --shadow: rgba(0,0,0,0.5);
+            --ink: #f4ead8;
+            --muted: #c9bba6;
+            --paper: #211916;
+            --paper-soft: #171312;
+            --vellum: #2c211c;
+            --oxblood: #ee8b81;
+            --oxblood-strong: #ffd1c9;
+            --gold: #e2b96b;
+            --verdigris: #7fc0b5;
+            --lapis: #aebfe8;
+            --line: rgba(243, 224, 190, 0.15);
+            --nav-bg: #0f0d0c;
+            --nav-active: #f0c779;
+            --nav-inactive: #83796f;
+            --shadow: 0 22px 62px rgba(0, 0, 0, 0.42);
+            --shadow-tight: 0 12px 34px rgba(0, 0, 0, 0.34);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
         body {
-            font-family: 'Merriweather', serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
-            height: 100vh;
-            overflow: hidden; 
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s, color 0.3s;
+            overflow: hidden;
+            color: var(--ink);
+            background:
+                linear-gradient(120deg, rgba(39, 100, 93, 0.12), transparent 36%),
+                linear-gradient(300deg, rgba(124, 31, 33, 0.1), transparent 34%),
+                var(--paper-soft);
+            font-family: "Merriweather", serif;
+            line-height: 1.7;
+            transition: background-color 240ms ease, color 240ms ease;
         }
 
-        /* --- 2. SPLASH SCREEN --- */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.28;
+            background-image:
+                linear-gradient(rgba(72, 53, 34, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(72, 53, 34, 0.04) 1px, transparent 1px);
+            background-size: 46px 46px;
+            mask-image: linear-gradient(to bottom, #000, transparent 78%);
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
         #splash-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #1a0505; z-index: 9999;
-            display: flex; justify-content: center; align-items: center; flex-direction: column;
-            transition: opacity 0.8s ease-out;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at center, rgba(226, 185, 107, 0.16), transparent 32%),
+                #170706;
+            transition: opacity 700ms ease;
         }
-        .splash-content i { color: var(--gold); animation: pulse 2s infinite; }
-        .splash-text { font-family: 'Cinzel', serif; color: #fff; margin-top: 20px; letter-spacing: 3px; animation: fadeInUp 1s ease-out; }
-        
-        @keyframes pulse { 0% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0.5; transform: scale(0.9); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 3. HEADER & SEARCH --- */
+        .splash-content {
+            display: grid;
+            place-items: center;
+            gap: 1rem;
+            color: #fff7e8;
+        }
+
+        .splash-content i {
+            display: grid;
+            width: 88px;
+            height: 88px;
+            place-items: center;
+            border: 1px solid rgba(226, 185, 107, 0.62);
+            border-radius: 50%;
+            color: var(--gold);
+            box-shadow: 0 0 0 10px rgba(226, 185, 107, 0.08);
+            animation: sealPulse 1800ms ease-in-out infinite;
+        }
+
+        .splash-text {
+            margin-top: 0;
+            color: #fff7e8;
+            font-family: "Cinzel", serif;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            animation: riseIn 700ms ease both;
+        }
+
         #app-header {
-            padding: 1rem; display: flex; justify-content: space-between; align-items: center;
-            background: var(--bg-body); z-index: 500; border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 68px;
+            padding: 0.75rem clamp(0.9rem, 3vw, 2rem);
+            border-bottom: 1px solid var(--line);
+            background: color-mix(in srgb, var(--paper) 86%, transparent);
+            backdrop-filter: blur(18px);
         }
-        .header-title { font-family: 'Cinzel'; font-weight: bold; color: var(--crimson); font-size: 1.3rem; }
-        .header-actions button { background: none; border: none; font-size: 1.2rem; color: var(--text-main); margin-left: 15px; cursor: pointer; }
 
-        #search-container { padding: 0 1rem 1rem 1rem; display: none; background: var(--bg-body); animation: slideDown 0.2s; }
-        @keyframes slideDown { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        #search-input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--gold); background: var(--bg-card); color: var(--text-main); font-family: 'Merriweather'; font-size: 1rem; }
+        .header-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.68rem;
+            min-width: 0;
+            padding: 0;
+            border: 0;
+            color: var(--oxblood-strong);
+            background: none;
+            font-family: "Cinzel", serif;
+            font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-        /* --- 4. MAIN CONTENT --- */
+        .header-title i {
+            display: grid;
+            flex: 0 0 auto;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--gold);
+            background: color-mix(in srgb, var(--paper) 90%, transparent);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .header-actions a,
+        .header-actions button,
+        .inline-action {
+            display: inline-grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--ink);
+            background: color-mix(in srgb, var(--paper) 90%, transparent);
+            box-shadow: 0 8px 18px rgba(49, 35, 21, 0.08);
+            transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
+        }
+
+        .header-actions a:hover,
+        .header-actions button:hover,
+        .inline-action:hover {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--gold) 70%, var(--line));
+            color: var(--oxblood);
+        }
+
+        #reading-progress {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 2px;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        #reading-progress span {
+            display: block;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--verdigris), var(--gold), var(--oxblood));
+            transition: width 120ms linear;
+        }
+
+        #search-container {
+            position: relative;
+            z-index: 450;
+            display: none;
+            padding: 0.75rem clamp(0.9rem, 3vw, 2rem);
+            border-bottom: 1px solid var(--line);
+            background: color-mix(in srgb, var(--paper) 88%, transparent);
+            backdrop-filter: blur(18px);
+            animation: slideDown 180ms ease;
+        }
+
+        #search-container.is-open {
+            display: block;
+        }
+
+        .search-field {
+            position: relative;
+        }
+
+        #search-input {
+            width: 100%;
+            min-height: 48px;
+            padding: 0.75rem 3rem 0.75rem 2.75rem;
+            border: 1px solid color-mix(in srgb, var(--gold) 48%, var(--line));
+            border-radius: 999px;
+            outline: none;
+            color: var(--ink);
+            background:
+                linear-gradient(90deg, color-mix(in srgb, var(--gold) 16%, transparent), transparent 38%),
+                var(--paper);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+            font-size: 0.95rem;
+        }
+
+        #search-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 22%, transparent);
+        }
+
+        .search-field::before {
+            content: "\f002";
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            color: var(--gold);
+            font: var(--fa-font-solid);
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        #search-clear {
+            position: absolute;
+            top: 50%;
+            right: 0.45rem;
+            display: grid;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            color: var(--muted);
+            background: transparent;
+            transform: translateY(-50%);
+            transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
+        }
+
+        #search-clear:hover {
+            color: var(--oxblood);
+            background: color-mix(in srgb, var(--gold) 14%, transparent);
+            transform: translateY(-50%) scale(1.04);
+        }
+
+        #topic-tools {
+            position: relative;
+            z-index: 420;
+            display: grid;
+            gap: 0.5rem;
+            padding: 0.55rem clamp(0.9rem, 3vw, 2rem);
+            border-bottom: 1px solid var(--line);
+            background: color-mix(in srgb, var(--paper) 86%, transparent);
+            backdrop-filter: blur(18px);
+        }
+
+        #topic-tools.is-hidden {
+            display: none;
+        }
+
+        .tool-row {
+            display: flex;
+            gap: 0.45rem;
+            overflow-x: auto;
+            padding-bottom: 0.08rem;
+            scrollbar-width: none;
+        }
+
+        .tool-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tool-chip,
+        .author-chip,
+        .mini-action {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-height: 36px;
+            padding: 0.5rem 0.72rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--muted);
+            background: color-mix(in srgb, var(--paper) 82%, transparent);
+            font-family: "Cinzel", serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 160ms ease, color 160ms ease, border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .tool-chip:hover,
+        .author-chip:hover,
+        .mini-action:hover {
+            transform: translateY(-1px);
+            border-color: color-mix(in srgb, var(--gold) 62%, var(--line));
+            color: var(--oxblood);
+            box-shadow: 0 8px 18px rgba(49, 35, 21, 0.08);
+        }
+
+        .tool-chip.active,
+        .author-chip.active {
+            color: var(--oxblood-strong);
+            border-color: color-mix(in srgb, var(--gold) 72%, var(--line));
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--gold) 20%, transparent), color-mix(in srgb, var(--paper) 88%, transparent)),
+                var(--paper);
+        }
+
+        .author-filter {
+            align-items: center;
+        }
+
+        #author-filter-list {
+            display: contents;
+        }
+
         #app-container {
-            flex: 1; overflow-y: auto; overflow-x: hidden;
-            position: relative; scroll-behavior: smooth;
-            padding-bottom: calc(var(--nav-height) + 20px);
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding-bottom: calc(var(--nav-height) + 1rem);
+            scroll-behavior: smooth;
         }
 
-        .view-section { display: none; max-width: 800px; margin: 0 auto; padding: 1rem; }
-        .view-section.active { display: block; animation: fadeScale 0.3s ease-out; }
-        @keyframes fadeScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .view-section {
+            display: none;
+            width: min(100%, 980px);
+            margin: 0 auto;
+            padding: clamp(0.85rem, 2.4vw, 1.5rem);
+        }
+
+        .view-section.active {
+            display: block;
+            animation: sectionIn 260ms ease both;
+        }
+
+        .reader-home {
+            display: grid;
+            gap: clamp(1.2rem, 3vw, 2rem);
+            min-height: calc(100svh - 160px);
+            align-content: center;
+            padding: clamp(0.5rem, 4vw, 2.5rem) 0;
+        }
+
+        .home-kicker {
+            display: inline-flex;
+            width: max-content;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--verdigris);
+            font-family: "Cinzel", serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .home-kicker::before {
+            content: "";
+            width: 36px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .reader-home h1 {
+            max-width: 780px;
+            margin: 0;
+            color: var(--oxblood-strong);
+            font-family: "Cinzel", serif;
+            font-size: clamp(2.4rem, 7vw, 5.25rem);
+            line-height: 0.98;
+        }
+
+        .reader-home p {
+            max-width: 710px;
+            margin: 0;
+            color: var(--muted);
+            font-size: clamp(1rem, 1.6vw, 1.15rem);
+        }
+
+        .home-actions,
+        .home-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .primary-action,
+        .secondary-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            min-height: 46px;
+            padding: 0.78rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        }
+
+        .primary-action {
+            border: 1px solid color-mix(in srgb, var(--oxblood) 70%, var(--line));
+            color: #fff7e8;
+            background: linear-gradient(135deg, var(--oxblood), var(--lapis));
+            box-shadow: 0 14px 30px rgba(85, 18, 19, 0.24);
+        }
+
+        .secondary-action {
+            border: 1px solid var(--line);
+            color: var(--ink);
+            background: color-mix(in srgb, var(--paper) 84%, transparent);
+        }
+
+        .primary-action:hover,
+        .secondary-action:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-tight);
+        }
+
+        .home-mosaic {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: clamp(0.45rem, 1vw, 0.75rem);
+            align-items: stretch;
+            padding: 0.75rem;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--paper) 76%, transparent);
+            box-shadow: var(--shadow-tight);
+            overflow: hidden;
+        }
+
+        .home-mosaic img {
+            display: block;
+            width: 100%;
+            height: clamp(190px, 18vw, 230px);
+            aspect-ratio: 4 / 5;
+            border-radius: 6px;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(0.95) contrast(1.04);
+            transform: none;
+            transition: transform 500ms ease, filter 500ms ease;
+        }
+
+        .home-mosaic:hover img {
+            transform: translateY(-2px);
+            filter: saturate(1.05) contrast(1.06);
+        }
+
+        .home-stat,
+        .result-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            min-height: 34px;
+            padding: 0.42rem 0.65rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--muted);
+            background: color-mix(in srgb, var(--paper) 78%, transparent);
+            font-size: 0.82rem;
+        }
+
+        .home-stat i,
+        .result-count i {
+            color: var(--gold);
+        }
 
         h2.topic-title {
-            font-family: 'Cinzel', serif; color: var(--crimson); font-size: 1.8rem;
-            text-align: center; margin: 0.5rem 0 2rem 0; border-bottom: 2px solid var(--gold); padding-bottom: 10px;
+            display: grid;
+            gap: 0.45rem;
+            margin: 0.5rem 0 1.5rem;
+            color: var(--oxblood-strong);
+            font-family: "Cinzel", serif;
+            font-size: clamp(1.55rem, 4vw, 2.35rem);
+            line-height: 1.05;
+        }
+
+        h2.topic-title::after {
+            content: "";
+            width: 76px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--gold), var(--verdigris));
+        }
+
+        .section-tools {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.6rem;
+            margin: -0.65rem 0 1rem;
+        }
+
+        .collapse-all-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 38px;
+            padding: 0.55rem 0.78rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--ink);
+            background: color-mix(in srgb, var(--paper) 84%, transparent);
+            box-shadow: 0 8px 18px rgba(49, 35, 21, 0.08);
+            font-family: "Cinzel", serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
+        }
+
+        .collapse-all-btn:hover,
+        .mini-action:hover {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--gold) 70%, var(--line));
+            color: var(--oxblood);
         }
 
         .quote-card {
-            background: var(--bg-card); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px var(--shadow); border-left: 5px solid var(--gold); position: relative;
+            position: relative;
+            margin-bottom: 1rem;
+            padding: clamp(1.1rem, 3vw, 1.45rem);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--gold);
+            border-radius: 8px;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top right, color-mix(in srgb, var(--gold) 12%, transparent), transparent 34%),
+                linear-gradient(135deg, color-mix(in srgb, var(--paper) 96%, transparent), color-mix(in srgb, var(--vellum) 52%, transparent)),
+                var(--paper);
+            box-shadow: var(--shadow-tight);
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(12px);
+            transition: opacity 360ms ease, transform 360ms ease, box-shadow 180ms ease, border-color 180ms ease;
         }
 
-        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1rem; }
-        .saint-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
-        .saint-info h3 { font-family: 'Cinzel'; font-size: 1rem; color: var(--crimson); font-weight: 700; }
-        .saint-info span { font-size: 0.75rem; color: var(--text-sub); display: block; }
-        .quote-text { font-style: italic; color: var(--text-main); margin-bottom: 1rem; font-size: 1.05rem; text-align: justify; }
-        .quote-source { font-size: 0.75rem; text-align: right; color: var(--text-sub); border-top: 1px solid var(--shadow); padding-top: 8px; font-weight: bold; margin-top: 0.5rem; }
-
-        .share-btn, .pdf-btn {
-            position: absolute; top: 1rem;
-            background: none; border: none;
-            font-size: 1.1rem; cursor: pointer; opacity: 0.6;
+        .quote-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--verdigris), transparent);
+            opacity: 0.72;
+            pointer-events: none;
         }
-        .share-btn { right: 1rem; color: var(--gold); }
-        .pdf-btn { right: 3rem; color: var(--crimson); }
-        .share-btn:hover, .pdf-btn:hover { opacity: 1; }
 
-        /* --- 5. SCROLLABLE NAVIGATION --- */
+        .quote-card:hover {
+            border-color: color-mix(in srgb, var(--gold) 48%, var(--line));
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .quote-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-card.is-visible:hover {
+            transform: translateY(-2px);
+        }
+
+        .quote-card-body {
+            position: relative;
+            z-index: 1;
+            transition: max-height 260ms ease;
+        }
+
+        .quote-card.is-collapsible.is-collapsed .quote-card-body {
+            max-height: 14.5rem;
+            overflow: hidden;
+        }
+
+        .quote-card.is-collapsible.is-collapsed .quote-card-body::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 5.5rem;
+            background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--paper) 98%, transparent));
+            pointer-events: none;
+        }
+
+        .quote-card.is-filter-hidden {
+            display: none;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            min-height: 66px;
+            margin-bottom: 1rem;
+            padding-right: 8.4rem;
+        }
+
+        .saint-avatar {
+            width: 62px;
+            height: 62px;
+            flex: 0 0 auto;
+            border: 2px solid color-mix(in srgb, var(--gold) 80%, var(--paper));
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 24px rgba(49, 35, 21, 0.14);
+        }
+
+        .saint-info h3 {
+            margin: 0;
+            color: var(--oxblood-strong);
+            font-family: "Cinzel", serif;
+            font-size: clamp(0.98rem, 2vw, 1.15rem);
+            line-height: 1.2;
+        }
+
+        .saint-info span {
+            display: block;
+            margin-top: 0.18rem;
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .quote-text {
+            margin: 0 0 0.95rem;
+            color: var(--ink);
+            font-size: clamp(1rem, 1.9vw, 1.08rem);
+            font-style: italic;
+            line-height: 1.82;
+            text-align: justify;
+            hyphens: auto;
+            overflow-wrap: break-word;
+        }
+
+        .quote-source {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.42rem;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0.72rem 0 0 auto;
+            padding: 0.42rem 0.6rem;
+            border: 1px solid color-mix(in srgb, var(--gold) 26%, var(--line));
+            border-radius: 999px;
+            color: var(--muted);
+            background: color-mix(in srgb, var(--paper) 72%, transparent);
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .quote-source::before {
+            content: "\f02e";
+            flex: 0 0 auto;
+            color: var(--gold);
+            font: var(--fa-font-solid);
+            font-size: 0.72rem;
+        }
+
+        .source-pdf-link {
+            color: var(--oxblood);
+            text-decoration: none;
+        }
+
+        .source-pdf-link:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        .share-btn,
+        .pdf-btn,
+        .bookmark-btn {
+            position: absolute;
+            top: 1rem;
+            display: inline-grid;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--muted);
+            background: color-mix(in srgb, var(--paper) 90%, transparent);
+            box-shadow: 0 8px 18px rgba(49, 35, 21, 0.08);
+            font-size: 0.95rem;
+            opacity: 1;
+            z-index: 4;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: transform 160ms ease, color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+        }
+
+        .share-btn { right: 1rem; }
+        .pdf-btn { right: 3.85rem; }
+        .bookmark-btn { right: 6.7rem; }
+
+        .share-btn:hover,
+        .pdf-btn:hover,
+        .bookmark-btn:hover,
+        .bookmark-btn.active {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--gold) 66%, var(--line));
+            color: var(--oxblood);
+            background: color-mix(in srgb, var(--gold) 16%, var(--paper));
+        }
+
+        .bookmark-btn.active {
+            color: var(--gold);
+        }
+
+        .bookmark-btn.active i {
+            animation: savePop 300ms ease;
+        }
+
+        .read-more-btn {
+            display: none;
+            position: relative;
+            z-index: 3;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            min-height: 42px;
+            margin-top: 0.85rem;
+            border: 1px solid color-mix(in srgb, var(--gold) 54%, var(--line));
+            border-radius: 999px;
+            color: var(--oxblood);
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--gold) 18%, transparent), color-mix(in srgb, var(--paper) 80%, transparent)),
+                var(--paper);
+            font-family: "Cinzel", serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .quote-card.is-collapsible .read-more-btn {
+            display: inline-flex;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 24px rgba(49, 35, 21, 0.12);
+        }
+
+        .empty-state {
+            display: grid;
+            place-items: center;
+            gap: 0.8rem;
+            min-height: 260px;
+            padding: 2rem;
+            border: 1px dashed color-mix(in srgb, var(--gold) 45%, var(--line));
+            border-radius: 8px;
+            color: var(--muted);
+            background: color-mix(in srgb, var(--paper) 72%, transparent);
+            text-align: center;
+        }
+
+        .empty-state i {
+            color: var(--gold);
+            font-size: 2rem;
+        }
+
+        .filter-empty {
+            margin-top: 1rem;
+        }
+
+        .saved-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.65rem;
+            margin: -0.35rem 0 1rem;
+        }
+
+        .saved-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.38rem;
+            width: fit-content;
+            margin: -0.2rem 0 0.75rem;
+            padding: 0.34rem 0.55rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--muted);
+            background: color-mix(in srgb, var(--paper) 76%, transparent);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .saved-note i {
+            color: var(--gold);
+        }
+
+        .mini-action:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        #search-results-list,
+        #saved-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        mark {
+            border-radius: 0.2rem;
+            color: inherit;
+            background: color-mix(in srgb, var(--gold) 38%, transparent);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 38%, transparent);
+        }
+
+        [data-theme="dark"] .quote-card {
+            background:
+                radial-gradient(circle at top right, color-mix(in srgb, var(--gold) 10%, transparent), transparent 34%),
+                linear-gradient(135deg, color-mix(in srgb, var(--paper) 94%, transparent), color-mix(in srgb, var(--vellum) 60%, transparent)),
+                var(--paper);
+        }
+
+        [data-theme="dark"] .quote-source,
+        [data-theme="dark"] .saved-note,
+        [data-theme="dark"] .tool-chip,
+        [data-theme="dark"] .author-chip,
+        [data-theme="dark"] .mini-action,
+        [data-theme="dark"] .result-count {
+            background: color-mix(in srgb, var(--paper) 72%, #000 16%);
+        }
+
+        [data-theme="dark"] mark {
+            background: color-mix(in srgb, var(--gold) 46%, transparent);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 30%, transparent);
+        }
+
         nav {
-            position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height);
-            background-color: var(--nav-bg); z-index: 1000;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
-            transition: transform 0.3s ease-in-out;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            height: var(--nav-height);
+            border-top: 1px solid rgba(255, 250, 240, 0.12);
+            background:
+                linear-gradient(180deg, color-mix(in srgb, var(--nav-bg) 90%, transparent), var(--nav-bg)),
+                var(--nav-bg);
+            box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.24);
+            transition: transform 260ms ease;
         }
-        nav.nav-hidden { transform: translateY(100%); }
 
-        /* Scrollable container for buttons */
+        nav.nav-hidden {
+            transform: translateY(100%);
+        }
+
         .nav-scroller {
             display: flex;
-            overflow-x: auto;
-            height: 100%;
             align-items: center;
-            padding: 0 10px;
-            /* Hide Scrollbar */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE */
+            height: 100%;
+            gap: 0.3rem;
+            overflow-x: auto;
+            padding: 0 0.6rem;
+            scrollbar-width: none;
         }
-        .nav-scroller::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+
+        .nav-scroller::-webkit-scrollbar {
+            display: none;
+        }
 
         nav button {
-            background: none; border: none; color: var(--nav-inactive);
-            font-family: 'Cinzel'; font-size: 0.65rem;
-            display: flex; flex-direction: column; align-items: center; gap: 5px;
-            min-width: 80px; /* Force width so they scroll */
-            flex-shrink: 0; /* Prevent squishing */
-            cursor: pointer;
-            transition: color 0.2s;
+            position: relative;
+            display: grid;
+            flex: 0 0 auto;
+            min-width: 74px;
+            min-height: 58px;
+            place-items: center;
+            gap: 0.25rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--nav-inactive);
+            background: transparent;
+            font-family: "Cinzel", serif;
+            font-size: 0.66rem;
+            font-weight: 700;
+            transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
         }
-        nav button i { font-size: 1.3rem; }
-        nav button.active { color: var(--nav-active); }
-        nav button.active i { transform: translateY(-3px); }
 
-        /* Toast */
+        nav button i {
+            font-size: 1.18rem;
+        }
+
+        nav button:hover,
+        nav button.active {
+            color: var(--nav-active);
+            background: rgba(255, 250, 240, 0.08);
+            border-color: rgba(255, 250, 240, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-count {
+            position: absolute;
+            top: 0.35rem;
+            right: 0.45rem;
+            display: none;
+            min-width: 18px;
+            height: 18px;
+            place-items: center;
+            padding: 0 0.26rem;
+            border-radius: 999px;
+            color: #211714;
+            background: var(--gold);
+            font-family: "Merriweather", serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+        }
+
+        .nav-count.is-visible {
+            display: grid;
+        }
+
+        .primary-action:active,
+        .secondary-action:active,
+        .tool-chip:active,
+        .author-chip:active,
+        .mini-action:active,
+        .share-btn:active,
+        .pdf-btn:active,
+        .bookmark-btn:active,
+        .read-more-btn:active,
+        nav button:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        :root {
+            --paper: #f8f0df;
+            --paper-soft: #e9dfca;
+            --vellum: #ded0b6;
+            --oxblood: #742123;
+            --oxblood-strong: #551516;
+            --gold: #a77d3f;
+            --verdigris: #496d65;
+            --lapis: #4f5b70;
+            --nav-bg: #211714;
+            --nav-active: #ead0a0;
+            --shadow: 0 14px 34px rgba(49, 35, 21, 0.12);
+            --shadow-tight: 0 8px 20px rgba(49, 35, 21, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --paper: #141211;
+            --paper-soft: #0b0a0a;
+            --vellum: #1d1917;
+            --oxblood: #c53d3f;
+            --oxblood-strong: #f05f60;
+            --gold: #cda765;
+            --verdigris: #87aaa2;
+            --lapis: #9ba6b9;
+            --nav-bg: #14110f;
+            --nav-active: #dec18a;
+            --shadow: 0 16px 38px rgba(0, 0, 0, 0.34);
+            --shadow-tight: 0 10px 24px rgba(0, 0, 0, 0.26);
+        }
+
+        body {
+            background: var(--paper-soft);
+        }
+
+        body::before {
+            opacity: 0.16;
+        }
+
+        #splash-screen {
+            background: #170706;
+        }
+
+        #reading-progress span,
+        h2.topic-title::after,
+        .quote-card::before {
+            background: var(--gold);
+        }
+
+        #search-input,
+        .tool-chip,
+        .author-chip,
+        .mini-action,
+        .secondary-action,
+        .home-mosaic,
+        .home-stat,
+        .result-count,
+        .collapse-all-btn,
+        .quote-card,
+        .quote-source,
+        .share-btn,
+        .pdf-btn,
+        .bookmark-btn,
+        .read-more-btn,
+        .empty-state,
+        .saved-note {
+            background: var(--paper);
+        }
+
+        .primary-action {
+            color: var(--paper);
+            background: var(--oxblood);
+            box-shadow: var(--shadow-tight);
+        }
+
+        .tool-chip.active,
+        .author-chip.active {
+            background: color-mix(in srgb, var(--paper) 82%, var(--gold) 18%);
+        }
+
+        .quote-card {
+            border-left-color: var(--gold);
+        }
+
+        .quote-card::before {
+            opacity: 0.42;
+        }
+
+        .quote-card.is-collapsible.is-collapsed .quote-card-body::after {
+            background: linear-gradient(to bottom, transparent, var(--paper));
+        }
+
+        .share-btn:hover,
+        .pdf-btn:hover,
+        .bookmark-btn:hover,
+        .bookmark-btn.active,
+        #search-clear:hover {
+            background: color-mix(in srgb, var(--paper) 88%, var(--gold) 12%);
+        }
+
+        mark,
+        [data-theme="dark"] mark {
+            background: color-mix(in srgb, var(--gold) 28%, transparent);
+            box-shadow: none;
+        }
+
+        nav {
+            background: var(--nav-bg);
+        }
+
+        [data-theme="dark"] .quote-card,
+        [data-theme="dark"] .quote-source,
+        [data-theme="dark"] .saved-note,
+        [data-theme="dark"] .tool-chip,
+        [data-theme="dark"] .author-chip,
+        [data-theme="dark"] .mini-action,
+        [data-theme="dark"] .result-count {
+            background: var(--paper);
+        }
+
         #toast {
-            visibility: hidden; background-color: #333; color: #fff; text-align: center;
-            border-radius: 50px; padding: 10px 20px; position: fixed; z-index: 2000;
-            left: 50%; bottom: 90px; transform: translateX(-50%); font-family: 'Cinzel';
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.3s;
-            font-size: 0.9rem; pointer-events: none;
+            position: fixed;
+            left: 50%;
+            bottom: calc(var(--nav-height) + 1rem);
+            z-index: 2000;
+            max-width: min(92vw, 420px);
+            padding: 0.7rem 1rem;
+            border: 1px solid rgba(255, 250, 240, 0.16);
+            border-radius: 999px;
+            color: #fff7e8;
+            background: rgba(33, 23, 20, 0.92);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
+            font-family: "Cinzel", serif;
+            font-size: 0.82rem;
+            opacity: 0;
+            pointer-events: none;
+            text-align: center;
+            transform: translate(-50%, 10px);
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+            visibility: hidden;
         }
-        #toast.show { visibility: visible; opacity: 1; }
 
-        /* Tablet/Desktop */
-        @media (min-width: 769px) {
-            nav { top: 0; bottom: auto; height: 80px; }
-            nav.nav-hidden { transform: translateY(-100%); }
-            #app-container { padding-top: 80px; }
-            #app-header { display: none; }
-            .nav-scroller { justify-content: center; }
+        #toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+            visibility: visible;
+        }
+
+        @keyframes sealPulse {
+            0%, 100% { transform: scale(1); opacity: 0.72; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes sectionIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes savePop {
+            0% { transform: scale(0.82); }
+            60% { transform: scale(1.18); }
+            100% { transform: scale(1); }
+        }
+
+        @media (min-width: 900px) {
+            #app-header,
+            #search-container,
+            #topic-tools,
+            #app-container {
+                margin-left: 96px;
+            }
+
+            #topic-tools {
+                grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+                align-items: center;
+            }
+
+            #app-container {
+                padding-bottom: 2rem;
+            }
+
+            .view-section {
+                padding-block: 2rem;
+            }
+
+            nav {
+                top: 0;
+                right: auto;
+                bottom: 0;
+                width: 96px;
+                height: 100%;
+                border-top: 0;
+                border-right: 1px solid rgba(255, 250, 240, 0.12);
+                box-shadow: 14px 0 34px rgba(0, 0, 0, 0.22);
+            }
+
+            nav.nav-hidden {
+                transform: none;
+            }
+
+            .nav-scroller {
+                flex-direction: column;
+                justify-content: center;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding: 0.75rem;
+            }
+
+            nav button {
+                width: 100%;
+                min-width: 0;
+            }
+
+            #toast {
+                bottom: 1.25rem;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .view-section {
+                padding: 0.75rem;
+            }
+
+            #topic-tools {
+                gap: 0.42rem;
+                padding: 0.45rem 0.75rem;
+            }
+
+            .tool-chip,
+            .author-chip,
+            .mini-action {
+                min-height: 34px;
+                padding: 0.44rem 0.62rem;
+                font-size: 0.68rem;
+            }
+
+            .reader-home {
+                min-height: auto;
+                align-content: start;
+                gap: 0.95rem;
+                padding-top: 0.25rem;
+            }
+
+            .reader-home h1 {
+                max-width: 100%;
+                font-size: clamp(2rem, 10vw, 2.85rem);
+                line-height: 1.02;
+            }
+
+            .reader-home p {
+                font-size: 0.98rem;
+                line-height: 1.65;
+            }
+
+            .home-actions,
+            .home-stats {
+                gap: 0.55rem;
+            }
+
+            .primary-action,
+            .secondary-action {
+                min-height: 44px;
+                padding: 0.68rem 0.9rem;
+            }
+
+            .home-mosaic {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.45rem;
+                padding: 0.45rem;
+            }
+
+            .home-mosaic img:nth-child(n+4) {
+                display: none;
+            }
+
+            .home-mosaic img {
+                height: auto;
+                aspect-ratio: 1 / 1.22;
+                transform: none;
+            }
+
+            .home-mosaic:hover img {
+                transform: none;
+            }
+
+            .card-header {
+                align-items: flex-start;
+                padding-right: 0;
+                padding-top: 3rem;
+            }
+
+            .saint-avatar {
+                width: 54px;
+                height: 54px;
+            }
+
+            .share-btn,
+            .pdf-btn,
+            .bookmark-btn {
+                top: 0.9rem;
+            }
+
+            .share-btn { right: 0.9rem; }
+            .pdf-btn { right: 3.65rem; }
+            .bookmark-btn { right: 6.4rem; }
+
+            nav button {
+                min-width: 68px;
+                font-size: 0.62rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 1ms !important;
+                scroll-behavior: auto !important;
+                transition-duration: 1ms !important;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div id="splash-screen">
-        <div class="splash-content">
-            <i class="fa-solid fa-cross fa-4x"></i>
-            <div class="splash-text">VOX PATRUM</div>
-        </div>
-    </div>
-
-    <div id="toast">Thema geändert</div>
-
-    <div id="app-header">
-        <div class="header-title">Vox Patrum</div>
-        <div class="header-actions">
-            <button onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button onclick="toggleTheme()"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
-        </div>
-    </div>
-    
-    <div id="search-container">
-        <input type="text" id="search-input" placeholder="Weisheit suchen..." onkeyup="performSearch()">
-    </div>
-
-    <div id="app-container">
-        
-        <section id="view-home" class="view-section active">
-            <div style="text-align: center; padding: 3rem 1rem;">
-                <h1 style="font-family: 'Cinzel'; font-size: 2.5rem; color: var(--crimson); margin-bottom: 0.5rem;">Vox Patrum</h1>
-                <p style="color: var(--gold); font-family: 'Cinzel'; margin-bottom: 3rem;">Die Eucharistie durch die Jahrhunderte</p>
-                <div style="opacity: 0.6; margin-bottom: 3rem;">
-                    <i class="fa-solid fa-hand-pointer fa-2x" style="color: var(--text-main);"></i>
-                    <p style="margin-top:10px; font-size: 0.9rem;">Wischen Sie nach links oder rechts und navigieren Sie durch die Jahrhunderte.</p>
-                </div>
-                <div style="font-size: 0.8rem; color: var(--text-sub);">
-                    <p>Klicken Sie auf das PDF-Symbol, um die Original-Scans der Buchzitate anzusehen.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 1. Jahrhundert -->
-        <section id="view-c1" class="view-section">
-            <h2 class="topic-title">1. Jahrhundert</h2>
-            <div style="text-align: center; color: var(--text-sub); padding: 2rem;">
-                <i class="fa-solid fa-scroll fa-3x" style="margin-bottom: 1rem; opacity: 0.5;"></i>
-                <p>Noch keine direkten Zitate über die Eucharistie im 1. Jahrhundert vorhanden. Schauen Sie sich die übrigen Jahrhunderten an!</p>
-            </div>
-        </section>
-
-        <!-- 2. Jahrhundert -->
-        <section id="view-c2" class="view-section">
-            <h2 class="topic-title">2. Jahrhundert</h2>
-            
-            <!-- Ignatius -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(1)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/ignatius_von_antiochien.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Ignatius von Antiochien</h3><span>(ca. 107 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Lasse sich niemand täuschen! Auch die himmlischen Mächte, die Herrlichkeit der Engel und die sichtbaren wie unsichtbaren Herrscher - wenn sie nicht an das Blut Christi glauben, kommt auch über sie das Gericht. Denn das Ganze ist Glaube und Liebe, die von nichts übertroffen werden."</p>
-                <div class="quote-source">Brief an die Smyrnäer, 6</div>
-                <br>
-                <p class="quote-text">"Von Eucharistie und Gebet halten sie sich fern, weil sie nicht bekennen, dass die Eucharistie das Fleisch unseres Erlösers Jesus Christus ist, das für unsere Sünden gelitten, das der Vater in seiner Güte auferweckt hat. Die sich nun der Gabe Gottes widersetzen, sterben an ihrem Streiten."</p>
-                <div class="quote-source">Brief an die Smyrnäer, 7</div>
-                <br>
-                <p class="quote-text">"Jene Eucharistie soll als zuverlässig gelten, die unter dem Bishof, oder, wem er es anvertraut, stattfindet."</p>
-                <div class="quote-source">Brief an die Smyrnäer, 8</div>
-                <br>
-                <p class="quote-text">Brot Gottes will ich, das ist das Fleisch Jesu Christi, der aus dem Samen Davids stammt, und zum Trank will ich sein Blut, das ist die unvergängliche Liebe."</p>
-                <div class="quote-source">Brief an die Römer, 7</div>
-            </div>
-
-            <!-- Justin -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(3)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/justin_der_maertyrer.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Justin der Märtyrer</h3><span>(ca. 155 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Diese Nahrung heißt bei uns Eucharistie. Niemand darf daran teilnehmen, als wer unsere Lehren für wahr hält, das Bad zur Nachlassung der Sünden und zur Wiedergeburt empfangen hat und nach den Weisungen Christi lebt. Denn nicht als gemeines Brot und als gemeinen Trank nehmen wir sie; sondern wie Jesus Christus, unser Erlöser, als er durch Gottes Logos Fleisch wurde, Fleisch und Blut um unseres Heiles willen angenommen hat, so sind wir belehrt worden, dass die durch ein Gebet um den Logos, der von ihm ausgeht, unter Danksagung geweihte Nahrung, mit der unser Fleisch und Blut durch Umwandlung genährt wird, Fleisch und Blut jenes fleischgewordenen Jesus sei."</p>
-                <div class="quote-source">Erste Apologie, Kapitel 66</div>
-            </div>
-
-            <!-- Irenaeus -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(4)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/irenaeus_von_lyon.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Irenäus von Lyon</h3><span>(ca. 180 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">Als er deshalb die Gabe des Brotes nahm, sagte er Dank und sprach: „Das ist mein Leib. Und ähnlich bekannte er den Kelch, der aus dieser irdischen Schöpfung stammt, als sein Blut und machte ihn zur Opfergabe des Neuen Bundes, so daß ihn die Kirche, wie sie ihn von den Aposteln empfangen hat, auf der ganzen Welt Gott darbringt, ihm, der uns ernährt, als die Erstlinge seiner Gaben im Neuen Bunde.</p>
-                <div class="quote-source">Gegen die Häresien, Buch 4, Kapitel 17, Absatz 5</div>
-                <br>
-                <p class="quote-text">Wie hat dann der Herr, wenn er von einem andern Vater als die Schöpfung stammt, mit Recht jenes Brot, das zu dieser Schöpfung gehört, als seinen Leib bezeichnet und den Inhalt des Kelches als sein Blut?</p>
-                <div class="quote-source">Gegen die Häresien, Buch 4, Kapitel 33, Absatz 2</div>
-                <br>
-                <p class="quote-text">2. Töricht in jeder Hinsicht sind die, welche die gesamte Anordnung Gottes verachten, die Heiligung des Fleisches leugnen und seine Wiedergeburt verwerfen, indem sie behaupten, daß es der Unvergänglichkeit nicht fähig sei. Wird aber dies nicht erlöst, dann hat uns der Herr auch nicht mit seinem Blute erlöst, noch ist der eucharistische Kelch die Teilnahme an seinem Blute, das Brot, das wir brechen, die Teilnahme an seinem Leibe. Blut stammt nämlich nur von Fleisch und Adern und der übrigen menschlichen Substanz, die das Wort Gottes in Wahrheit angenommen hat. Mit seinem Blute erlöste er uns, wie auch der Apostel sagt: „In ihm haben wir die Erlösung, durch sein Blut Nachlaß der Sünden“. Und da wir seine Glieder sind, werden wir durch seine Schöpfung ernährt werden, und er selbst gewährt uns seine Schöpfung: läßt seine Sonne aufgehen und regnen, sagt, daß er uns den Kelch von seiner Schöpfung als sein eigenes Blut reiche, mit dem er unser Blut erquickt, und versichert, daß das Brot seiner Schöpfung sein eigener Leib ist, mit dem er unsere Leiber erhebt.</p>
-                <br>
-                <p class="quote-text"> 3. Wenn nun also der gemischte Kelch und das zubereitete Brot das Wort Gottes aufnimmt und die Eucharistie zum Leibe Christi wird, woraus die Substanz unseres Fleisches Erhebung und Bestand erhält, wie können sie dann sagen, das Fleisch könne nicht aufnehmen die Gabe Gottes, die in dem ewigen Leben besteht, da es doch von dem Blute und Fleische des Herrn genährt wird und sein Glied ist? So sagt auch der selige Apostel Paulus in dem Briefe an die Epheser: „Wir sind Glieder seines Leibes, aus seinem Fleisch und seinem Gebein“. Das sagt er nicht von einem geistigen und unsichtbaren Leibe — denn „ein Geist hat weder Bein noch Knochen“ — sondern von einem wahrhaften menschlichen Organismus, der aus Fleisch, Nerven und Knochen besteht, der von dem Kelch seines Blutes ernährt und von dem Brot seines Leibes erhoben wird. Und wie das Holz der Weinrebe, in der Erde wurzelnd, zu seiner Zeit Frucht hervorbringt, und wie das Weizenkorn in die Erde fällt, sich auflöst und vielfältig aufersteht durch den Geist Gottes, der alles umfaßt — und alsdann kommt dieses weisheitsvoll in den Gebrauch der Menschen, nimmt auf das Wort Gottes und wird zur Eucharistie, welche der Leib und das Blut Christi ist — so werden auch unsere Körper aus ihr genährt, und wenn sie in der Erde geborgen und dort aufgelöst sein werden, dann werden sie zu ihrer Zeit auferstehen, indem das Wort Gottes ihnen verleiht, aufzuerstehen für die Herrlichkeit Gottes des Vaters. Er umgibt dieses Sterbliche mit Unsterblichkeit, schenkt dem Verweslichen aus Gnade seine Unverweslichkeit, da die Kraft Gottes in der Schwäche vollkommen wird, damit wir nicht in Undankbarkeit gegen Gott uns jemals hochmütig aufbliesen, gleich als ob wir das Leben aus uns selbst hätten. So sollte die Erfahrung uns lehren, daß wir aus seiner Größe, nicht kraft unserer Natur ewig fortdauern, so sollten wir Gottes Herrlichkeit, wie sie ist, uns vor Augen halten und unsere eigene Schwäche nicht verkennen. Sollten wissen, was Gott vermag, und was der Mensch Gutes empfängt, sollten niemals irregehen in der wahren Erkenntnis der Wirklichkeit, d. h. des Verhältnisses zwischen Gott und den Menschen. Ja freilich, deswegen hat Gott zugelassen, daß wir in Erde uns auflösen, damit wir allseitig erzogen, in Zukunft in allem gewissenhaft seien und unsere Stellung zu Gott nicht verkannten.</p>
-                <div class="quote-source">Gegen die Häresien, Buch 5, Kapitel 2, Absatz 2-3</div>
-            </div>
-        </section>
-
-        <!-- 3. Jahrhundert -->
-        <section id="view-c3" class="view-section">
-            <h2 class="topic-title">3. Jahrhundert</h2>
-
-            <!-- Tertullian -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(5)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/tertullian.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Tertullian</h3><span>(160-220 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Der Leib genießt das Fleisch und das Blut Christi, damit die Seele aus Gott genährt werde."</p>
-                <div class="quote-source">Über die Auferstehung des Fleisches, Kapitel 8</div>
-            </div>
-
-            <!-- Clemens von Alexandria -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(6)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/clemens_von_alexandria.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Clemens von Alexandria</h3><span>(ca. 200 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Der Logos wird alles für das Kind, Vater und Mutter und Erzieher und Ernährer. 'Esset mein Fleisch', so steht geschrieben, 'und trinkt mein Blut!' Diese für uns geeignete Nahrung spendet der Herr, und Er reicht sein Fleisch dar und vergießt sein Blut."</p>
-                <div class="quote-source">Der Erzieher, Buch 1</div>
-            </div>
-
-            <!-- Hippolytus -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(7)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/hippolytus_von_rom.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Hippolytus von Rom</h3><span>(ca. 235 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"„Und sie hat ihren Tisch ausgestattet:“ dies bezeichnet die verheißene Erkenntnis der Heiligen Dreifaltigkeit; es bezieht sich auch auf seinen geehrten und unbefleckten Leib und sein Blut, welche Tag für Tag am geistlichen göttlichen Tisch verwaltet und opferhaft dargebracht werden, als ein Gedächtnis jenes ersten und immer-denkwürdigen Tisches des geistlichen göttlichen Mahles."</p>
-                <div class="quote-source">Commentarii in Proverbia (Fragmenta)</div>
-            </div>
-
-            <!-- Origenes -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(8)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/origenes.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Origenes</h3><span>(ca. 240 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Früher war „im Rätsel“ (andeutungsweise) die Taufe „in der Wolke und im Meer“, nun aber ist „in sichtbarer Gestalt“ die Wiedergeburt in Wasser und Heiligem Geist. Damals war „im Rätsel“ das Manna die Speise, nun aber ist „in sichtbarer Gestalt“ das Fleisch des Wortes Gottes die wahre Speise, so wie er selbst sagt: „Denn mein Fleisch ist wahrhaft Speise und mein Blut ist wahrhaft Trank“."</p>
-                <div class="quote-source">Die Homilien zu Numeri, Homilie Nr.7</div>
-                <br>
-                <p class="quote-text">"Ein jeder also, wie er es in seinem Herzen verstanden hat.“ Seht zu, ob ihr versteht, seht zu, ob ihr es festhaltet, damit nicht etwa das Gesagte vergeht und zu nichts wird. Ich wünsche euch mit Beispielen aus euren religiösen Übungen zu ermahnen. Ihr, die ihr gewohnt seid, an den göttlichen Mysterien teilzunehmen, wisst, wenn ihr den Leib des Herrn empfangt, mit welcher Vorsicht und Verehrung ihr ihn schützt, damit nicht irgendein kleines Teilchen davon herabfalle, damit nichts von der konsekrierten Gabe verloren gehe. Denn ihr glaubt – und mit Recht –, dass ihr verantwortlich seid, wenn durch Nachlässigkeit etwas davon herabfällt. Wenn ihr aber so sorgfältig bemüht seid, seinen Leib zu bewahren, und das mit Recht, wie meint ihr dann, dass es eine geringere Schuld sei, das Wort Gottes vernachlässigt zu haben, als seinen Leib vernachlässigt zu haben?</p>
-                <div class="quote-source">Die Homilien zu Exodus, Homilie Nr.13</div>
-            </div>
-
-            <!-- Cyprian von Karthago -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(9)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/cyprian_von_karthago.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Cyprian von Karthago</h3><span>(ca. 250 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Die todbringenden Speisen der Götzen stoßen ihnen fast noch auf, aber während noch ihr Schlund sein Verbrechen durch den Atem und die unheilvolle Befleckung durch den Geruch verrät, wagen sie sich an den Leib des Herrn. Und doch tritt ihnen die göttliche Schrift entgegen und ruft und sagt: „Jeder Reine soll von dem Fleische essen, und jede Seele, die von dem Fleische des Heilsopfers ißt, das dem Herrn zugehört, und hat eine Unreinigkeit an sich, diese Seele soll aus ihrem Volke verschwinden“, und auch der Apostel bezeugt und sagt: „Ihr könnt nicht den Kelch des Herrn trinken und den Kelch der bösen Geister; ihr könnt nicht am Tische des Herrn teilhaben und am Tische der bösen Geister.“"</p>
-                <div class="quote-source">Über die Gefallenen (de lapsis), Kap. 15</div>
-                <br>
-                <p class="quote-text">"Ohne jedoch auf dies alles zu achten und zu merken, bevor man noch den Frevel gesühnt und das Verbrechen offen eingestanden hat, ehe noch das Gewissen durch das Opfer und die Hand des Priesters gereinigt und der Groll des empörten und drohenden Herrn versöhnt ist, tut man seinem Leibe und Blute Gewalt an, und sie vergehen sich jetzt an dem Herrn mit Hand und Mund noch mehr als damals, als sie den Herrn verleugneten."</p>
-                <div class="quote-source">Über die Gefallenen (de lapsis), Kap. 16</div>
-            </div>
-        </section>
-
-        <!-- 4. Jahrhundert -->
-        <section id="view-c4" class="view-section">
-            <h2 class="topic-title">4. Jahrhundert</h2>
-
-            <!-- Die Kirchlichen Canones -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(10)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/canones_apostolorum.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Kirchliche Canones der Hl. Apostel</h3><span>(ca. 300 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Wenn ein Bischof oder Priester oder Diakon oder ein im Priesterverzeichniß Stehender nach vollzogenem Opfer nicht communicirt, so soll er den Grund davon angeben. Ist der Grund vernünftig, soll er Verzeihung erlangen; wenn er es aber nicht sagt, so soll er exkommunizirt werden, weil er Ursächer einer Schädigung des Volkes ist."</p>
-                <div class="quote-source">Kanon 6</div>
-                <br>
-                <p class="quote-text">"Alle Gläubigen, welche in die hl. Kirche Gottes gehen und die hl. Schriften anhören, aber nicht beim Dankagungsgebet (Kanon) und der hl. Kommunion bleiben, sollen, weil in die Kirche Unordnung bringend, exkommunizirt werden."</p>
-                <div class="quote-source">Kanon 7</div>
-            </div>
-
-            <!-- Hl. Ambrosius von Mailand -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(12)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/ambrosius_von_mailand.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Ambrosius von Mailand</h3><span>(ca. 380 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Wenn es das tägliche Brot ist, warum nimmst du es nur einmal im Jahr, wie es die Griechen im Osten zu tun pflegen? Nimm täglich, was dir täglich zum Heil gereicht. Lebe so, dass du würdig bist, es täglich zu empfangen. Wer nicht würdig ist, es täglich zu empfangen, ist auch nicht würdig, es einmal im Jahr zu empfangen. So brachte der heilige Hiob täglich ein Opfer für seine Söhne dar, damit sie nicht vielleicht in Gedanken oder Worten gesündigt hätten. Darum hörst du, dass sooft das Opfer dargebracht wird, der Tod des Herrn, die Auferstehung des Herrn, die Himmelfahrt des Herrn und die Vergebung der Sünden vergegenwärtigt werden – und du nimmst dieses Brot des Lebens nicht täglich? Wer eine Wunde hat, braucht ein Heilmittel. Die Wunde ist, dass wir unter der Sünde stehen; das Heilmittel ist das himmlische und ehrwürdige Sakrament."</p>
-                <div class="quote-source">De Sacramentis, Buch 5, Kapitel 3, Abschnitt 25</div>
-                <br>
-                <p class="quote-text">"„Unser tägliches Brot gib uns heute.“ Wenn du täglich empfängst, dann ist für dich „heute“ gleichbedeutend mit „täglich“. Wenn Christus für dich „heute“ ist, dann steht er für dich auch täglich wieder auf. Wie das? „Du bist mein Sohn, heute habe ich dich gezeugt.“ Darum ist „heute“ der Tag, an dem Christus aufersteht. Gestern und heute ist er derselbe, sagt der Apostel Paulus. An anderer Stelle aber sagt er: „Die Nacht ist vorgerückt, der Tag ist nahe.“ Die vergangene Nacht ist vorüber, der gegenwärtige Tag ist angebrochen."</p>
-                <div class="quote-source">De Sacramentis, Buch 5, Kapitel 3, Abschnitt 26</div>
-                <br>
-                <p class="quote-text">"So steht nachweislich fest, dass die Sakramente der Kirche älter sind. Jetzt erkenne ihre größere Vorzüglichkeit. Wahrhaft etwas Wunderbares ward der Mannaregen, den Gott den Vätern spendete, und die tägliche Himmelsspeise, mit der sie gesättigt wurden. Daher das Wort: „Das Brot der Engel aß der Mensch.“ Doch gleichwohl sind alle, die jenes Brot aßen, in der Wüste gestorben. Diese Speise aber, die du empfängst, dieses „lebendige Brot, das vom Himmel gekommen“, verleiht die Substanz des ewigen Lebens, und wer immer dieses Brot isst, wird nicht sterben in Ewigkeit. Es ist der Leib Christi."</p>
-                <div class="quote-source">De Mysteriis, Kapitel 8, Abschnitt 47</div>
-                <br>
-                <p class="quote-text">"Vielleicht möchtest du einwenden: Ich sehe etwas anderes, wie kannst du mir behaupten, daß ich Christi Leib empfange? Auch dies erübrigt uns noch zu beweisen. Wie triftiger Belege können wir uns bedienen! Wir wollen nachweisen, daß hier nicht etwas vorliegt, was die Natur gebildet, sondern was die Segnung konsekriert hat, und daß die Wirksamkeit der Segnung über die der Natur hinausgeht, indem sogar die Natur selbst kraft der Segnung verwandelt wird."</p>
-                <div class="quote-source">De Mysteriis, Kapitel 9, Abschnitt 50</div>
-                <br>
-                <p class="quote-text">"Der Herr Jesus selbst versichert mit lauter Stimme: „Das ist mein Leib.“ Vor den himmlischen Segensworten heißt die Wesenheit anders, nach der Konsekration wird sie als „Leib“ bezeichnet. Er selbst spricht von seinem Blut. Vor der Konsekration heißt es anders, nach der Konsekration wird es „Blut“ genannt. Und du sprichst „Amen“, das heißt „wahr ist‘s“. Was der Mund spricht, soll der Geist innerlich bekennen; was das Wort tönt, soll das Herz fühlen."</p>
-                <div class="quote-source">De Mysteriis, Kapitel 9, Abschnitt 54</div>
-            </div>
-            
-            <!-- Cyrill von Jerusalem -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(11)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/cyrill_von_jerusalem.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Cyrill von Jerusalem</h3><span>(ca. 350 n. Chr.)</span></div>
-                </div>
-                
-                <!-- I. Mystagogische Katechese -->
-                <p class="quote-text">"Auch das, was in Götzentempeln und auf festlichen Märkten aufgehängt ist, sei es Fleisch oder Brot oder anderes dergleichen, gehört, weil durch Anrufung der unreinen Dämonen beschmutzt, zum Pompe des Teufels. Gleichwie nämlich das Brot und der Wein der Eucharistie vor der Anrufung der heiligen, anbetungswürdigen Dreifaltigkeit gewöhnliches Brot und gewöhnlicher Wein ist, nach der Anrufung aber das Brot zum Leibe Christi und der Wein zum Blute Christi wird, ebenso werden solche Eßwaren vom Pompe des Satans, obwohl sie von Natur aus gewöhnliche Dinge sind, durch die Anrufung der Dämonen unrein."</p>
-                <div class="quote-source">I. Mystagogische Katechese – Kapitel 7</div>
-                <br>
-
-                <!-- III. Mystagogische Katechese -->
-                <p class="quote-text">"Doch darfst du ja nicht meinen, jene Salbe sei nur Salbe. Denn gleichwie das Brot der Eucharistie nach der Anrufung des Hl. Geistes nicht mehr gewöhnliches Brot ist, sondern der Leib Christi, so ist diese heilige Salbe nach der Anrufung nicht mehr einfache Salbe und nicht, wie man sagen möchte, gemein, vielmehr ist sie Gnade Christi und wirkt durch die Gegenwart von Christi Gottheit den Hl. Geist."</p>
-                <div class="quote-source">III. Mystagogische Katechese – Kapitel 3</div>
-                <br>
-
-                <!-- IV. Mystagogische Katechese -->
-                <p class="quote-text">"Lesung aus dem Briefe Pauli an die Korinther: „Ich habe von dem Herrn empfangen, was ich auch euch überliefert habe usw.“ Schon diese Lehre des heiligen Paulus genügt, euch von der Wahrheit der göttlichen Geheimnisse völlig zu überzeugen, durch welche ihr gewürdigt wurdet, ein Leib und ein Blut mit Christus zu werden. Soeben rief euch nämlich Paulus zu: „In der Nacht, da unser Herr Jesus Christus verraten wurde, nahm er Brot, dankte, brach es und gab es seinen Jüngern mit den Worten: "nehmet hin und esset, das ist mein Leib! Und er nahm den Kelch, dankte und sprach: nehmet hin und trinket, das ist mein Blut!“</p>
-                <br>
-                <p class="quote-text">Wenn Jesus einst zu Kana in Galiläa durch seinen Wink Wasser in Wein verwandelt hat, soll ihm dann nicht zuzutrauen sein, daß er Wein in Blut verwandelt hat? Wenn Jesus, zu irdischer Hochzeit geladen, dieses seltsame Wunder gewirkt hat, soll man dann nicht noch viel mehr zugeben, daß er den Sohn des Brautgemaches seinen Leib und sein Blut zum Genusse dargeboten hat?</p>
-                <br>
-                <p class="quote-text">Aus voller Glaubensüberzeugung wollen wir also am Leibe und Blute Christi teilnehmen! In der Gestalt des Brotes wird dir nämlich der Leib gegeben, und in der Gestalt des Weines wird dir das Blut gereicht, damit du durch den Empfang des Leibes und Blutes Christi ein Leib und ein Blut mit ihm werdest. Durch diesen Empfang werden wir Christusträger; denn sein Fleisch und sein Blut kommt in unsere Glieder.</p>
-                <br>
-                <p class="quote-text">In einem Disput mit den Juden sagte Christus einmal: „Wenn ihr mein Fleisch nicht esset und mein Blut nicht trinket, habt ihr das Leben nicht in euch.“</p>
-                <br>
-                <p class="quote-text">Im Alten Bunde hatte man Schaubrote. Doch diese Brote des Alten Bundes hatten ein Ende. Im Neuen Bunde aber gibt es ein himmlisches Brot und einen Kelch des Heiles; sie heiligen Seele und Leib.</p>
-                <br>
-                <p class="quote-text">Betrachte daher Brot und Wein nicht als rein irdische Dinge! Denn nach der Versicherung des Herrn sind sie Leib und Blut Christi. Wenn dich auch die Sinne hier im Stiche lassen: der Glaube möge dir Festigkeit geben!</p>
-                <br>
-                <p class="quote-text">Derselige David deutet dir die Kraft von Brot und Wein an, wenn er sagt: „Du hast vor meinen Augen den Tisch gedeckt gegenüber denen, welche mich bedrängen.“ Der Sinn der Worte ist: „Ehe du erschienen bist, hatten die Dämonen den Menschen den Tisch gedeckt, und zwar einen schmutzigen, unreinen, reich an teuflischer Macht. Nach dem du aber erschienen bist, o Herr, hast du vor meinen Augen den Tisch gedeckt.“ Wenn der Mensch zu Gott spricht: „Du hast vor meinen Augen den Tisch gedeckt“, was meint er darunter anders als den mystischen, geistigen Tisch, welchen uns Gott gedeckt hat gegenüber den Dämonen, d. h. zum Kampfe gegen die Dämonen? Und so ist es in der Tat. Denn während jener Tisch die Gemeinschaft mit den Dämonen verlieh, verleiht dieser die Gemeinschaft mit Gott.</p>
-                <br>
-                <p class="quote-text">„Mit Öl hast du mein Haupt gesalbt.“ Mit Öl hat er die Stirne deines Hauptes gesalbt, damit Gott dich besiegle und du „ein Ausdruck der Besiegelung, ein Heiligtum Gottes“ werdest."</p>
-                <div class="quote-source">IV. Mystagogische Katechese – Kapitel 1-9</div>
-                <br>
-
-                <!-- V. Mystagogische Katechese - Kapitel 7 -->
-                <p class="quote-text">"Nachdem wir uns durch diese geistigen Lobgesänge geheiligt haben, rufen wir die Barmherzigkeit Gottes an, daß er den Hl. Geist auf die Opfergaben herabsende, um das Brot zum Leibe Christi, den Wein zum Blute Christi zu machen. Denn was der Hl. Geist berührt, ist völlig geheiligt und verwandelt."</p>
-                <div class="quote-source">V. Mystagogische Katechese – Kapitel 7</div>
-                <br>
-
-                <!-- V. Mystagogische Katechese - Kapitel 20 -->
-                <p class="quote-text">"Alsdann hört ihr, wie der Psalmensänger euch mit göttlicher Melodie zur Teilnahme an den heiligen Geheimnissen einlädt und spricht: „Kostet und sehet, daß süß der Herr ist!“ Urteilet nicht nach dem Gaumen, sondern nach dem festen Glauben! Denn wer zum Mahle kommt, der wird nicht eingeladen, Brot und Wein zu kosten, sondern das Abbild des Leibes und Blutes Christi."</p>
-                <div class="quote-source">V. Mystagogische Katechese – Kapitel 20</div>
-                <br>
-
-                <!-- V. Mystagogische Katechese - Kapitel 21 -->
-                <p class="quote-text">"Trittst du vor, dann darfst du nicht die Hände flach ausstrecken und nicht die Finger spreizen. Da die rechte Hand den Leib zu empfangen hat, mache die linke Hand zum Throne für denselben! Nimm den Leib Christi mit hohler Hand entgegen und erwidere: Amen! Berühre behutsam mit dem heiligen Leibe deine Augen, um sie zu heiligen! Dann genieße ihn, doch habe acht, daß dir nichts davon auf den Boden falle! Was du davon fallen ließest, wäre natürlich so viel als Verlust eines deiner eigenen Glieder."</p>
-                <div class="quote-source">V. Mystagogische Katechese – Kapitel 21</div>
-                <br>
-
-                <!-- V. Mystagogische Katechese - Kapitel 22 -->
-                <p class="quote-text">"Nach der Kommunion des Leibes Christi gehe auch zum Kelch des Blutes, nicht jedoch mit ausgestreckten Händen! Verbeuge dich, sprich zur Anbetung und Verehrung das Amen und genieße, um dich zu heiligen, auch vom Blute Christi! So lange noch Feuchtigkeit auf deinen Lippen ist, berühre sie mit den Fingern und heilige (mit jener Feuchtigkeit) Augen, Stirne und die übrigen Sinne! Alsdann warte das Gebet ab, um Gott zu danken, da er dich solcher Geheimnisse gewürdigt hat!"</p>
-                <div class="quote-source">V. Mystagogische Katechese – Kapitel 22</div>
-            </div>
-        </section>
-
-        <!-- 5. Jahrhundert -->
-        <section id="view-c5" class="view-section">
-            <h2 class="topic-title">5. Jahrhundert</h2>
-
-            <!-- Augustinus -->
-            <div class="quote-card">
-                <button class="pdf-btn" onclick="openPDF(2)"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
-                <div class="card-header">
-                    <img src="profilbilder/augustinus_von_hippo.jpg" class="saint-avatar">
-                    <div class="saint-info"><h3>Hl. Augustinus von Hippo</h3><span>(ca. 415 n. Chr.)</span></div>
-                </div>
-                <p class="quote-text">"Dieses Brot, das du auf dem Altar sehen kannst, geheiligt durch das Wort Gottes, ist der Leib Christi. Dieser Kelch, oder vielmehr was der Kelch enthält, geheiligt durch das Wort Gottes, ist das Blut Christi. Es war durch diese Dinge, dass der Herr Christus uns seinen Leib und sein Blut darstellen wollte, das er für unsere Sünden vergossen hat."</p>
-                <div class="quote-source">Predigt 227</div>
-                <br>
-                <p class="quote-text">"Was du auf dem Altar sehen kannst, hast du letzte Nacht gesehen; aber was es war, was es bedeutete, welche große Realität es im Sakrament enthielt, hattest du noch nicht gehört. Was du also sehen kannst, ist Brot und ein Kelch; das ist es, was sogar deine Augen dir sagen; aber was dein Glaube zu verstehen bittet, ist Brot der Leib Christi."</p>
-                <div class="quote-source">Predigt 272</div>
-            </div>
-        </section>
-
-        <section id="view-search" class="view-section">
-            <h2 class="topic-title">Suchergebnisse</h2>
-            <div id="search-results-list"></div>
-        </section>
-    </div>
-
-    <nav>
-        <div class="nav-scroller">
-            <button onclick="switchTab('c1')" id="btn-c1"><i class="fa-solid fa-scroll"></i>1. Jhd.</button>
-            <button onclick="switchTab('c2')" id="btn-c2"><i class="fa-solid fa-scroll"></i>2. Jhd.</button>
-            <button onclick="switchTab('c3')" id="btn-c3"><i class="fa-solid fa-scroll"></i>3. Jhd.</button>
-            <button onclick="switchTab('c4')" id="btn-c4"><i class="fa-solid fa-scroll"></i>4. Jhd.</button>
-            <button onclick="switchTab('c5')" id="btn-c5"><i class="fa-solid fa-scroll"></i>5. Jhd.</button>
-        </div>
-    </nav>
-
-    <script>
-        // --- 1. CONFIGURATION ---
-        const tabs = ['home', 'c1', 'c2', 'c3', 'c4', 'c5'];
-        let currentTabIndex = 0;
-        
-        // Mapping for German Toast messages
+<div id="splash-screen">
+<div class="splash-content">
+<i class="fa-solid fa-cross fa-4x"></i>
+<div class="splash-text">VOX PATRUM</div>
+</div>
+</div>
+<div id="toast">Thema geändert</div>
+<div id="app-header">
+<a class="header-title" href="index.html" onclick="goToIndex(event)" aria-label="Zur Themenübersicht">
+<i class="fa-solid fa-book-bible"></i><span>Vox Patrum</span>
+</a>
+<div class="header-actions">
+<a href="index.html" onclick="goToIndex(event)" aria-label="Zur Themenübersicht" title="Zur Themenübersicht"><i class="fa-solid fa-arrow-left"></i></a>
+<button type="button" onclick="toggleSearch()" aria-label="Suche öffnen" title="Suche"><i class="fa-solid fa-magnifying-glass"></i></button>
+<button type="button" onclick="toggleTheme()" aria-label="Darstellung wechseln" title="Darstellung wechseln"><i class="fa-solid fa-moon" id="theme-icon"></i></button>
+</div>
+<div id="reading-progress" aria-hidden="true"><span></span></div>
+</div>
+<div id="search-container">
+<div class="search-field">
+<input id="search-input" placeholder="Vater, Leib, Kelch, Opfer..." type="search"/>
+<button id="search-clear" type="button" onclick="clearSearch()" aria-label="Suche leeren" title="Suche leeren"><i class="fa-solid fa-xmark"></i></button>
+</div>
+</div>
+<div id="topic-tools" class="is-hidden" aria-label="Lesewerkzeuge">
+<div class="tool-row century-strip" aria-label="Jahrhundert auswählen">
+<button class="tool-chip" type="button" data-tool-tab="c1" onclick="switchTab('c1')"><i class="fa-solid fa-scroll"></i> 1. Jh.</button>
+<button class="tool-chip" type="button" data-tool-tab="c2" onclick="switchTab('c2')"><i class="fa-solid fa-scroll"></i> 2. Jh.</button>
+<button class="tool-chip" type="button" data-tool-tab="c3" onclick="switchTab('c3')"><i class="fa-solid fa-scroll"></i> 3. Jh.</button>
+<button class="tool-chip" type="button" data-tool-tab="c4" onclick="switchTab('c4')"><i class="fa-solid fa-scroll"></i> 4. Jh.</button>
+<button class="tool-chip" type="button" data-tool-tab="c5" onclick="switchTab('c5')"><i class="fa-solid fa-scroll"></i> 5. Jh.</button>
+</div>
+<div class="tool-row author-filter" aria-label="Autor filtern">
+<button class="author-chip active" type="button" data-author="all" onclick="setAuthorFilter('all')"><i class="fa-solid fa-users"></i> Alle</button>
+<span id="author-filter-list"></span>
+</div>
+</div>
+<div id="app-container">
+<section class="view-section active" id="view-home">
+<div class="reader-home">
+<div>
+<span class="home-kicker">Eucharistie</span>
+<h1>Warhaftiges Leib und Blut</h1>
+</div>
+<p>Ignatius, Justin, Irenäus, Tertullian, Clemens, Hippolytus, Origenes, Cyprian, Ambrosius, Athanasius, Cyrill, Augustinus.</p>
+<div class="home-actions">
+<button class="primary-action" type="button" onclick="switchTab('c2')"><i class="fa-solid fa-scroll"></i> Beginnen</button>
+<button class="secondary-action" type="button" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i> Suchen</button>
+<button class="secondary-action" type="button" onclick="switchTab('saved')"><i class="fa-solid fa-star"></i> Merkliste</button>
+</div>
+<div class="home-mosaic" aria-label="Ausgewählte Kirchenväter">
+<img src="profilbilder/ignatius_von_antiochien.jpg" alt="Hl. Ignatius von Antiochien"/>
+<img src="profilbilder/justin_der_maertyrer.jpg" alt="Hl. Justin der Märtyrer"/>
+<img src="profilbilder/cyrill_von_jerusalem.jpg" alt="Hl. Cyrill von Jerusalem"/>
+<img src="profilbilder/ambrosius_von_mailand.jpg" alt="Hl. Ambrosius von Mailand"/>
+<img src="profilbilder/augustinus_von_hippo.jpg" alt="Hl. Augustinus von Hippo"/>
+</div>
+<div class="home-stats" aria-label="Sammlung">
+<span class="home-stat"><i class="fa-solid fa-calendar-days"></i> 5 Jahrhunderte</span>
+<span class="home-stat"><i class="fa-solid fa-user-pen"></i> 13 Autoren</span>
+<span class="home-stat"><i class="fa-solid fa-file-pdf"></i> PDF-Quellen</span>
+</div>
+</div>
+</section>
+<!-- 1. Jahrhundert -->
+<section class="view-section" id="view-c1">
+<h2 class="topic-title">1. Jahrhundert</h2>
+<div class="empty-state">
+<i class="fa-solid fa-scroll"></i>
+<p>Noch keine direkten Zitate über die Eucharistie im 1. Jahrhundert vorhanden. Schauen Sie sich die übrigen Jahrhunderten an!</p>
+</div>
+</section>
+<!-- 2. Jahrhundert -->
+<section class="view-section" id="view-c2">
+<h2 class="topic-title">2. Jahrhundert</h2>
+<!-- Ignatius -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(1)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/ignatius_von_antiochien.jpg"/>
+<div class="saint-info"><h3>Hl. Ignatius von Antiochien</h3><span>(ca. 107 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Lasse sich niemand täuschen! Auch die himmlischen Mächte, die Herrlichkeit der Engel und die sichtbaren wie unsichtbaren Herrscher - wenn sie nicht an das Blut Christi glauben, kommt auch über sie das Gericht. Denn das Ganze ist Glaube und Liebe, die von nichts übertroffen werden."</p>
+<div class="quote-source">Brief an die Smyrnäer, 6</div>
+<br/>
+<p class="quote-text">"Von Eucharistie und Gebet halten sie sich fern, weil sie nicht bekennen, dass die Eucharistie das Fleisch unseres Erlösers Jesus Christus ist, das für unsere Sünden gelitten, das der Vater in seiner Güte auferweckt hat. Die sich nun der Gabe Gottes widersetzen, sterben an ihrem Streiten."</p>
+<div class="quote-source">Brief an die Smyrnäer, 7</div>
+<br/>
+<p class="quote-text">"Jene Eucharistie soll als zuverlässig gelten, die unter dem Bishof, oder, wem er es anvertraut, stattfindet."</p>
+<div class="quote-source">Brief an die Smyrnäer, 8</div>
+<br/>
+<p class="quote-text">Brot Gottes will ich, das ist das Fleisch Jesu Christi, der aus dem Samen Davids stammt, und zum Trank will ich sein Blut, das ist die unvergängliche Liebe."</p>
+<div class="quote-source">Brief an die Römer, 7</div>
+</div>
+<!-- Justin -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(3)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/justin_der_maertyrer.jpg"/>
+<div class="saint-info"><h3>Hl. Justin der Märtyrer</h3><span>(ca. 155 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Diese Nahrung heißt bei uns Eucharistie. Niemand darf daran teilnehmen, als wer unsere Lehren für wahr hält, das Bad zur Nachlassung der Sünden und zur Wiedergeburt empfangen hat und nach den Weisungen Christi lebt. Denn nicht als gemeines Brot und als gemeinen Trank nehmen wir sie; sondern wie Jesus Christus, unser Erlöser, als er durch Gottes Logos Fleisch wurde, Fleisch und Blut um unseres Heiles willen angenommen hat, so sind wir belehrt worden, dass die durch ein Gebet um den Logos, der von ihm ausgeht, unter Danksagung geweihte Nahrung, mit der unser Fleisch und Blut durch Umwandlung genährt wird, Fleisch und Blut jenes fleischgewordenen Jesus sei."</p>
+<div class="quote-source">Erste Apologie, Kapitel 66</div>
+</div>
+<!-- Irenaeus -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(4)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/irenaeus_von_lyon.jpg"/>
+<div class="saint-info"><h3>Hl. Irenäus von Lyon</h3><span>(ca. 180 n. Chr.)</span></div>
+</div>
+<p class="quote-text">Als er deshalb die Gabe des Brotes nahm, sagte er Dank und sprach: „Das ist mein Leib. Und ähnlich bekannte er den Kelch, der aus dieser irdischen Schöpfung stammt, als sein Blut und machte ihn zur Opfergabe des Neuen Bundes, so daß ihn die Kirche, wie sie ihn von den Aposteln empfangen hat, auf der ganzen Welt Gott darbringt, ihm, der uns ernährt, als die Erstlinge seiner Gaben im Neuen Bunde.</p>
+<div class="quote-source">Gegen die Häresien, Buch 4, Kapitel 17, Absatz 5</div>
+<br/>
+<p class="quote-text">Wie hat dann der Herr, wenn er von einem andern Vater als die Schöpfung stammt, mit Recht jenes Brot, das zu dieser Schöpfung gehört, als seinen Leib bezeichnet und den Inhalt des Kelches als sein Blut?</p>
+<div class="quote-source">Gegen die Häresien, Buch 4, Kapitel 33, Absatz 2</div>
+<br/>
+<p class="quote-text">2. Töricht in jeder Hinsicht sind die, welche die gesamte Anordnung Gottes verachten, die Heiligung des Fleisches leugnen und seine Wiedergeburt verwerfen, indem sie behaupten, daß es der Unvergänglichkeit nicht fähig sei. Wird aber dies nicht erlöst, dann hat uns der Herr auch nicht mit seinem Blute erlöst, noch ist der eucharistische Kelch die Teilnahme an seinem Blute, das Brot, das wir brechen, die Teilnahme an seinem Leibe. Blut stammt nämlich nur von Fleisch und Adern und der übrigen menschlichen Substanz, die das Wort Gottes in Wahrheit angenommen hat. Mit seinem Blute erlöste er uns, wie auch der Apostel sagt: „In ihm haben wir die Erlösung, durch sein Blut Nachlaß der Sünden“. Und da wir seine Glieder sind, werden wir durch seine Schöpfung ernährt werden, und er selbst gewährt uns seine Schöpfung: läßt seine Sonne aufgehen und regnen, sagt, daß er uns den Kelch von seiner Schöpfung als sein eigenes Blut reiche, mit dem er unser Blut erquickt, und versichert, daß das Brot seiner Schöpfung sein eigener Leib ist, mit dem er unsere Leiber erhebt.</p>
+<br/>
+<p class="quote-text"> 3. Wenn nun also der gemischte Kelch und das zubereitete Brot das Wort Gottes aufnimmt und die Eucharistie zum Leibe Christi wird, woraus die Substanz unseres Fleisches Erhebung und Bestand erhält, wie können sie dann sagen, das Fleisch könne nicht aufnehmen die Gabe Gottes, die in dem ewigen Leben besteht, da es doch von dem Blute und Fleische des Herrn genährt wird und sein Glied ist? So sagt auch der selige Apostel Paulus in dem Briefe an die Epheser: „Wir sind Glieder seines Leibes, aus seinem Fleisch und seinem Gebein“. Das sagt er nicht von einem geistigen und unsichtbaren Leibe — denn „ein Geist hat weder Bein noch Knochen“ — sondern von einem wahrhaften menschlichen Organismus, der aus Fleisch, Nerven und Knochen besteht, der von dem Kelch seines Blutes ernährt und von dem Brot seines Leibes erhoben wird. Und wie das Holz der Weinrebe, in der Erde wurzelnd, zu seiner Zeit Frucht hervorbringt, und wie das Weizenkorn in die Erde fällt, sich auflöst und vielfältig aufersteht durch den Geist Gottes, der alles umfaßt — und alsdann kommt dieses weisheitsvoll in den Gebrauch der Menschen, nimmt auf das Wort Gottes und wird zur Eucharistie, welche der Leib und das Blut Christi ist — so werden auch unsere Körper aus ihr genährt, und wenn sie in der Erde geborgen und dort aufgelöst sein werden, dann werden sie zu ihrer Zeit auferstehen, indem das Wort Gottes ihnen verleiht, aufzuerstehen für die Herrlichkeit Gottes des Vaters. Er umgibt dieses Sterbliche mit Unsterblichkeit, schenkt dem Verweslichen aus Gnade seine Unverweslichkeit, da die Kraft Gottes in der Schwäche vollkommen wird, damit wir nicht in Undankbarkeit gegen Gott uns jemals hochmütig aufbliesen, gleich als ob wir das Leben aus uns selbst hätten. So sollte die Erfahrung uns lehren, daß wir aus seiner Größe, nicht kraft unserer Natur ewig fortdauern, so sollten wir Gottes Herrlichkeit, wie sie ist, uns vor Augen halten und unsere eigene Schwäche nicht verkennen. Sollten wissen, was Gott vermag, und was der Mensch Gutes empfängt, sollten niemals irregehen in der wahren Erkenntnis der Wirklichkeit, d. h. des Verhältnisses zwischen Gott und den Menschen. Ja freilich, deswegen hat Gott zugelassen, daß wir in Erde uns auflösen, damit wir allseitig erzogen, in Zukunft in allem gewissenhaft seien und unsere Stellung zu Gott nicht verkannten.</p>
+<div class="quote-source">Gegen die Häresien, Buch 5, Kapitel 2, Absatz 2-3</div>
+</div>
+</section>
+<!-- 3. Jahrhundert -->
+<section class="view-section" id="view-c3">
+<h2 class="topic-title">3. Jahrhundert</h2>
+<!-- Tertullian -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(5)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/tertullian.jpg"/>
+<div class="saint-info"><h3>Tertullian</h3><span>(160-220 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Der Leib genießt das Fleisch und das Blut Christi, damit die Seele aus Gott genährt werde."</p>
+<div class="quote-source">Über die Auferstehung des Fleisches, Kapitel 8</div>
+</div>
+<!-- Clemens von Alexandria -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(6)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/clemens_von_alexandria.jpg"/>
+<div class="saint-info"><h3>Hl. Clemens von Alexandria</h3><span>(ca. 200 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Der Logos wird alles für das Kind, Vater und Mutter und Erzieher und Ernährer. 'Esset mein Fleisch', so steht geschrieben, 'und trinkt mein Blut!' Diese für uns geeignete Nahrung spendet der Herr, und Er reicht sein Fleisch dar und vergießt sein Blut."</p>
+<div class="quote-source">Der Erzieher, Buch 1</div>
+</div>
+<!-- Hippolytus -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(7)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/hippolytus_von_rom.jpg"/>
+<div class="saint-info"><h3>Hl. Hippolytus von Rom</h3><span>(ca. 235 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"„Und sie hat ihren Tisch ausgestattet:“ dies bezeichnet die verheißene Erkenntnis der Heiligen Dreifaltigkeit; es bezieht sich auch auf seinen geehrten und unbefleckten Leib und sein Blut, welche Tag für Tag am geistlichen göttlichen Tisch verwaltet und opferhaft dargebracht werden, als ein Gedächtnis jenes ersten und immer-denkwürdigen Tisches des geistlichen göttlichen Mahles."</p>
+<div class="quote-source">Commentarii in Proverbia (Fragmenta)</div>
+</div>
+<!-- Origenes -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(8)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/origenes.jpg"/>
+<div class="saint-info"><h3>Hl. Origenes</h3><span>(ca. 240 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Früher war „im Rätsel“ (andeutungsweise) die Taufe „in der Wolke und im Meer“, nun aber ist „in sichtbarer Gestalt“ die Wiedergeburt in Wasser und Heiligem Geist. Damals war „im Rätsel“ das Manna die Speise, nun aber ist „in sichtbarer Gestalt“ das Fleisch des Wortes Gottes die wahre Speise, so wie er selbst sagt: „Denn mein Fleisch ist wahrhaft Speise und mein Blut ist wahrhaft Trank“."</p>
+<div class="quote-source">Die Homilien zu Numeri, Homilie Nr.7</div>
+<br/>
+<p class="quote-text">"Ein jeder also, wie er es in seinem Herzen verstanden hat.“ Seht zu, ob ihr versteht, seht zu, ob ihr es festhaltet, damit nicht etwa das Gesagte vergeht und zu nichts wird. Ich wünsche euch mit Beispielen aus euren religiösen Übungen zu ermahnen. Ihr, die ihr gewohnt seid, an den göttlichen Mysterien teilzunehmen, wisst, wenn ihr den Leib des Herrn empfangt, mit welcher Vorsicht und Verehrung ihr ihn schützt, damit nicht irgendein kleines Teilchen davon herabfalle, damit nichts von der konsekrierten Gabe verloren gehe. Denn ihr glaubt – und mit Recht –, dass ihr verantwortlich seid, wenn durch Nachlässigkeit etwas davon herabfällt. Wenn ihr aber so sorgfältig bemüht seid, seinen Leib zu bewahren, und das mit Recht, wie meint ihr dann, dass es eine geringere Schuld sei, das Wort Gottes vernachlässigt zu haben, als seinen Leib vernachlässigt zu haben?</p>
+<div class="quote-source">Die Homilien zu Exodus, Homilie Nr.13</div>
+</div>
+<!-- Cyprian von Karthago -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(9)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/cyprian_von_karthago.jpg"/>
+<div class="saint-info"><h3>Hl. Cyprian von Karthago</h3><span>(ca. 250 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Die todbringenden Speisen der Götzen stoßen ihnen fast noch auf, aber während noch ihr Schlund sein Verbrechen durch den Atem und die unheilvolle Befleckung durch den Geruch verrät, wagen sie sich an den Leib des Herrn. Und doch tritt ihnen die göttliche Schrift entgegen und ruft und sagt: „Jeder Reine soll von dem Fleische essen, und jede Seele, die von dem Fleische des Heilsopfers ißt, das dem Herrn zugehört, und hat eine Unreinigkeit an sich, diese Seele soll aus ihrem Volke verschwinden“, und auch der Apostel bezeugt und sagt: „Ihr könnt nicht den Kelch des Herrn trinken und den Kelch der bösen Geister; ihr könnt nicht am Tische des Herrn teilhaben und am Tische der bösen Geister.“"</p>
+<div class="quote-source">Über die Gefallenen (de lapsis), Kap. 15</div>
+<br/>
+<p class="quote-text">"Ohne jedoch auf dies alles zu achten und zu merken, bevor man noch den Frevel gesühnt und das Verbrechen offen eingestanden hat, ehe noch das Gewissen durch das Opfer und die Hand des Priesters gereinigt und der Groll des empörten und drohenden Herrn versöhnt ist, tut man seinem Leibe und Blute Gewalt an, und sie vergehen sich jetzt an dem Herrn mit Hand und Mund noch mehr als damals, als sie den Herrn verleugneten."</p>
+<div class="quote-source">Über die Gefallenen (de lapsis), Kap. 16</div>
+</div>
+</section>
+<!-- 4. Jahrhundert -->
+<section class="view-section" id="view-c4">
+<h2 class="topic-title">4. Jahrhundert</h2>
+<!-- Die Kirchlichen Canones -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(10)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/canones_apostolorum.jpg"/>
+<div class="saint-info"><h3>Kirchliche Canones der Hl. Apostel</h3><span>(ca. 300 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Wenn ein Bischof oder Priester oder Diakon oder ein im Priesterverzeichniß Stehender nach vollzogenem Opfer nicht communicirt, so soll er den Grund davon angeben. Ist der Grund vernünftig, soll er Verzeihung erlangen; wenn er es aber nicht sagt, so soll er exkommunizirt werden, weil er Ursächer einer Schädigung des Volkes ist."</p>
+<div class="quote-source">Kanon 6</div>
+<br/>
+<p class="quote-text">"Alle Gläubigen, welche in die hl. Kirche Gottes gehen und die hl. Schriften anhören, aber nicht beim Dankagungsgebet (Kanon) und der hl. Kommunion bleiben, sollen, weil in die Kirche Unordnung bringend, exkommunizirt werden."</p>
+<div class="quote-source">Kanon 7</div>
+</div>
+<!-- Hl. Ambrosius von Mailand -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(12)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/ambrosius_von_mailand.jpg"/>
+<div class="saint-info"><h3>Hl. Ambrosius von Mailand</h3><span>(ca. 380 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Wenn es das tägliche Brot ist, warum nimmst du es nur einmal im Jahr, wie es die Griechen im Osten zu tun pflegen? Nimm täglich, was dir täglich zum Heil gereicht. Lebe so, dass du würdig bist, es täglich zu empfangen. Wer nicht würdig ist, es täglich zu empfangen, ist auch nicht würdig, es einmal im Jahr zu empfangen. So brachte der heilige Hiob täglich ein Opfer für seine Söhne dar, damit sie nicht vielleicht in Gedanken oder Worten gesündigt hätten. Darum hörst du, dass sooft das Opfer dargebracht wird, der Tod des Herrn, die Auferstehung des Herrn, die Himmelfahrt des Herrn und die Vergebung der Sünden vergegenwärtigt werden – und du nimmst dieses Brot des Lebens nicht täglich? Wer eine Wunde hat, braucht ein Heilmittel. Die Wunde ist, dass wir unter der Sünde stehen; das Heilmittel ist das himmlische und ehrwürdige Sakrament."</p>
+<div class="quote-source">Über die Sakramente, Buch 5, Kapitel 3, Abschnitt 25</div>
+<br/>
+<p class="quote-text">"„Unser tägliches Brot gib uns heute.“ Wenn du täglich empfängst, dann ist für dich „heute“ gleichbedeutend mit „täglich“. Wenn Christus für dich „heute“ ist, dann steht er für dich auch täglich wieder auf. Wie das? „Du bist mein Sohn, heute habe ich dich gezeugt.“ Darum ist „heute“ der Tag, an dem Christus aufersteht. Gestern und heute ist er derselbe, sagt der Apostel Paulus. An anderer Stelle aber sagt er: „Die Nacht ist vorgerückt, der Tag ist nahe.“ Die vergangene Nacht ist vorüber, der gegenwärtige Tag ist angebrochen."</p>
+<div class="quote-source">Über die Sakramente, Buch 5, Kapitel 3, Abschnitt 26</div>
+<br/>
+<p class="quote-text">"So steht nachweislich fest, dass die Sakramente der Kirche älter sind. Jetzt erkenne ihre größere Vorzüglichkeit. Wahrhaft etwas Wunderbares ward der Mannaregen, den Gott den Vätern spendete, und die tägliche Himmelsspeise, mit der sie gesättigt wurden. Daher das Wort: „Das Brot der Engel aß der Mensch.“ Doch gleichwohl sind alle, die jenes Brot aßen, in der Wüste gestorben. Diese Speise aber, die du empfängst, dieses „lebendige Brot, das vom Himmel gekommen“, verleiht die Substanz des ewigen Lebens, und wer immer dieses Brot isst, wird nicht sterben in Ewigkeit. Es ist der Leib Christi."</p>
+<div class="quote-source">Über die Mysterien, Kapitel 8, Abschnitt 47</div>
+<br/>
+<p class="quote-text">"Erwäge jetzt, ob das Brot der Engel, oder aber das Fleisch Christi, der Leib des Lebens, vorzüglicher ist! Jenes Manna stammte vom Himmel, dieser (Leib) thront über dem Himmel; jenes war nur Himmelssubstanz, das ist der Leib des Herrn der Himmel; jenes war im Fall seiner Aufbewahrung bis zum folgenden Tage der Gefahr der Verwesung ausgesetzt, diesem ist alle Verwesung fremd: wird doch, wer immer es frommen Sinnes genießt, die Verwesung nicht kosten können; jenen strömte Wasser vom Felsen, dir aus Christus; jene tränkte das Wasser für eine Stunde, dich läutert das Blut auf ewig; der Jude trinkt und durstet, du wirst nicht dursten können, wenn du trinkst; jenes Brot endlich war nur der Schatten, dieses ist die Wahrheit.</p>
+<p class="quote-text">Wenn jenes Brot, das du bewunderst, nur Schatten ist, wie erhaben muß dieses hier sein, dessen bloßen Schatten du bewunderst! Vernimm, daß es der Schatten ist, was bei den Vätern sich zugetragen hat: „Sie tranken“, heißt es, „aus dem ihnen folgenden Felsen, der Felsen aber war Christus. Aber an der Mehrzahl von ihnen hatte Gott kein Wohlgefallen; denn sie wurden niedergestreckt in der Wüste“. Das aber geschah zum Vorbild für uns. Du hast dich von der größeren Vorzüglichkeit (der Eucharistie) überzeugt; denn vorzüglicher ist das Licht als der Schatten, die Wahrheit als der Typus, der Leib des Schöpfers (des Himmels) als das Manna vom Himmel."</p>
+<div class="quote-source">Über die Mysterien, Kapitel 8, Abschnitte 48-49</div>
+<br/>
+<p class="quote-text">"Vielleicht möchtest du einwenden: Ich sehe etwas anderes, wie kannst du mir behaupten, daß ich Christi Leib empfange? Auch dies erübrigt uns noch zu beweisen. Wie triftiger Belege können wir uns bedienen! Wir wollen nachweisen, daß hier nicht etwas vorliegt, was die Natur gebildet, sondern was die Segnung konsekriert hat, und daß die Wirksamkeit der Segnung über die der Natur hinausgeht, indem sogar die Natur selbst kraft der Segnung verwandelt wird."</p>
+<div class="quote-source">Über die Mysterien, Kapitel 9, Abschnitt 50</div>
+<br/>
+<p class="quote-text">"Wenn nun schon ein menschlicher Segensspruch soviel vermochte, daß er eine Natur verwandelte: was sollen wir erst von der göttlichen Konsekration sagen, wo die Worte des Herrn und Heilandes selbst wirksam sind? Denn dieses Sakrament, das du empfängst, wird durch Christi Wort vollzogen. Wenn das Wort des Elias soviel vermochte, daß es Feuer vom Himmel herabzog: soll Christi Wort es nicht vermögen, daß die Gattung von Dingen sich verwandelt? Von den Schöpfungswerken der ganzen Welt hast du gelesen: „Er sprach und sie wurden, er befahl und sie waren geschaffen“. Das Wort Christi, welches das Nichtseiende aus dem Nichts zu schaffen vermochte, soll Seiendes nicht in etwas verwandeln können, was es vorher nicht war? Nichts Geringeres ist es, neue Dinge zu setzen, als Naturen zu verwandeln."</p>
+<div class="quote-source">Über die Mysterien, Kapitel 9, Abschnitt 52</div>
+<br/>
+<p class="quote-text">"Doch was bedarf es da der Beweise? Greifen wir zurück auf sein eigenes vorbildliches Leben! Am Beispiel seiner Menschwerdung laßt uns die Wahrheit des Geheimnisses begründen! Oder wiederholte sich etwa mit der Geburt des Herrn Jesus ein vorausgegangener Naturvorgang? Fragen wir nach der gewöhnlichen Ordnung, so ist der Kindersegen einer Frau regelmäßig vom Beischlaf des Mannes bedingt. Daraus erhellt nun, daß die Jungfrau außer der Ordnung der Natur geboren hat. Und eben der Leib, den wir gegenwärtig setzen, stammt aus der Jungfrau. Was willst du hier bei Christi Leib nach der Ordnung der Natur fragen, nachdem der Herr Jesus selbst übernatürlicherweise aus der Jungfrau geboren wurde? Ein wahres Fleisch war doch das Fleisch Christi, das gekreuzigt und begraben wurde: in Wahrheit ist es darum das Sakrament jenes Fleisches."</p>
+<div class="quote-source">Über die Mysterien, Kapitel 9, Abschnitt 53</div>
+<br/>
+<p class="quote-text">"Der Herr Jesus selbst versichert mit lauter Stimme: „Das ist mein Leib.“ Vor den himmlischen Segensworten heißt die Wesenheit anders, nach der Konsekration wird sie als „Leib“ bezeichnet. Er selbst spricht von seinem Blut. Vor der Konsekration heißt es anders, nach der Konsekration wird es „Blut“ genannt. Und du sprichst „Amen“, das heißt „wahr ist‘s“. Was der Mund spricht, soll der Geist innerlich bekennen; was das Wort tönt, soll das Herz fühlen."</p>
+<div class="quote-source">Über die Mysterien, Kapitel 9, Abschnitt 54</div>
+<br/>
+<p class="quote-text">"Was wir essen, was wir trinken sollen, hat dir der Heilige Geist an einer anderen Stelle ausdrücklich durch den Propheten mit den Worten angekündigt: „Kostet und sehet! Denn süß ist der Herr. Selig der Mann, der auf ihn vertraut“. In jenem Sakramente ist Christus, weil es der Leib Christi ist. Es ist darum keine physische, sondern eine geistliche Speise. Darum hebt auch der Apostel von dessen Vorbild hervor: „Unsere Väter haben eine ‚geistliche Speise genossen‘ und einen ‚geistlichen Trank getrunken‘ “. Denn Gottes Leib ist ein geistlicher Leib, der Leib Christi ist der Leib des göttlichen Geistes; denn Christus ist Geist, wie wir lesen: „Ein Geist vor unserem Angesicht ist Christus der Herr“."</p>
+<div class="quote-source">Über die Mysterien, Kapitel 9, Abschnitt 58</div>
+<br/>
+<p class="quote-text">"Dann befiehlt der Vater, daß das Mahl bereitet werde: „Als unser Osterlamm ist ja Christus geopfert.“ Wie oft wir nun den Kelch des Herrn empfangen, verkündigen wir den Tod des Herrn. Wie er einmal für Alle gestorben ist, so nehmen wir, so oft die Sünden nachgelassen werden, Theil an dem Sakramente seines Leibes, so daß allezeit durch sein Blut die Nachlassung der Sünden bewirkt wird."</p>
+<div class="quote-source">Über die Buße, Zweites Buch, Kapitel 3</div>
+<br/>
+<p class="quote-text">"Was aber wäre deutlicher ausgesprochen als die Tatsache, daß David in Abimelechs Haus fünf Brote sich erbat, nur eines erhielt? Ein typischer Hinweis darauf, daß nicht mehr aus fünf Pfund (Mehl), sondern aus Christi Leib den Gläubigen die Speise bereitet, daß Christus einen Leib annehmen werde, damit niemand unter den Gläubigen hungere."</p>
+<div class="quote-source">Lukaskommentar, Fünftes Buch, § 37</div>
+<br/>
+<p class="quote-text">"Es gibt auch einen Leib, von welchem gesprochen ward: „Mein Fleisch ist wahrhaft eine Speise und mein Blut ist wahrhaft ein Trank“. Um diesen Leib schweben Adler, die mit geistigen Fittichen ihn umkreisen. - Auch das sind Adler rings um den Leib, welche glauben, das Jesus im Fleische gekommen ist; denn „jeder Geist, welcher bekennt, daß Jesus Christus im Fleische gekommen ist, ist von Gott“. Wo also der Glaube, da ist das Sakrament, da die Heilstätte der Heiligkeit."</p>
+<div class="quote-source">Lukaskommentar, Achtes Buch, § 56</div>
+</div>
+<!-- Hl. Athanasius von Alexandrien -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(13)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/athanasius_von_alexandrien.png"/>
+<div class="saint-info"><h3>Hl. Athanasius von Alexandrien</h3><span>(ca. 295-373 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Der heilige Kelch aber, durch dessen absichtliche Zerbrechung der, welcher es unternimmt, als gottlos erscheint, ist nur bei den rechtmäßigen Vorständen zu finden. Dieß Verhältniß allein hat es mit diesem Kelche, kein anderes. Diesen reicht ihr dem Volke vorschriftsmäßig zum Genusse, diesen habt ihr von der kirchlichen Anordnung überkommen, dieser gehört denen allein, die der katholischen Kirche vorstehen. Denn euch allein kommt es zu, das Blut Christi auszuspenden, ausserdem Keinem. Aber so gottlos der ist, der den heiligen Kelch zerbricht, so ist doch der noch gottloser, der das Blut Christi verhöhnt."</p>
+<div class="quote-source">Schutzschrift gegen die Arianer, § 11</div>
+<br/>
+<p class="quote-text">"Den Priestern wird die Anwesenheit nicht gestattet, die doch die Diener der Geheimnisse sind, aber vor einem auswärtigen Richter, in Gegenwart von Katechumenen, und was das Schlimmste ist, vor Heiden und Juden, die in Bezug auf ihre Stellung zum Christenthum nicht wohl angeschrieben sind, findet eine Untersuchung über des Blut Christi und den Leib Christi statt. Denn wäre überhaupt irgend ein Verbrechen vorgekommen, so hätten solche Dinge in der Kirche von Klerikern in gesetzlicher Weise untersucht werden sollen, und nicht von Heiden, die das Wort verabscheuen und die Wahrheit nicht kennen."</p>
+<div class="quote-source">Schutzschrift gegen die Arianer, § 31</div>
+<br/>
+<p class="quote-text">"Denn wie vielen würde der Leib zur Speise genügen, damit er Nahrung für die ganze Welt würde? Allein deshalb erwähnte er die Auffahrt des Menschensohnes zum Himmel, um sie vom Gedanken an den Leib abzuziehen und sie schließlich zur Erkenntnis zu führen, daß das Fleisch, von dem er redete, als himmlische Speise von oben her und als geistige Nahrung von ihm gegeben werde. Denn er sagte: „Was ich zu euch geredet habe, ist Geist und Leben”; das heißt soviel, als wenn er sagte: Was für das Heil der Welt geoffenbart und gegeben wird, ist das Fleisch, das ich trage; dieses aber und sein Blut wird euch von mir geistigerweise als Speise gegeben werden, dazu bestimmt, einem jeden geistigerweise gereicht und allen ein Bewahrungsmittel für die Auferstehung zum ewigen Leben zu werden."</p>
+<div class="quote-source">Vier Briefe an Serapion von Thmuis, Vierter Brief, § 19</div>
+</div>
+<!-- Cyrill von Jerusalem -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(11)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/cyrill_von_jerusalem.jpg"/>
+<div class="saint-info"><h3>Hl. Cyrill von Jerusalem</h3><span>(ca. 350 n. Chr.)</span></div>
+</div>
+<!-- I. Mystagogische Katechese -->
+<p class="quote-text">"Auch das, was in Götzentempeln und auf festlichen Märkten aufgehängt ist, sei es Fleisch oder Brot oder anderes dergleichen, gehört, weil durch Anrufung der unreinen Dämonen beschmutzt, zum Pompe des Teufels. Gleichwie nämlich das Brot und der Wein der Eucharistie vor der Anrufung der heiligen, anbetungswürdigen Dreifaltigkeit gewöhnliches Brot und gewöhnlicher Wein ist, nach der Anrufung aber das Brot zum Leibe Christi und der Wein zum Blute Christi wird, ebenso werden solche Eßwaren vom Pompe des Satans, obwohl sie von Natur aus gewöhnliche Dinge sind, durch die Anrufung der Dämonen unrein."</p>
+<div class="quote-source">I. Mystagogische Katechese – Kapitel 7</div>
+<br/>
+<!-- III. Mystagogische Katechese -->
+<p class="quote-text">"Doch darfst du ja nicht meinen, jene Salbe sei nur Salbe. Denn gleichwie das Brot der Eucharistie nach der Anrufung des Hl. Geistes nicht mehr gewöhnliches Brot ist, sondern der Leib Christi, so ist diese heilige Salbe nach der Anrufung nicht mehr einfache Salbe und nicht, wie man sagen möchte, gemein, vielmehr ist sie Gnade Christi und wirkt durch die Gegenwart von Christi Gottheit den Hl. Geist."</p>
+<div class="quote-source">III. Mystagogische Katechese – Kapitel 3</div>
+<br/>
+<!-- IV. Mystagogische Katechese -->
+<p class="quote-text">"Lesung aus dem Briefe Pauli an die Korinther: „Ich habe von dem Herrn empfangen, was ich auch euch überliefert habe usw.“ Schon diese Lehre des heiligen Paulus genügt, euch von der Wahrheit der göttlichen Geheimnisse völlig zu überzeugen, durch welche ihr gewürdigt wurdet, ein Leib und ein Blut mit Christus zu werden. Soeben rief euch nämlich Paulus zu: „In der Nacht, da unser Herr Jesus Christus verraten wurde, nahm er Brot, dankte, brach es und gab es seinen Jüngern mit den Worten: "nehmet hin und esset, das ist mein Leib! Und er nahm den Kelch, dankte und sprach: nehmet hin und trinket, das ist mein Blut!“</p>
+<br/>
+<p class="quote-text">Wenn Jesus einst zu Kana in Galiläa durch seinen Wink Wasser in Wein verwandelt hat, soll ihm dann nicht zuzutrauen sein, daß er Wein in Blut verwandelt hat? Wenn Jesus, zu irdischer Hochzeit geladen, dieses seltsame Wunder gewirkt hat, soll man dann nicht noch viel mehr zugeben, daß er den Sohn des Brautgemaches seinen Leib und sein Blut zum Genusse dargeboten hat?</p>
+<br/>
+<p class="quote-text">Aus voller Glaubensüberzeugung wollen wir also am Leibe und Blute Christi teilnehmen! In der Gestalt des Brotes wird dir nämlich der Leib gegeben, und in der Gestalt des Weines wird dir das Blut gereicht, damit du durch den Empfang des Leibes und Blutes Christi ein Leib und ein Blut mit ihm werdest. Durch diesen Empfang werden wir Christusträger; denn sein Fleisch und sein Blut kommt in unsere Glieder.</p>
+<br/>
+<p class="quote-text">In einem Disput mit den Juden sagte Christus einmal: „Wenn ihr mein Fleisch nicht esset und mein Blut nicht trinket, habt ihr das Leben nicht in euch.“</p>
+<br/>
+<p class="quote-text">Im Alten Bunde hatte man Schaubrote. Doch diese Brote des Alten Bundes hatten ein Ende. Im Neuen Bunde aber gibt es ein himmlisches Brot und einen Kelch des Heiles; sie heiligen Seele und Leib.</p>
+<br/>
+<p class="quote-text">Betrachte daher Brot und Wein nicht als rein irdische Dinge! Denn nach der Versicherung des Herrn sind sie Leib und Blut Christi. Wenn dich auch die Sinne hier im Stiche lassen: der Glaube möge dir Festigkeit geben!</p>
+<br/>
+<p class="quote-text">Derselige David deutet dir die Kraft von Brot und Wein an, wenn er sagt: „Du hast vor meinen Augen den Tisch gedeckt gegenüber denen, welche mich bedrängen.“ Der Sinn der Worte ist: „Ehe du erschienen bist, hatten die Dämonen den Menschen den Tisch gedeckt, und zwar einen schmutzigen, unreinen, reich an teuflischer Macht. Nach dem du aber erschienen bist, o Herr, hast du vor meinen Augen den Tisch gedeckt.“ Wenn der Mensch zu Gott spricht: „Du hast vor meinen Augen den Tisch gedeckt“, was meint er darunter anders als den mystischen, geistigen Tisch, welchen uns Gott gedeckt hat gegenüber den Dämonen, d. h. zum Kampfe gegen die Dämonen? Und so ist es in der Tat. Denn während jener Tisch die Gemeinschaft mit den Dämonen verlieh, verleiht dieser die Gemeinschaft mit Gott.</p>
+<br/>
+<p class="quote-text">„Mit Öl hast du mein Haupt gesalbt.“ Mit Öl hat er die Stirne deines Hauptes gesalbt, damit Gott dich besiegle und du „ein Ausdruck der Besiegelung, ein Heiligtum Gottes“ werdest."</p>
+<div class="quote-source">IV. Mystagogische Katechese – Kapitel 1-9</div>
+<br/>
+<!-- V. Mystagogische Katechese - Kapitel 7 -->
+<p class="quote-text">"Nachdem wir uns durch diese geistigen Lobgesänge geheiligt haben, rufen wir die Barmherzigkeit Gottes an, daß er den Hl. Geist auf die Opfergaben herabsende, um das Brot zum Leibe Christi, den Wein zum Blute Christi zu machen. Denn was der Hl. Geist berührt, ist völlig geheiligt und verwandelt."</p>
+<div class="quote-source">V. Mystagogische Katechese – Kapitel 7</div>
+<br/>
+<!-- V. Mystagogische Katechese - Kapitel 20 -->
+<p class="quote-text">"Alsdann hört ihr, wie der Psalmensänger euch mit göttlicher Melodie zur Teilnahme an den heiligen Geheimnissen einlädt und spricht: „Kostet und sehet, daß süß der Herr ist!“ Urteilet nicht nach dem Gaumen, sondern nach dem festen Glauben! Denn wer zum Mahle kommt, der wird nicht eingeladen, Brot und Wein zu kosten, sondern das Abbild des Leibes und Blutes Christi."</p>
+<div class="quote-source">V. Mystagogische Katechese – Kapitel 20</div>
+<br/>
+<!-- V. Mystagogische Katechese - Kapitel 21 -->
+<p class="quote-text">"Trittst du vor, dann darfst du nicht die Hände flach ausstrecken und nicht die Finger spreizen. Da die rechte Hand den Leib zu empfangen hat, mache die linke Hand zum Throne für denselben! Nimm den Leib Christi mit hohler Hand entgegen und erwidere: Amen! Berühre behutsam mit dem heiligen Leibe deine Augen, um sie zu heiligen! Dann genieße ihn, doch habe acht, daß dir nichts davon auf den Boden falle! Was du davon fallen ließest, wäre natürlich so viel als Verlust eines deiner eigenen Glieder."</p>
+<div class="quote-source">V. Mystagogische Katechese – Kapitel 21</div>
+<br/>
+<!-- V. Mystagogische Katechese - Kapitel 22 -->
+<p class="quote-text">"Nach der Kommunion des Leibes Christi gehe auch zum Kelch des Blutes, nicht jedoch mit ausgestreckten Händen! Verbeuge dich, sprich zur Anbetung und Verehrung das Amen und genieße, um dich zu heiligen, auch vom Blute Christi! So lange noch Feuchtigkeit auf deinen Lippen ist, berühre sie mit den Fingern und heilige (mit jener Feuchtigkeit) Augen, Stirne und die übrigen Sinne! Alsdann warte das Gebet ab, um Gott zu danken, da er dich solcher Geheimnisse gewürdigt hat!"</p>
+<div class="quote-source">V. Mystagogische Katechese – Kapitel 22</div>
+</div>
+</section>
+<!-- 5. Jahrhundert -->
+<section class="view-section" id="view-c5">
+<h2 class="topic-title">5. Jahrhundert</h2>
+<!-- Augustinus -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(2)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<img class="saint-avatar" src="profilbilder/augustinus_von_hippo.jpg"/>
+<div class="saint-info"><h3>Hl. Augustinus von Hippo</h3><span>(ca. 415 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Sind übrigens die Sünden nicht so groß, daß jemand sich dadurch der Exkommunikation schuldig macht, so soll er sich nicht von dem täglichen Heilmittel des Leibes unseres Herrn fernhalten. Am nächsten würde man vielleicht der Wahrheit kommen, wenn der, der diesen Streit schlichten wollte, darauf hinwiese, man müsse vor allem im Frieden Christi bleiben; jeder solle also tun, was er nach seinem Gewissen und zum Heile seiner Seele tun zu sollen glaubt. Wollen doch beide nicht den Leib und das Blut des Herrn entehren, sondern beide bestreben sich um die Wette, das gnadenreichste Sakrament zu ehren. Auch Zachäus und jener Hauptmann haben nicht miteinander gestritten, noch dachte einer besser von sich, obwohl der eine den Herrn „mit Freuden in sein Haus aufnahm“, der andere aber sprach: „Ich bin nicht würdig, daß Du eingehest unter mein Dach“. Beide ehrten den Heiland, obwohl auf verschiedene, gewissermaßen entgegengesetzte Weise: beide fühlten das Elend der Sünde, beide erlangten Barmherzigkeit. Hierher gehört aus dem Alten Bunde, daß das Manna für jeden aus dem Volke den Geschmack hatte, der seiner Gesinnung entsprach; so verhält es sich auch mit dem Sakramente, das die Welt besiegt hat. Der eine wagt aus Ehrfurcht nicht, es täglich zu empfangen; der andere wagt aus Ehrfurcht nicht, den Empfang auch nur einen Tag zu unterlassen. Nur die Geringschätzung ist mit dieser Speise unverträglich, wie Überdruß mit dem Manna. Darum sagt der Apostel, daß diejenigen sie unwürdig empfangen, die sie nicht durch eine ihr allein gebührende Ehrfurcht von den anderen Speisen unterscheiden. Sogleich nach den Worten: „Er ißt und trinkt sich das Gericht“ fügt er bei: „indem er den Leib des Herrn nicht unterscheidet“. Es geht dies indessen hinreichend aus der ganzen Stelle im ersten Korintherbrief hervor, wenn man sie aufmerksam betrachtet."</p>
+<div class="quote-source">Ausgewählte Briefe (Erster Teil), Brief 54: Antwort auf die Fragen des Januarius, Erstes Buch, Kapitel III, Abschnitt 4</div>
+<br/>
+<p class="quote-text">"Auch darf man nicht glauben, daß die Einführung des an vielen Orten üblichen Gebrauches, an jenem Tage nach der Abendmahlzeit das heilige Opfer zu feiern, sich auf die Worte stütze: „Auf gleiche Weise nahm er nach dem Mahle den Kelch und sprach“. Es kann ja unter dem Mahle auch der vorausgegangene Empfang des Leibes Christi verstanden sein, auf den der Empfang des Kelches folgen sollte. So sagt der Apostel an einer anderen Stelle: „Wenn ihr zusammenkommt, so heißt das nicht, das Abendmahl des Herrn begehen“, und nennt also mit diesen Worten den Empfang der Eucharistie selbst das Abendmahl des Herrn. Nach dem Essen aber noch das Opfer darzubringen oder die Eucharistie zu empfangen, konnte der Umstand leichter die Gläubigen bewegen, weil es im Evangelium heißt: „Während sie aßen, nahm Jesus das Brot und segnete es“, wie es auch schon früher heißt: „Als es Abend geworden war, setzte er sich mit den Zwölfen zu Tische, und während sie aßen, sprach er: Einer aus euch wird mich verraten“. Eine Weile später erst setzte er das heilige Sakrament ein. Offenbar ergibt sich also, daß die Jünger das erste Mal den Leib und das Blut des Herrn ohne vorherige Enthaltung von Speise und Trank empfangen haben."</p>
+<div class="quote-source">Ausgewählte Briefe (Erster Teil), Brief 54: Antwort auf die Fragen des Januarius, Erstes Buch, Kapitel V, Abschnitt 7</div>
+<br/>
+<p class="quote-text">"Muß man aber deshalb der ganzen Kirche einen Vorwurf daraus machen, daß die heilige Kommunion immer nüchtern empfangen wird? Nein, denn seit dieser Zeit hat es dem Heiligen Geiste gefallen, daß zur Ehre eines so erhabenen Sakramentes der Leib des Herrn früher in den Mund des Christen eingehe als andere Speisen; nur aus diesem Grunde ja hält sich der gesamte Erdkreis an diese Sitte. Denn wenn auch der Herr am Einsetzungstage nach der Abendmahlzeit die heilige Kommunion gereicht hat, so müssen deshalb nicht unsere Mitbrüder nach der Mittags- oder Abendmahlzeit zum Empfange dieses Sakramentes zusammenkommen oder es gleich an ihrem eigenen Tische vollziehen, wie die taten, die der Apostel rügt und zurechtweist. Um die Erhabenheit dieses Geheimnisses kräftiger einzuprägen, wollte der Erlöser es als den Schlußstein aufs tiefste in das Herz und das Gedächtnis der Jünger einsenken, die er bald darauf verlassen sollte."</p>
+<div class="quote-source">Ausgewählte Briefe (Erster Teil), Brief 54: Antwort auf die Fragen des Januarius, Erstes Buch, Kapitel VI, Abschnitt 8</div>
+<br/>
+<p class="quote-text">"Hat sich denn nicht Christus nur einmal in eigener Person geopfert? Und doch opfert er sich im Sakramente nicht nur an allen Osterfeiertagen, sondern jeden Tag für das Volk; nicht lügt also, wer auf eine Frage antwortet, Christus werde noch geopfert. Denn wenn die Sakramente nicht eine Ähnlichkeit mit jenen Dingen hätten, deren Sakramente sie sind, so wären sie überhaupt keine Sakramente. Um dieser Ähnlichkeit willen erhalten sie meistens den Namen jener Dinge selbst. Denn wie in gewisser Weise das Sakrament des Leibes Christi der Leib Christi, das Sakrament des Blutes Christi das Blut Christi ist, so ist auch das Sakrament des Glaubens der Glaube."</p>
+<div class="quote-source">Ausgewählte Briefe (Erster Teil), Brief 98: An Bonifatius, Kapitel 9</div>
+<br/>
+<p class="quote-text">"Dieses Brot, das du auf dem Altar sehen kannst, geheiligt durch das Wort Gottes, ist der Leib Christi. Dieser Kelch, oder vielmehr was der Kelch enthält, geheiligt durch das Wort Gottes, ist das Blut Christi. Es war durch diese Dinge, dass der Herr Christus uns seinen Leib und sein Blut darstellen wollte, das er für unsere Sünden vergossen hat."</p>
+<div class="quote-source">Predigt 227</div>
+<br/>
+<p class="quote-text">"Was du auf dem Altar sehen kannst, hast du letzte Nacht gesehen; aber was es war, was es bedeutete, welche große Realität es im Sakrament enthielt, hattest du noch nicht gehört. Was du also sehen kannst, ist Brot und ein Kelch; das ist es, was sogar deine Augen dir sagen; aber was dein Glaube zu verstehen bittet, ist Brot der Leib Christi."</p>
+<div class="quote-source">Predigt 272</div>
+<br/>
+<p class="quote-text">"Was hat aber die ganze Zeit, während der sie Stellung und Name eines Katechumenen haben, für einen anderen Zweck, als daß sie das Wesen des christlichen Glaubens und Lebens zu hören bekommen, damit sie, wenn sie sich selbst geprüft haben, vom Tische des Herrn essen und von seinem Blute trinken? Denn “ein jeder, der unwürdig davon ißt und trinkt, der ißt und trinkt sich das Gericht”."</p>
+<div class="quote-source">Vom Glauben und von den Werken, Kapitel 6, Abschnitt 9</div>
+</div>
+</section>
+<section class="view-section" id="view-saved">
+<h2 class="topic-title">Merkliste</h2>
+<div class="saved-toolbar">
+<span class="result-count" id="saved-count"><i class="fa-solid fa-star"></i> 0 gemerkt</span>
+<button class="mini-action" id="clear-saved" type="button" onclick="clearBookmarks()"><i class="fa-solid fa-trash-can"></i> Alle entfernen</button>
+</div>
+<div id="saved-list"></div>
+</section>
+<section class="view-section" id="view-search">
+<h2 class="topic-title">Suchergebnisse</h2>
+<div class="result-count" id="search-count"><i class="fa-solid fa-magnifying-glass"></i> Suchbegriff eingeben</div>
+<div id="search-results-list"></div>
+</section>
+</div>
+<nav>
+<div class="nav-scroller">
+<button id="btn-home" onclick="switchTab('home')"><i class="fa-solid fa-house"></i>Start</button>
+<button id="btn-search" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i>Suche</button>
+<button id="btn-c1" onclick="switchTab('c1')"><i class="fa-solid fa-scroll"></i>1. Jhd.</button>
+<button id="btn-c2" onclick="switchTab('c2')"><i class="fa-solid fa-scroll"></i>2. Jhd.</button>
+<button id="btn-c3" onclick="switchTab('c3')"><i class="fa-solid fa-scroll"></i>3. Jhd.</button>
+<button id="btn-c4" onclick="switchTab('c4')"><i class="fa-solid fa-scroll"></i>4. Jhd.</button>
+<button id="btn-c5" onclick="switchTab('c5')"><i class="fa-solid fa-scroll"></i>5. Jhd.</button>
+<button id="btn-saved" onclick="switchTab('saved')"><i class="fa-solid fa-star"></i>Merkliste<span class="nav-count" id="saved-nav-count">0</span></button>
+</div>
+</nav>
+<script>
+        const tabs = ['home', 'c1', 'c2', 'c3', 'c4', 'c5', 'saved'];
+        const appContainer = document.getElementById('app-container');
+        const nav = document.querySelector('nav');
+        const bookmarkKey = 'vox-patrum-bookmarks';
+        const bookmarkMetaKey = 'vox-patrum-bookmark-meta';
+        const topicTools = document.getElementById('topic-tools');
         const germanTopics = {
+            home: 'Start',
             c1: '1. Jahrhundert',
             c2: '2. Jahrhundert',
             c3: '3. Jahrhundert',
             c4: '4. Jahrhundert',
-            c5: '5. Jahrhundert'
+            c5: '5. Jahrhundert',
+            saved: 'Merkliste'
         };
 
-        // --- 2. INITIALIZATION ---
-        window.addEventListener('load', () => {
-            // Splash Logic
-            const splash = document.getElementById('splash-screen');
-            setTimeout(() => {
-                splash.style.opacity = '0';
-                setTimeout(() => splash.style.display = 'none', 800);
-            }, 1200);
-
-            // Theme Logic
-            const savedTheme = localStorage.getItem('theme');
-            if(savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                document.getElementById('theme-icon').className = "fa-solid fa-sun";
-            }
-        });
-
-        // --- 3. TAB SWITCHING ---
-        function switchTab(tabId) {
-            if(tabId === 'search') {
-                // Don't update main index for search overlay
-                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-                document.getElementById('view-search').classList.add('active');
-                return;
-            }
-
-            // Find index in main list
-            const index = tabs.indexOf(tabId);
-            if(index !== -1) currentTabIndex = index;
-
-            // Hide Search
-            document.getElementById('search-container').style.display = 'none';
-
-            // Hide all views
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            // Show target view
-            document.getElementById('view-' + tabId).classList.add('active');
-
-            // Update Buttons
-            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
-            const btn = document.getElementById('btn-' + tabId);
-            if(btn) {
-                btn.classList.add('active');
-                // Scroll nav to keep button in view
-                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
-
-            // Scroll Top
-            document.getElementById('app-container').scrollTo(0, 0);
-
-            // Toast with German topic name
-            if(tabId !== 'home') showToast(germanTopics[tabId] || tabId);
-        }
-
-        // --- 4. SWIPE GESTURES (Improved) ---
+        let currentTabIndex = 0;
         let touchStartX = 0;
         let touchStartY = 0;
         let touchEndX = 0;
         let touchEndY = 0;
-        const appContainer = document.getElementById('app-container');
+        let lastScrollTop = 0;
+        let revealObserver = null;
+        let toastTimer = null;
+        let activeAuthorFilter = 'all';
+        const quoteCollapseThreshold = 430;
 
-        // Capture touch anywhere in container
-        appContainer.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-        }, {passive: true});
+        window.addEventListener('load', () => {
+            applySavedTheme();
+            hydrateCards();
+            setupAuthorFilters();
+            setupRevealObserver();
+            bindMotion();
+            bindSearch();
+            handleSplash();
+            switchTab('home', { silent: true });
+            updateBookmarkSummary();
+            updateReadingProgress();
+        });
 
-        appContainer.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            touchEndY = e.changedTouches[0].screenY;
-            handleSwipe();
-        }, {passive: true});
+        function handleSplash() {
+            const splash = document.getElementById('splash-screen');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (sessionStorage.getItem('splashShown') || reduceMotion) {
+                splash.style.display = 'none';
+                return;
+            }
+
+            sessionStorage.setItem('splashShown', 'true');
+            setTimeout(() => {
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                }, 720);
+            }, 850);
+        }
+
+        function applySavedTheme() {
+            const icon = document.getElementById('theme-icon');
+            const savedTheme = getStoredTheme();
+
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        function toggleTheme() {
+            const nextTheme = document.documentElement.hasAttribute('data-theme') ? 'light' : 'dark';
+            setStoredTheme(nextTheme);
+            applySavedTheme();
+            showToast(nextTheme === 'dark' ? 'Dunkle Darstellung' : 'Helle Darstellung');
+        }
+
+        function getStoredTheme() {
+            try {
+                return localStorage.getItem('theme') || 'light';
+            } catch (error) {
+                return document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';
+            }
+        }
+
+        function setStoredTheme(theme) {
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (error) {}
+        }
+
+        function themedUrl(page) {
+            const theme = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';
+            const separator = page.includes('?') ? '&' : '?';
+            return `${page}${separator}theme=${theme}`;
+        }
+
+        function hydrateCards() {
+            const cards = getOriginalCards();
+
+            cards.forEach((card, index) => {
+                const legacyId = `quote-${index + 1}`;
+                const stableId = createQuoteId(card, index);
+                card.dataset.quoteId = stableId;
+                migrateBookmarkId(legacyId, stableId);
+
+                const avatar = card.querySelector('.saint-avatar');
+                const saint = card.querySelector('.saint-info h3');
+                if (avatar && saint && !avatar.alt) avatar.alt = saint.innerText;
+                if (saint) card.dataset.author = saint.innerText.trim();
+                card.dataset.century = card.closest('.view-section')?.id.replace('view-', '') || '';
+
+                const pdfBtn = card.querySelector('.pdf-btn');
+                if (pdfBtn) {
+                    const pdfNumber = getPdfNumber(pdfBtn);
+                    if (pdfNumber) pdfBtn.dataset.pdf = pdfNumber;
+                    pdfBtn.removeAttribute('onclick');
+                    pdfBtn.type = 'button';
+                    pdfBtn.setAttribute('aria-label', 'PDF-Quelle öffnen');
+                    pdfBtn.title = 'PDF-Quelle';
+                }
+
+                const shareBtn = card.querySelector('.share-btn');
+                if (shareBtn) {
+                    shareBtn.removeAttribute('onclick');
+                    shareBtn.type = 'button';
+                    shareBtn.setAttribute('aria-label', 'Zitat teilen');
+                    shareBtn.title = 'Teilen';
+                }
+
+                if (!card.querySelector('.bookmark-btn')) {
+                    const bookmark = document.createElement('button');
+                    bookmark.className = 'bookmark-btn';
+                    bookmark.type = 'button';
+                    bookmark.setAttribute('aria-label', 'Zitat merken');
+                    bookmark.title = 'Merken';
+                    bookmark.innerHTML = '<i class="fa-regular fa-star"></i>';
+                    card.insertBefore(bookmark, card.firstChild);
+                }
+
+                prepareCollapsibleCard(card);
+                wireCardButtons(card);
+            });
+
+            updateBookmarkButtons();
+            setupQuoteToolbars();
+        }
+
+        function getOriginalCards() {
+            return Array.from(document.querySelectorAll('section:not(#view-search):not(#view-saved) .quote-card'));
+        }
+
+        function setupAuthorFilters() {
+            const list = document.getElementById('author-filter-list');
+            if (!list) return;
+
+            const authors = [...new Set(getOriginalCards()
+                .map(card => card.dataset.author)
+                .filter(Boolean))]
+                .sort((a, b) => a.localeCompare(b, 'de'));
+
+            list.innerHTML = '';
+
+            authors.forEach(author => {
+                const button = document.createElement('button');
+                button.className = 'author-chip';
+                button.type = 'button';
+                button.dataset.author = author;
+                button.textContent = shortAuthorName(author);
+                button.onclick = () => setAuthorFilter(author);
+                list.appendChild(button);
+            });
+
+            updateAuthorChips();
+        }
+
+        function shortAuthorName(author) {
+            return author
+                .replace(/^Hl\.\s+/, '')
+                .replace(/^Kirchliche\s+/, '');
+        }
+
+        function setAuthorFilter(author) {
+            activeAuthorFilter = author || 'all';
+            updateAuthorChips();
+            refreshActiveViewForFilter();
+        }
+
+        function updateAuthorChips() {
+            document.querySelectorAll('.author-chip').forEach(button => {
+                button.classList.toggle('active', button.dataset.author === activeAuthorFilter);
+            });
+        }
+
+        function cardMatchesAuthor(card) {
+            return activeAuthorFilter === 'all' || card.dataset.author === activeAuthorFilter;
+        }
+
+        function refreshActiveViewForFilter() {
+            const section = document.querySelector('.view-section.active');
+            if (!section) return;
+
+            if (section.id === 'view-search') {
+                performSearch();
+                return;
+            }
+
+            if (section.id === 'view-saved') {
+                renderSaved();
+                revealCards(section);
+                return;
+            }
+
+            applyAuthorFilterToSection(section);
+            revealCards(section);
+            updateCollapseControls();
+
+            if (activeAuthorFilter !== 'all') {
+                showToast(shortAuthorName(activeAuthorFilter));
+            }
+        }
+
+        function applyAuthorFilterToSection(section) {
+            if (!section || section.id === 'view-search' || section.id === 'view-saved') return;
+
+            const cards = Array.from(section.querySelectorAll('.quote-card'));
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const visible = cardMatchesAuthor(card);
+                card.classList.toggle('is-filter-hidden', !visible);
+                if (visible) visibleCount += 1;
+            });
+
+            let empty = section.querySelector('.filter-empty');
+            const shouldShowEmpty = cards.length > 0 && visibleCount === 0;
+
+            if (shouldShowEmpty && !empty) {
+                empty = document.createElement('div');
+                empty.className = 'empty-state filter-empty';
+                section.appendChild(empty);
+            }
+
+            if (empty) {
+                empty.innerHTML = `<i class="fa-solid fa-user-slash"></i><p>Keine Zitate von ${shortAuthorName(activeAuthorFilter)} in diesem Jahrhundert.</p>`;
+                empty.style.display = shouldShowEmpty ? 'grid' : 'none';
+            }
+        }
+
+        function createQuoteId(card, index) {
+            const saint = card.querySelector('.saint-info h3')?.textContent || `author-${index + 1}`;
+            const source = card.querySelector('.quote-source')?.textContent || '';
+            const quote = card.querySelector('.quote-text')?.textContent || '';
+            return `quote-${hashString(`${saint}|${source}|${quote}`)}`;
+        }
+
+        function hashString(value) {
+            let hash = 0;
+
+            for (let i = 0; i < value.length; i += 1) {
+                hash = ((hash << 5) - hash) + value.charCodeAt(i);
+                hash |= 0;
+            }
+
+            return Math.abs(hash).toString(36);
+        }
+
+        function migrateBookmarkId(legacyId, stableId) {
+            if (legacyId === stableId) return;
+
+            const bookmarks = getBookmarks();
+            if (!bookmarks.includes(legacyId) || bookmarks.includes(stableId)) return;
+
+            setBookmarks(bookmarks.map(id => id === legacyId ? stableId : id));
+            const meta = getBookmarkMeta();
+            if (meta[legacyId] && !meta[stableId]) {
+                meta[stableId] = meta[legacyId];
+                delete meta[legacyId];
+                setBookmarkMeta(meta);
+            }
+        }
+
+        function getPdfNumber(button) {
+            if (button.dataset.pdf) return button.dataset.pdf;
+            const inlineHandler = button.getAttribute('onclick') || '';
+            const match = inlineHandler.match(/\d+/);
+            return match ? match[0] : '';
+        }
+
+        function wireCardButtons(card) {
+            const pdfBtn = card.querySelector('.pdf-btn');
+            const shareBtn = card.querySelector('.share-btn');
+            const bookmarkBtn = card.querySelector('.bookmark-btn');
+            const readMoreBtn = card.querySelector('.read-more-btn');
+
+            if (pdfBtn) {
+                const pdfNumber = getPdfNumber(pdfBtn);
+                if (pdfNumber) pdfBtn.dataset.pdf = pdfNumber;
+                pdfBtn.onclick = event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    openPDF(pdfBtn.dataset.pdf);
+                };
+            }
+
+            if (shareBtn) {
+                shareBtn.onclick = event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    shareQuote(shareBtn);
+                };
+            }
+
+            if (bookmarkBtn) {
+                bookmarkBtn.onclick = event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    toggleBookmark(card.dataset.quoteId);
+                };
+            }
+
+            if (readMoreBtn) {
+                readMoreBtn.onclick = event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    toggleQuoteCard(readMoreBtn);
+                };
+            }
+        }
+
+        function prepareCollapsibleCard(card) {
+            let body = Array.from(card.children).find(child => child.classList.contains('quote-card-body'));
+
+            if (!body) {
+                body = document.createElement('div');
+                body.className = 'quote-card-body';
+
+                Array.from(card.childNodes).forEach(node => {
+                    const isAction = node.nodeType === Node.ELEMENT_NODE
+                        && node.matches('.pdf-btn, .share-btn, .bookmark-btn, .read-more-btn');
+
+                    if (!isAction) body.appendChild(node);
+                });
+
+                card.appendChild(body);
+            }
+
+            const textLength = body.textContent.replace(/\s+/g, ' ').trim().length;
+            const shouldCollapse = textLength > quoteCollapseThreshold;
+            let readMoreBtn = Array.from(card.children).find(child => child.classList.contains('read-more-btn'));
+
+            card.classList.toggle('is-collapsible', shouldCollapse);
+
+            if (!shouldCollapse) {
+                card.classList.remove('is-collapsed', 'is-expanded');
+                if (readMoreBtn) readMoreBtn.remove();
+                return;
+            }
+
+            if (!readMoreBtn) {
+                readMoreBtn = document.createElement('button');
+                readMoreBtn.className = 'read-more-btn';
+                readMoreBtn.type = 'button';
+                card.appendChild(readMoreBtn);
+            }
+
+            setCardExpanded(card, card.classList.contains('is-expanded'), false);
+        }
+
+        function setCardExpanded(card, expanded, keepInView = false) {
+            const button = card.querySelector('.read-more-btn');
+
+            card.classList.toggle('is-expanded', expanded);
+            card.classList.toggle('is-collapsed', !expanded);
+
+            if (button) {
+                button.setAttribute('aria-expanded', String(expanded));
+                button.innerHTML = expanded
+                    ? '<i class="fa-solid fa-chevron-up"></i> Einklappen'
+                    : '<i class="fa-solid fa-chevron-down"></i> Weiterlesen';
+            }
+
+            if (keepInView && !expanded) {
+                const cardTop = card.getBoundingClientRect().top;
+                const containerTop = appContainer.getBoundingClientRect().top;
+
+                if (cardTop < containerTop + 80) {
+                    appContainer.scrollBy({
+                        top: cardTop - containerTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+
+        function toggleQuoteCard(button) {
+            const card = button.closest('.quote-card');
+            const shouldExpand = card.classList.contains('is-collapsed');
+
+            setCardExpanded(card, shouldExpand, true);
+            updateCollapseControls();
+        }
+
+        function setupQuoteToolbars() {
+            document.querySelectorAll('.view-section:not(#view-search):not(#view-saved)').forEach(section => {
+                if (!section.querySelector('.quote-card.is-collapsible')) return;
+                if (section.querySelector('.section-tools')) return;
+
+                const title = section.querySelector('.topic-title');
+                if (!title) return;
+
+                const toolbar = document.createElement('div');
+                toolbar.className = 'section-tools';
+
+                const button = document.createElement('button');
+                button.className = 'collapse-all-btn';
+                button.type = 'button';
+                button.onclick = toggleVisibleQuotes;
+
+                toolbar.appendChild(button);
+                title.insertAdjacentElement('afterend', toolbar);
+            });
+
+            updateCollapseControls();
+        }
+
+        function toggleVisibleQuotes() {
+            const section = document.querySelector('.view-section.active');
+            if (!section) return;
+
+            const cards = Array.from(section.querySelectorAll('.quote-card.is-collapsible:not(.is-filter-hidden)'));
+            const shouldExpand = cards.some(card => card.classList.contains('is-collapsed'));
+
+            cards.forEach(card => setCardExpanded(card, shouldExpand));
+            updateCollapseControls();
+            showToast(shouldExpand ? 'Alle Zitate ausgeklappt' : 'Alle Zitate eingeklappt');
+        }
+
+        function updateCollapseControls() {
+            document.querySelectorAll('.section-tools').forEach(toolbar => {
+                const section = toolbar.closest('.view-section');
+                const button = toolbar.querySelector('.collapse-all-btn');
+                const cards = Array.from(section.querySelectorAll('.quote-card.is-collapsible:not(.is-filter-hidden)'));
+
+                if (!button) return;
+                toolbar.style.display = cards.length ? 'flex' : 'none';
+                if (!cards.length) return;
+
+                const hasCollapsed = cards.some(card => card.classList.contains('is-collapsed'));
+                button.innerHTML = hasCollapsed
+                    ? '<i class="fa-solid fa-chevron-down"></i> Alle ausklappen'
+                    : '<i class="fa-solid fa-chevron-up"></i> Alle einklappen';
+            });
+        }
+
+        function getBookmarks() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(bookmarkKey)) || [];
+                return stored.map(item => typeof item === 'string' ? item : item.id).filter(Boolean);
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function setBookmarks(bookmarks) {
+            try {
+                localStorage.setItem(bookmarkKey, JSON.stringify(bookmarks));
+            } catch (error) {}
+        }
+
+        function getBookmarkMeta() {
+            try {
+                return JSON.parse(localStorage.getItem(bookmarkMetaKey)) || {};
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function setBookmarkMeta(meta) {
+            try {
+                localStorage.setItem(bookmarkMetaKey, JSON.stringify(meta));
+            } catch (error) {}
+        }
+
+        function toggleBookmark(quoteId) {
+            if (!quoteId) return;
+
+            const bookmarks = new Set(getBookmarks());
+            const wasSaved = bookmarks.has(quoteId);
+            const meta = getBookmarkMeta();
+
+            if (wasSaved) {
+                bookmarks.delete(quoteId);
+                delete meta[quoteId];
+            } else {
+                bookmarks.add(quoteId);
+                meta[quoteId] = Date.now();
+            }
+
+            setBookmarks(Array.from(bookmarks));
+            setBookmarkMeta(meta);
+            updateBookmarkButtons();
+            updateBookmarkSummary();
+            if (document.getElementById('view-saved').classList.contains('active')) renderSaved();
+            showToast(wasSaved ? 'Aus der Merkliste entfernt' : 'In der Merkliste gespeichert');
+        }
+
+        function clearBookmarks() {
+            if (!getBookmarks().length) return;
+
+            setBookmarks([]);
+            setBookmarkMeta({});
+            updateBookmarkButtons();
+            updateBookmarkSummary();
+
+            if (document.getElementById('view-saved').classList.contains('active')) {
+                renderSaved();
+            }
+
+            showToast('Merkliste geleert');
+        }
+
+        function updateBookmarkButtons() {
+            const bookmarks = new Set(getBookmarks());
+
+            document.querySelectorAll('.quote-card[data-quote-id] .bookmark-btn').forEach(button => {
+                const card = button.closest('.quote-card');
+                const isSaved = bookmarks.has(card.dataset.quoteId);
+                button.classList.toggle('active', isSaved);
+                button.setAttribute('aria-pressed', String(isSaved));
+                button.setAttribute('aria-label', isSaved ? 'Zitat aus Merkliste entfernen' : 'Zitat merken');
+                button.title = isSaved ? 'Entfernen' : 'Merken';
+                button.innerHTML = isSaved ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+            });
+        }
+
+        function updateBookmarkSummary() {
+            const count = getBookmarks().length;
+            const savedCount = document.getElementById('saved-count');
+            const navCount = document.getElementById('saved-nav-count');
+            const clearButton = document.getElementById('clear-saved');
+            const label = count === 1 ? '1 gemerkt' : `${count} gemerkt`;
+
+            if (savedCount) savedCount.innerHTML = `<i class="fa-solid fa-star"></i> ${label}`;
+            if (navCount) {
+                navCount.textContent = String(count);
+                navCount.classList.toggle('is-visible', count > 0);
+            }
+            if (clearButton) clearButton.disabled = count === 0;
+        }
+
+        function renderSaved() {
+            const savedList = document.getElementById('saved-list');
+            const bookmarks = new Set(getBookmarks());
+            const meta = getBookmarkMeta();
+            const savedCards = getOriginalCards().filter(card => bookmarks.has(card.dataset.quoteId) && cardMatchesAuthor(card));
+
+            savedList.innerHTML = '';
+            updateBookmarkSummary();
+
+            if (!savedCards.length) {
+                const hasBookmarks = bookmarks.size > 0;
+                const message = hasBookmarks && activeAuthorFilter !== 'all'
+                    ? `Keine gemerkten Zitate von ${shortAuthorName(activeAuthorFilter)}.`
+                    : 'Noch keine Zitate markiert.';
+                savedList.innerHTML = `<div class="empty-state"><i class="fa-regular fa-star"></i><p>${message}</p></div>`;
+                return;
+            }
+
+            savedCards.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.classList.remove('is-visible', 'is-filter-hidden');
+                prepareCollapsibleCard(clone);
+                addSavedNote(clone, meta[clone.dataset.quoteId]);
+                wireCardButtons(clone);
+                savedList.appendChild(clone);
+            });
+
+            updateBookmarkButtons();
+        }
+
+        function addSavedNote(card, timestamp) {
+            if (!timestamp) return;
+
+            const body = card.querySelector('.quote-card-body');
+            const header = body?.querySelector('.card-header');
+            if (!body || !header || body.querySelector('.saved-note')) return;
+
+            const note = document.createElement('div');
+            note.className = 'saved-note';
+            note.innerHTML = `<i class="fa-solid fa-bookmark"></i> Gemerkt ${formatSavedDate(timestamp)}`;
+            header.insertAdjacentElement('afterend', note);
+        }
+
+        function formatSavedDate(timestamp) {
+            try {
+                return new Intl.DateTimeFormat('de-CH', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                }).format(new Date(timestamp));
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function switchTab(tabId, options = {}) {
+            const isSearch = tabId === 'search';
+
+            if (!isSearch) {
+                const nextIndex = tabs.indexOf(tabId);
+                if (nextIndex !== -1) currentTabIndex = nextIndex;
+                closeSearch(false);
+            }
+
+            if (tabId === 'saved') renderSaved();
+
+            document.querySelectorAll('.view-section').forEach(section => section.classList.remove('active'));
+            const section = document.getElementById(`view-${tabId}`);
+            if (!section) return;
+
+            section.classList.add('active');
+            updateNav(tabId);
+            updateReaderTools(tabId);
+            applyAuthorFilterToSection(section);
+            appContainer.scrollTo({ top: 0, behavior: 'smooth' });
+            revealCards(section);
+            updateCollapseControls();
+            updateReadingProgress();
+
+            if (!options.silent && !isSearch && tabId !== 'home') {
+                showToast(germanTopics[tabId] || tabId);
+            }
+        }
+
+        function updateNav(tabId) {
+            document.querySelectorAll('nav button').forEach(button => button.classList.remove('active'));
+
+            const button = document.getElementById(`btn-${tabId}`);
+            if (!button) return;
+
+            button.classList.add('active');
+            button.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+
+        function updateReaderTools(tabId) {
+            const isReaderContext = tabId !== 'home';
+
+            topicTools.classList.toggle('is-hidden', !isReaderContext);
+
+            document.querySelectorAll('[data-tool-tab]').forEach(button => {
+                button.classList.toggle('active', button.dataset.toolTab === tabId);
+            });
+
+            updateAuthorChips();
+        }
+
+        function setupRevealObserver() {
+            if (!('IntersectionObserver' in window)) {
+                document.querySelectorAll('.quote-card').forEach(card => card.classList.add('is-visible'));
+                return;
+            }
+
+            revealObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: appContainer,
+                threshold: 0.08
+            });
+        }
+
+        function revealCards(section) {
+            section.querySelectorAll('.quote-card.is-filter-hidden').forEach(card => {
+                card.classList.remove('is-visible');
+            });
+
+            const cards = section.querySelectorAll('.quote-card:not(.is-filter-hidden)');
+
+            cards.forEach((card, index) => {
+                card.classList.remove('is-visible');
+                card.style.transitionDelay = `${Math.min(index, 7) * 45}ms`;
+
+                if (revealObserver) revealObserver.observe(card);
+                else card.classList.add('is-visible');
+            });
+        }
+
+        function bindMotion() {
+            appContainer.addEventListener('touchstart', event => {
+                touchStartX = event.changedTouches[0].screenX;
+                touchStartY = event.changedTouches[0].screenY;
+            }, { passive: true });
+
+            appContainer.addEventListener('touchend', event => {
+                touchEndX = event.changedTouches[0].screenX;
+                touchEndY = event.changedTouches[0].screenY;
+                handleSwipe();
+            }, { passive: true });
+
+            appContainer.addEventListener('scroll', () => {
+                updateReadingProgress();
+                updateNavVisibility();
+            }, { passive: true });
+        }
 
         function handleSwipe() {
             const diffX = touchEndX - touchStartX;
             const diffY = touchEndY - touchStartY;
-            
-            // Thresholds
-            const minSwipeDistance = 70; 
-            const maxVerticalVariance = 50; // Don't trigger if user is scrolling down
+            const minSwipeDistance = 70;
+            const maxVerticalVariance = 50;
 
-            if (Math.abs(diffX) > minSwipeDistance && Math.abs(diffY) < maxVerticalVariance) {
-                if (diffX < 0) {
-                    // Swipe Left -> Next Tab
-                    if (currentTabIndex < tabs.length - 1) {
-                        switchTab(tabs[currentTabIndex + 1]);
-                    }
-                } else {
-                    // Swipe Right -> Prev Tab
-                    if (currentTabIndex > 0) {
-                        switchTab(tabs[currentTabIndex - 1]);
-                    }
-                }
+            if (Math.abs(diffX) <= minSwipeDistance || Math.abs(diffY) >= maxVerticalVariance) return;
+
+            if (diffX < 0 && currentTabIndex < tabs.length - 1) {
+                switchTab(tabs[currentTabIndex + 1]);
+            }
+
+            if (diffX > 0 && currentTabIndex > 0) {
+                switchTab(tabs[currentTabIndex - 1]);
             }
         }
 
-        // --- 5. SEARCH ---
+        function updateNavVisibility() {
+            nav.classList.remove('nav-hidden');
+        }
+
+        function updateReadingProgress() {
+            const progress = document.querySelector('#reading-progress span');
+            const maxScroll = appContainer.scrollHeight - appContainer.clientHeight;
+            const percent = maxScroll > 0 ? (appContainer.scrollTop / maxScroll) * 100 : 0;
+            progress.style.width = `${Math.min(100, Math.max(0, percent))}%`;
+        }
+
+        function bindSearch() {
+            document.getElementById('search-input').addEventListener('input', performSearch);
+        }
+
         function toggleSearch() {
             const container = document.getElementById('search-container');
-            if(container.style.display === 'block') {
-                container.style.display = 'none';
-                switchTab(tabs[currentTabIndex]); // Go back to current
-            } else {
-                container.style.display = 'block';
-                switchTab('search');
-                document.getElementById('search-input').focus();
+            const input = document.getElementById('search-input');
+            const isOpen = container.classList.contains('is-open');
+
+            if (isOpen) {
+                closeSearch(true);
+                return;
             }
+
+            container.classList.add('is-open');
+            container.style.display = 'block';
+            switchTab('search');
+            performSearch();
+            setTimeout(() => input.focus(), 60);
+        }
+
+        function closeSearch(returnToTab) {
+            const container = document.getElementById('search-container');
+            container.classList.remove('is-open');
+            container.style.display = 'none';
+
+            if (returnToTab) switchTab(tabs[currentTabIndex], { silent: true });
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('search-input');
+            input.value = '';
+            performSearch();
+            input.focus();
         }
 
         function performSearch() {
-            const query = document.getElementById('search-input').value.toLowerCase();
+            const input = document.getElementById('search-input');
+            const query = input.value.trim().toLowerCase();
             const resultsContainer = document.getElementById('search-results-list');
-            
-            resultsContainer.innerHTML = '';
-            if(query.length < 2) return;
+            const searchCount = document.getElementById('search-count');
+            const authorLabel = activeAuthorFilter === 'all' ? '' : ` · ${shortAuthorName(activeAuthorFilter)}`;
 
-            // Search all cards in hidden sections
-            const allCards = document.querySelectorAll('section:not(#view-search) .quote-card');
-            
-            allCards.forEach(card => {
-                if(card.innerText.toLowerCase().includes(query)) {
-                    const clone = card.cloneNode(true);
-                    // Re-attach share event since onclick is copied but context matters
-                    clone.querySelector('.share-btn').onclick = function() { shareQuote(this); };
-                    // Re-attach PDF event
-                    const pdfBtn = clone.querySelector('.pdf-btn');
-                    if(pdfBtn) {
-                        const pdfNum = pdfBtn.getAttribute('onclick').match(/\d+/)[0];
-                        pdfBtn.onclick = function() { openPDF(pdfNum); };
-                    }
-                    resultsContainer.appendChild(clone);
-                }
+            resultsContainer.innerHTML = '';
+
+            if (query.length < 2) {
+                searchCount.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Suchbegriff eingeben${authorLabel}`;
+                resultsContainer.innerHTML = '<div class="empty-state"><i class="fa-solid fa-scroll"></i><p>Mindestens zwei Zeichen eingeben.</p></div>';
+                return;
+            }
+
+            const matches = getOriginalCards().filter(card => {
+                return cardMatchesAuthor(card) && card.textContent.toLowerCase().includes(query);
             });
 
-            if(resultsContainer.innerHTML === '') {
-                resultsContainer.innerHTML = '<p style="text-align:center; color:var(--text-sub); margin-top:2rem;">Keine Übereinstimmungen gefunden.</p>';
+            searchCount.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> ${matches.length} Treffer${authorLabel}`;
+
+            if (!matches.length) {
+                resultsContainer.innerHTML = '<div class="empty-state"><i class="fa-solid fa-circle-xmark"></i><p>Keine Übereinstimmungen gefunden.</p></div>';
+                return;
             }
+
+            matches.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.classList.remove('is-visible', 'is-filter-hidden');
+                highlightMatches(clone, query);
+                prepareCollapsibleCard(clone);
+                wireCardButtons(clone);
+                resultsContainer.appendChild(clone);
+            });
+
+            updateBookmarkButtons();
+            revealCards(document.getElementById('view-search'));
         }
 
-        // --- 6. UTILITIES ---
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            if(body.hasAttribute('data-theme')) {
-                body.removeAttribute('data-theme');
-                icon.className = "fa-solid fa-moon";
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                icon.className = "fa-solid fa-sun";
-                localStorage.setItem('theme', 'dark');
-            }
+        function highlightMatches(root, query) {
+            const regex = new RegExp(escapeRegex(query), 'gi');
+            const targets = root.querySelectorAll('.quote-text, .quote-source, .saint-info h3');
+
+            targets.forEach(target => {
+                target.childNodes.forEach(node => {
+                    regex.lastIndex = 0;
+                    if (node.nodeType !== Node.TEXT_NODE || !regex.test(node.nodeValue)) return;
+
+                    regex.lastIndex = 0;
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = node.nodeValue.replace(regex, match => `<mark>${match}</mark>`);
+                    node.replaceWith(wrapper);
+                });
+            });
         }
 
-        function showToast(msg) {
-            const t = document.getElementById("toast");
-            t.className = "show";
-            t.innerText = msg;
-            setTimeout(() => t.className = "", 2000);
+        function escapeRegex(value) {
+            return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
 
-        async function shareQuote(btn) {
-            const card = btn.closest('.quote-card');
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            clearTimeout(toastTimer);
+            toast.textContent = message;
+            toast.classList.add('show');
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+        }
+
+        async function shareQuote(button) {
+            const card = button.closest('.quote-card');
             const text = card.querySelector('.quote-text').innerText;
             const saint = card.querySelector('.saint-info h3').innerText;
             const source = card.querySelector('.quote-source').innerText;
             const shareData = {
-                title: 'Katholische Weisheit',
+                title: 'Vox Patrum',
                 text: `${text}\n\n- ${saint} (${source})`
             };
+
             try {
-                if(navigator.share) await navigator.share(shareData);
-                else {
-                    navigator.clipboard.writeText(shareData.text);
-                    showToast("In die Zwischenablage kopiert");
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                    return;
                 }
-            } catch(e) { console.log(e); }
+
+                await navigator.clipboard.writeText(shareData.text);
+                showToast('In die Zwischenablage kopiert');
+            } catch (error) {
+                showToast('Teilen abgebrochen');
+            }
         }
 
         function openPDF(pdfNumber) {
-            // Open PDF in a new window/tab
+            if (!pdfNumber) return;
             window.open(`pdfs/pdf${pdfNumber}.pdf`, '_blank');
         }
 
-        // Auto Hide Nav on Scroll
-        let lastScrollTop = 0;
-        const nav = document.querySelector('nav');
-        appContainer.addEventListener('scroll', () => {
-            const st = appContainer.scrollTop;
-            if(Math.abs(st - lastScrollTop) > 10) {
-                if (st > lastScrollTop && st > 50) nav.classList.add('nav-hidden');
-                else nav.classList.remove('nav-hidden');
-                lastScrollTop = st;
-            }
-        });
+        function goToIndex(event) {
+            event.preventDefault();
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = themedUrl('index.html');
+            }, 160);
+        }
     </script>
 </body>
 </html>
