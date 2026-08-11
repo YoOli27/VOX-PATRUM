@@ -76,10 +76,7 @@
             margin: 0;
             font-family: "Merriweather", serif;
             color: var(--ink);
-            background:
-                linear-gradient(120deg, rgba(39, 100, 93, 0.12), transparent 34%),
-                linear-gradient(300deg, rgba(124, 31, 33, 0.12), transparent 36%),
-                var(--paper-soft);
+            background: var(--paper-soft);
             opacity: 1;
             transition: opacity 240ms ease, background-color 240ms ease, color 240ms ease;
         }
@@ -90,11 +87,7 @@
             inset: 0;
             pointer-events: none;
             opacity: 0.34;
-            background-image:
-                linear-gradient(rgba(75, 56, 36, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(75, 56, 36, 0.045) 1px, transparent 1px);
-            background-size: 44px 44px;
-            mask-image: linear-gradient(to bottom, #000, transparent 80%);
+            background: transparent;
         }
 
         button {
@@ -107,9 +100,7 @@
             z-index: 100;
             display: grid;
             place-items: center;
-            background:
-                radial-gradient(circle at center, rgba(183, 138, 65, 0.16), transparent 32%),
-                #170706;
+            background: #170706;
             transition: opacity 700ms ease;
         }
 
@@ -309,9 +300,7 @@
             border: 1px solid var(--line);
             border-radius: 8px;
             color: var(--ink);
-            background:
-                linear-gradient(135deg, color-mix(in srgb, var(--paper) 92%, transparent), color-mix(in srgb, var(--vellum) 72%, transparent)),
-                var(--paper);
+            background: var(--paper);
             box-shadow: var(--shadow-tight);
             text-align: left;
             cursor: pointer;
@@ -324,7 +313,7 @@
             position: absolute;
             inset: 0 0 auto;
             height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--verdigris), transparent);
+            background: var(--gold);
             opacity: 0;
             transition: opacity 200ms ease;
         }
@@ -347,7 +336,7 @@
             place-items: center;
             border-radius: 50%;
             color: #fffaf0;
-            background: linear-gradient(145deg, var(--oxblood), var(--lapis));
+            background: var(--oxblood);
         }
 
         .topic-content {
@@ -473,9 +462,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(to top, color-mix(in srgb, var(--paper-soft) 96%, transparent), transparent 48%),
-                linear-gradient(90deg, rgba(37, 63, 103, 0.12), transparent 34%, rgba(39, 100, 93, 0.12));
+            background: transparent;
             pointer-events: none;
             z-index: 1;
         }
@@ -728,16 +715,10 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="simple-theme.css">
 </head>
 
 <body>
-<div id="splash-screen" aria-hidden="true">
-    <div class="splash-content">
-        <div class="splash-seal"><i class="fa-solid fa-cross fa-2x"></i></div>
-        <p class="splash-text">VOX PATRUM</p>
-    </div>
-</div>
-
 <div class="app-shell">
     <header class="topbar">
         <a class="brand" href="index.html" aria-label="Vox Patrum Startseite">
@@ -751,9 +732,7 @@
 
     <main class="hero" id="main">
         <section class="hero-copy" aria-labelledby="page-title">
-            <span class="eyebrow">Kirchenväter nach Themen</span>
             <h1 id="page-title">Vox Patrum</h1>
-            <p class="intro">Eine Sammlung patristischer Quellen, geordnet nach Jahrhunderten, inklusive Buchscans</p>
         </section>
 
         <section class="topic-overview" aria-labelledby="topics-title">
@@ -763,48 +742,15 @@
 
             <div class="topics-grid">
                 <button class="topic-card is-active" type="button" onclick="openTopic('eucharistie.html')">
-                <span class="topic-icon"><i class="fa-solid fa-wine-glass"></i></span>
-                <span class="topic-content">
-                    <span class="topic-label">Thema <span class="topic-status">Aktiv</span></span>
                     <span class="topic-title">Eucharistie</span>
-                </span>
-                <p class="topic-description">Patristische Zeugnisse zur Eucharistie und ihrer Wahrhaftigkeit.</p>
-                <span class="topic-meta">
-                    <span><i class="fa-solid fa-calendar-days"></i> 2.-5. Jh.</span>
-                    <span><i class="fa-solid fa-user-pen"></i> 13 Autoren</span>
-                    <span><i class="fa-solid fa-file-pdf"></i> PDF-Scans</span>
-                </span>
-                <span class="topic-footer">Lesen <i class="fa-solid fa-arrow-right"></i></span>
                 </button>
 
                 <button class="topic-card" type="button" onclick="openTopic('test.html')">
-                <span class="topic-icon"><i class="fa-solid fa-scroll"></i></span>
-                <span class="topic-content">
-                    <span class="topic-label">Thema <span class="topic-status">Entwurf</span></span>
                     <span class="topic-title">Test</span>
-                </span>
-                <p class="topic-description">Platzhalter für ein späteres Thema mit eigener Sammlung und Quellenlage.</p>
-                <span class="topic-meta">
-                    <span><i class="fa-solid fa-calendar-days"></i> Testzeitraum</span>
-                    <span><i class="fa-solid fa-user-pen"></i> 0 Autoren</span>
-                    <span><i class="fa-solid fa-flask"></i> Entwurf</span>
-                </span>
-                <span class="topic-footer">Vorschau <i class="fa-solid fa-arrow-right"></i></span>
                 </button>
 
                 <button class="topic-card" type="button" onclick="openTopic('test2.html')">
-                <span class="topic-icon"><i class="fa-solid fa-book-open"></i></span>
-                <span class="topic-content">
-                    <span class="topic-label">Thema <span class="topic-status">Entwurf</span></span>
                     <span class="topic-title">Test 2</span>
-                </span>
-                <p class="topic-description">Zweiter Platzhalter für eine zusätzliche thematische Sammlung.</p>
-                <span class="topic-meta">
-                    <span><i class="fa-solid fa-calendar-days"></i> Testzeitraum</span>
-                    <span><i class="fa-solid fa-user-pen"></i> 0 Autoren</span>
-                    <span><i class="fa-solid fa-flask"></i> Entwurf</span>
-                </span>
-                <span class="topic-footer">Vorschau <i class="fa-solid fa-arrow-right"></i></span>
                 </button>
             </div>
         </section>
@@ -815,12 +761,7 @@
             <div class="portrait"><img src="profilbilder/cyrill_von_jerusalem.jpg" alt="Hl. Cyrill von Jerusalem"></div>
             <div class="portrait"><img src="profilbilder/augustinus_von_hippo.jpg" alt="Hl. Augustinus von Hippo"></div>
             <div class="portrait"><img src="profilbilder/ambrosius_von_mailand.jpg" alt="Hl. Ambrosius von Mailand"></div>
-            <div class="portrait"><img src="profilbilder/origenes.jpg" alt="Hl. Origenes"></div>
-            <div class="stats" aria-label="Sammlungsumfang">
-                <span class="stat"><i class="fa-solid fa-scroll"></i> 5 Jahrhunderte</span>
-                <span class="stat"><i class="fa-solid fa-user-pen"></i> 13 Autoren</span>
-                <span class="stat"><i class="fa-solid fa-file-pdf"></i> Originalscans</span>
-            </div>
+            <div class="portrait"><img src="profilbilder/origenes.jpg" alt="Origenes"></div>
         </section>
     </main>
 </div>
@@ -839,28 +780,8 @@
         }
     }
 
-    function showMain() {
-        const splash = document.getElementById('splash-screen');
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        document.body.style.opacity = '1';
-
-        if (sessionStorage.getItem('splashShown') || reduceMotion) {
-            splash.style.display = 'none';
-            return;
-        }
-
-        sessionStorage.setItem('splashShown', 'true');
-        setTimeout(() => {
-            splash.style.opacity = '0';
-            setTimeout(() => {
-                splash.style.display = 'none';
-            }, 720);
-        }, 850);
-    }
-
     window.addEventListener('pageshow', () => {
         applySavedTheme();
-        showMain();
     });
 
     function toggleTheme() {
@@ -890,10 +811,7 @@
     }
 
     function openTopic(page) {
-        document.body.style.opacity = '0';
-        setTimeout(() => {
-            window.location.href = themedUrl(page);
-        }, 180);
+        window.location.href = themedUrl(page);
     }
 </script>
 

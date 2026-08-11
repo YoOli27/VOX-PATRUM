@@ -1342,6 +1342,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="simple-theme.css">
 </head>
 <body>
 <div id="splash-screen">
@@ -1360,7 +1361,6 @@
 <button type="button" onclick="toggleSearch()" aria-label="Suche öffnen" title="Suche"><i class="fa-solid fa-magnifying-glass"></i></button>
 <button type="button" onclick="toggleTheme()" aria-label="Darstellung wechseln" title="Darstellung wechseln"><i class="fa-solid fa-moon" id="theme-icon"></i></button>
 </div>
-<div id="reading-progress" aria-hidden="true"><span></span></div>
 </div>
 <div id="search-container">
 <div class="search-field">
@@ -1368,46 +1368,7 @@
 <button id="search-clear" type="button" onclick="clearSearch()" aria-label="Suche leeren" title="Suche leeren"><i class="fa-solid fa-xmark"></i></button>
 </div>
 </div>
-<div id="topic-tools" class="is-hidden" aria-label="Lesewerkzeuge">
-<div class="tool-row century-strip" aria-label="Jahrhundert auswählen">
-<button class="tool-chip" type="button" data-tool-tab="c1" onclick="switchTab('c1')"><i class="fa-solid fa-scroll"></i> 1. Jh.</button>
-<button class="tool-chip" type="button" data-tool-tab="c2" onclick="switchTab('c2')"><i class="fa-solid fa-scroll"></i> 2. Jh.</button>
-<button class="tool-chip" type="button" data-tool-tab="c3" onclick="switchTab('c3')"><i class="fa-solid fa-scroll"></i> 3. Jh.</button>
-<button class="tool-chip" type="button" data-tool-tab="c4" onclick="switchTab('c4')"><i class="fa-solid fa-scroll"></i> 4. Jh.</button>
-<button class="tool-chip" type="button" data-tool-tab="c5" onclick="switchTab('c5')"><i class="fa-solid fa-scroll"></i> 5. Jh.</button>
-</div>
-<div class="tool-row author-filter" aria-label="Autor filtern">
-<button class="author-chip active" type="button" data-author="all" onclick="setAuthorFilter('all')"><i class="fa-solid fa-users"></i> Alle</button>
-<span id="author-filter-list"></span>
-</div>
-</div>
 <div id="app-container">
-<section class="view-section active" id="view-home">
-<div class="reader-home">
-<div>
-<span class="home-kicker">Eucharistie</span>
-<h1>Warhaftiges Leib und Blut</h1>
-</div>
-<p>Ignatius, Justin, Irenäus, Tertullian, Clemens, Hippolytus, Origenes, Cyprian, Ambrosius, Athanasius, Cyrill, Augustinus.</p>
-<div class="home-actions">
-<button class="primary-action" type="button" onclick="switchTab('c2')"><i class="fa-solid fa-scroll"></i> Beginnen</button>
-<button class="secondary-action" type="button" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i> Suchen</button>
-<button class="secondary-action" type="button" onclick="switchTab('saved')"><i class="fa-solid fa-star"></i> Merkliste</button>
-</div>
-<div class="home-mosaic" aria-label="Ausgewählte Kirchenväter">
-<img src="profilbilder/ignatius_von_antiochien.jpg" alt="Hl. Ignatius von Antiochien"/>
-<img src="profilbilder/justin_der_maertyrer.jpg" alt="Hl. Justin der Märtyrer"/>
-<img src="profilbilder/cyrill_von_jerusalem.jpg" alt="Hl. Cyrill von Jerusalem"/>
-<img src="profilbilder/ambrosius_von_mailand.jpg" alt="Hl. Ambrosius von Mailand"/>
-<img src="profilbilder/augustinus_von_hippo.jpg" alt="Hl. Augustinus von Hippo"/>
-</div>
-<div class="home-stats" aria-label="Sammlung">
-<span class="home-stat"><i class="fa-solid fa-calendar-days"></i> 5 Jahrhunderte</span>
-<span class="home-stat"><i class="fa-solid fa-user-pen"></i> 13 Autoren</span>
-<span class="home-stat"><i class="fa-solid fa-file-pdf"></i> PDF-Quellen</span>
-</div>
-</div>
-</section>
 <!-- 1. Jahrhundert -->
 <section class="view-section" id="view-c1">
 <h2 class="topic-title">1. Jahrhundert</h2>
@@ -1714,7 +1675,6 @@
 </div>
 <nav>
 <div class="nav-scroller">
-<button id="btn-home" onclick="switchTab('home')"><i class="fa-solid fa-house"></i>Start</button>
 <button id="btn-search" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i>Suche</button>
 <button id="btn-c1" onclick="switchTab('c1')"><i class="fa-solid fa-scroll"></i>1. Jhd.</button>
 <button id="btn-c2" onclick="switchTab('c2')"><i class="fa-solid fa-scroll"></i>2. Jhd.</button>
@@ -1725,14 +1685,12 @@
 </div>
 </nav>
 <script>
-        const tabs = ['home', 'c1', 'c2', 'c3', 'c4', 'c5', 'saved'];
+        const tabs = ['c1', 'c2', 'c3', 'c4', 'c5', 'saved'];
         const appContainer = document.getElementById('app-container');
         const nav = document.querySelector('nav');
         const bookmarkKey = 'vox-patrum-bookmarks';
         const bookmarkMetaKey = 'vox-patrum-bookmark-meta';
-        const topicTools = document.getElementById('topic-tools');
         const germanTopics = {
-            home: 'Start',
             c1: '1. Jahrhundert',
             c2: '2. Jahrhundert',
             c3: '3. Jahrhundert',
@@ -1755,33 +1713,11 @@
         window.addEventListener('load', () => {
             applySavedTheme();
             hydrateCards();
-            setupAuthorFilters();
-            setupRevealObserver();
             bindMotion();
             bindSearch();
-            handleSplash();
-            switchTab('home', { silent: true });
+            switchTab('c2', { silent: true });
             updateBookmarkSummary();
-            updateReadingProgress();
         });
-
-        function handleSplash() {
-            const splash = document.getElementById('splash-screen');
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            if (sessionStorage.getItem('splashShown') || reduceMotion) {
-                splash.style.display = 'none';
-                return;
-            }
-
-            sessionStorage.setItem('splashShown', 'true');
-            setTimeout(() => {
-                splash.style.opacity = '0';
-                setTimeout(() => {
-                    splash.style.display = 'none';
-                }, 720);
-            }, 850);
-        }
 
         function applySavedTheme() {
             const icon = document.getElementById('theme-icon');
@@ -2349,14 +2285,12 @@
 
             section.classList.add('active');
             updateNav(tabId);
-            updateReaderTools(tabId);
             applyAuthorFilterToSection(section);
             appContainer.scrollTo({ top: 0, behavior: 'smooth' });
             revealCards(section);
             updateCollapseControls();
-            updateReadingProgress();
 
-            if (!options.silent && !isSearch && tabId !== 'home') {
+            if (!options.silent && !isSearch) {
                 showToast(germanTopics[tabId] || tabId);
             }
         }
@@ -2369,18 +2303,6 @@
 
             button.classList.add('active');
             button.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
-
-        function updateReaderTools(tabId) {
-            const isReaderContext = tabId !== 'home';
-
-            topicTools.classList.toggle('is-hidden', !isReaderContext);
-
-            document.querySelectorAll('[data-tool-tab]').forEach(button => {
-                button.classList.toggle('active', button.dataset.toolTab === tabId);
-            });
-
-            updateAuthorChips();
         }
 
         function setupRevealObserver() {
@@ -2431,7 +2353,6 @@
             }, { passive: true });
 
             appContainer.addEventListener('scroll', () => {
-                updateReadingProgress();
                 updateNavVisibility();
             }, { passive: true });
         }
@@ -2455,13 +2376,6 @@
 
         function updateNavVisibility() {
             nav.classList.remove('nav-hidden');
-        }
-
-        function updateReadingProgress() {
-            const progress = document.querySelector('#reading-progress span');
-            const maxScroll = appContainer.scrollHeight - appContainer.clientHeight;
-            const percent = maxScroll > 0 ? (appContainer.scrollTop / maxScroll) * 100 : 0;
-            progress.style.width = `${Math.min(100, Math.max(0, percent))}%`;
         }
 
         function bindSearch() {
@@ -2598,10 +2512,7 @@
 
         function goToIndex(event) {
             event.preventDefault();
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                window.location.href = themedUrl('index.html');
-            }, 160);
+            window.location.href = themedUrl('index.html');
         }
     </script>
 </body>

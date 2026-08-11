@@ -1,0 +1,315 @@
+:root {
+    color-scheme: light;
+    --ink: #2c2c2c;
+    --muted: #555555;
+    --paper: #ffffff;
+    --paper-soft: #e8e4d9;
+    --vellum: #e8e4d9;
+    --oxblood: #7b1113;
+    --oxblood-strong: #7b1113;
+    --gold: #c5a05a;
+    --verdigris: #555555;
+    --lapis: #7b1113;
+    --line: rgba(0, 0, 0, 0.1);
+    --nav-bg: #1a1a1a;
+    --nav-active: #c5a05a;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-tight: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+    --ink: #e0e0e0;
+    --muted: #aaaaaa;
+    --paper: #1e1e1e;
+    --paper-soft: #121212;
+    --vellum: #1e1e1e;
+    --oxblood: #ff6b6b;
+    --oxblood-strong: #ff6b6b;
+    --gold: #d4af37;
+    --verdigris: #aaaaaa;
+    --lapis: #ff6b6b;
+    --line: rgba(0, 0, 0, 0.5);
+    --nav-bg: #000000;
+    --nav-active: #d4af37;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --shadow-tight: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+*,
+*::before,
+*::after {
+    animation: none !important;
+    background-image: none !important;
+    mask-image: none !important;
+}
+
+html,
+body {
+    background: var(--paper-soft) !important;
+}
+
+body {
+    opacity: 1 !important;
+    transition: background-color 120ms ease, color 120ms ease !important;
+}
+
+body::before,
+#splash-screen {
+    display: none !important;
+}
+
+.brand {
+    background-color: transparent !important;
+}
+
+.brand-mark,
+.icon-button,
+.header-title,
+.header-actions a,
+.header-actions button,
+.topic-card,
+.portrait-panel,
+.template-card,
+.empty-card,
+.chip,
+.card-kicker,
+.timeline-mini span,
+.source-mini span,
+.action,
+#search-input,
+.tool-chip,
+.author-chip,
+.mini-action,
+.secondary-action,
+.home-mosaic,
+.home-stat,
+.result-count,
+.collapse-all-btn,
+.quote-card,
+.quote-source,
+.share-btn,
+.pdf-btn,
+.bookmark-btn,
+.read-more-btn,
+.empty-state,
+.saved-note {
+    background-color: var(--paper) !important;
+}
+
+.brand-mark,
+.brand i,
+.topic-icon,
+.primary-action,
+.action.primary {
+    background-color: var(--oxblood) !important;
+}
+
+.brand-mark,
+.brand i,
+.topic-icon,
+.primary-action,
+.action.primary {
+    color: #fff5f5 !important;
+}
+
+.brand:hover,
+.icon-button:hover,
+.header-title:hover,
+.header-actions a:hover,
+.header-actions button:hover,
+.topic-card:hover,
+.action:hover,
+.primary-action:hover,
+.secondary-action:hover,
+.tool-chip:hover,
+.author-chip:hover,
+.mini-action:hover,
+.collapse-all-btn:hover,
+.share-btn:hover,
+.pdf-btn:hover,
+.bookmark-btn:hover,
+.read-more-btn:hover,
+nav button:hover,
+.pdf-btn:active,
+.bookmark-btn:active,
+.read-more-btn:active,
+nav button:active {
+    transform: none !important;
+}
+
+.icon-button,
+.header-title,
+.header-actions a,
+.header-actions button,
+.brand,
+.action,
+.primary-action,
+.secondary-action,
+.tool-chip,
+.author-chip,
+.mini-action,
+.collapse-all-btn,
+.share-btn,
+.pdf-btn,
+.bookmark-btn,
+.read-more-btn,
+nav button {
+    box-shadow: none !important;
+}
+
+/* Index: concise topic list and a still portrait gallery. */
+.hero {
+    align-self: start;
+    align-items: start;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+    padding-top: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.hero-copy,
+.topic-overview,
+.portrait-panel {
+    animation: none !important;
+}
+
+.hero-copy {
+    gap: 0;
+}
+
+.hero-copy h1 {
+    max-width: none;
+    font-size: clamp(2.8rem, 10vw, 6.5rem);
+    line-height: 0.95;
+}
+
+.topics-grid {
+    gap: 0.65rem;
+}
+
+.topic-card {
+    display: flex;
+    align-items: center;
+    min-height: 74px;
+    padding: 1rem 1.1rem;
+    border-radius: 6px;
+    box-shadow: none !important;
+    overflow: visible;
+    transition: border-color 140ms ease, background-color 140ms ease !important;
+}
+
+.topic-card::before {
+    display: none !important;
+}
+
+.topic-card:hover,
+.topic-card:focus-visible {
+    border-color: var(--oxblood);
+    box-shadow: none !important;
+}
+
+.topics-grid .topic-title {
+    color: var(--oxblood-strong);
+    font-size: clamp(1.15rem, 4vw, 1.45rem);
+}
+
+.portrait-panel {
+    min-height: 360px;
+    background-color: var(--paper) !important;
+    box-shadow: none !important;
+}
+
+.portrait-panel::before {
+    display: none !important;
+}
+
+.portrait,
+.portrait:nth-child(n) {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.portrait img,
+.portrait-panel:hover img {
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Reader: keep functional state changes, remove decorative reveals and zooms. */
+.view-section,
+#search-container,
+.bookmark-btn.saved {
+    animation: none !important;
+}
+
+.quote-card,
+.quote-card.is-visible,
+.quote-card:hover {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: border-color 140ms ease, box-shadow 140ms ease !important;
+    transition-delay: 0ms !important;
+}
+
+.quote-card:hover {
+    border-color: var(--line);
+    border-left-color: var(--gold);
+    box-shadow: var(--shadow-tight) !important;
+}
+
+.home-mosaic img,
+.home-mosaic img:nth-child(n),
+.home-mosaic:hover img {
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+h2.topic-title::after,
+.quote-card::before {
+    background-color: var(--gold) !important;
+}
+
+.quote-card {
+    border-left-color: var(--gold) !important;
+}
+
+.tool-chip.active,
+.author-chip.active,
+.bookmark-btn.active,
+mark,
+[data-theme="dark"] mark {
+    background-color: color-mix(in srgb, var(--paper) 78%, var(--oxblood) 22%) !important;
+}
+
+nav {
+    background-color: var(--nav-bg) !important;
+}
+
+nav button {
+    color: #888888 !important;
+}
+
+[data-theme="dark"] nav button {
+    color: #555555 !important;
+}
+
+nav button.active {
+    color: var(--nav-active) !important;
+}
+
+@media (max-width: 720px) {
+    .hero-copy h1 {
+        font-size: clamp(2.55rem, 14vw, 4.25rem);
+    }
+
+    .topic-card {
+        min-height: 62px;
+        padding: 0.8rem 0.9rem;
+    }
+
+    .portrait-panel {
+        min-height: 0;
+        height: 190px;
+    }
+}
