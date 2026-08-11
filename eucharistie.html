@@ -83,10 +83,7 @@
             flex-direction: column;
             overflow: hidden;
             color: var(--ink);
-            background:
-                linear-gradient(120deg, rgba(39, 100, 93, 0.12), transparent 36%),
-                linear-gradient(300deg, rgba(124, 31, 33, 0.1), transparent 34%),
-                var(--paper-soft);
+            background: var(--paper-soft);
             font-family: "Merriweather", serif;
             line-height: 1.7;
             transition: background-color 240ms ease, color 240ms ease;
@@ -98,11 +95,7 @@
             inset: 0;
             pointer-events: none;
             opacity: 0.28;
-            background-image:
-                linear-gradient(rgba(72, 53, 34, 0.055) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(72, 53, 34, 0.04) 1px, transparent 1px);
-            background-size: 46px 46px;
-            mask-image: linear-gradient(to bottom, #000, transparent 78%);
+            background: transparent;
         }
 
         button,
@@ -120,9 +113,7 @@
             z-index: 9999;
             display: grid;
             place-items: center;
-            background:
-                radial-gradient(circle at center, rgba(226, 185, 107, 0.16), transparent 32%),
-                #170706;
+            background: #170706;
             transition: opacity 700ms ease;
         }
 
@@ -226,24 +217,6 @@
             color: var(--oxblood);
         }
 
-        #reading-progress {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1px;
-            height: 2px;
-            overflow: hidden;
-            background: transparent;
-        }
-
-        #reading-progress span {
-            display: block;
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--verdigris), var(--gold), var(--oxblood));
-            transition: width 120ms linear;
-        }
-
         #search-container {
             position: relative;
             z-index: 450;
@@ -271,9 +244,7 @@
             border-radius: 999px;
             outline: none;
             color: var(--ink);
-            background:
-                linear-gradient(90deg, color-mix(in srgb, var(--gold) 16%, transparent), transparent 38%),
-                var(--paper);
+            background: var(--paper);
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
             font-size: 0.95rem;
         }
@@ -377,9 +348,7 @@
         .author-chip.active {
             color: var(--oxblood-strong);
             border-color: color-mix(in srgb, var(--gold) 72%, var(--line));
-            background:
-                linear-gradient(135deg, color-mix(in srgb, var(--gold) 20%, transparent), color-mix(in srgb, var(--paper) 88%, transparent)),
-                var(--paper);
+            background: color-mix(in srgb, var(--paper) 82%, var(--oxblood) 18%);
         }
 
         .author-filter {
@@ -479,7 +448,7 @@
         .primary-action {
             border: 1px solid color-mix(in srgb, var(--oxblood) 70%, var(--line));
             color: #fff7e8;
-            background: linear-gradient(135deg, var(--oxblood), var(--lapis));
+            background: var(--oxblood);
             box-shadow: 0 14px 30px rgba(85, 18, 19, 0.24);
         }
 
@@ -560,7 +529,7 @@
             width: 76px;
             height: 2px;
             border-radius: 999px;
-            background: linear-gradient(90deg, var(--gold), var(--verdigris));
+            background: var(--oxblood);
         }
 
         .section-tools {
@@ -604,10 +573,7 @@
             border-left: 5px solid var(--gold);
             border-radius: 8px;
             color: var(--ink);
-            background:
-                radial-gradient(circle at top right, color-mix(in srgb, var(--gold) 12%, transparent), transparent 34%),
-                linear-gradient(135deg, color-mix(in srgb, var(--paper) 96%, transparent), color-mix(in srgb, var(--vellum) 52%, transparent)),
-                var(--paper);
+            background: var(--paper);
             box-shadow: var(--shadow-tight);
             opacity: 0;
             overflow: hidden;
@@ -620,7 +586,7 @@
             position: absolute;
             inset: 0 0 auto 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--verdigris), transparent);
+            background: var(--oxblood);
             opacity: 0.72;
             pointer-events: none;
         }
@@ -658,7 +624,7 @@
             bottom: 0;
             left: 0;
             height: 5.5rem;
-            background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--paper) 98%, transparent));
+            display: none;
             pointer-events: none;
         }
 
@@ -683,6 +649,17 @@
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 10px 24px rgba(49, 35, 21, 0.14);
+        }
+
+        .avatar-placeholder {
+            display: grid;
+            place-items: center;
+            background: color-mix(in srgb, var(--paper-soft) 78%, var(--oxblood));
+            color: var(--oxblood-strong);
+            font-family: "Cinzel", serif;
+            font-size: 1.08rem;
+            font-weight: 800;
+            letter-spacing: 0;
         }
 
         .saint-info h3 {
@@ -804,9 +781,7 @@
             border: 1px solid color-mix(in srgb, var(--gold) 54%, var(--line));
             border-radius: 999px;
             color: var(--oxblood);
-            background:
-                linear-gradient(135deg, color-mix(in srgb, var(--gold) 18%, transparent), color-mix(in srgb, var(--paper) 80%, transparent)),
-                var(--paper);
+            background: color-mix(in srgb, var(--paper) 84%, var(--oxblood) 16%);
             font-family: "Cinzel", serif;
             font-size: 0.78rem;
             font-weight: 700;
@@ -894,10 +869,7 @@
         }
 
         [data-theme="dark"] .quote-card {
-            background:
-                radial-gradient(circle at top right, color-mix(in srgb, var(--gold) 10%, transparent), transparent 34%),
-                linear-gradient(135deg, color-mix(in srgb, var(--paper) 94%, transparent), color-mix(in srgb, var(--vellum) 60%, transparent)),
-                var(--paper);
+            background: var(--paper);
         }
 
         [data-theme="dark"] .quote-source,
@@ -922,9 +894,7 @@
             z-index: 1000;
             height: var(--nav-height);
             border-top: 1px solid rgba(255, 250, 240, 0.12);
-            background:
-                linear-gradient(180deg, color-mix(in srgb, var(--nav-bg) 90%, transparent), var(--nav-bg)),
-                var(--nav-bg);
+            background: var(--nav-bg);
             box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.24);
             transition: transform 260ms ease;
         }
@@ -1053,7 +1023,6 @@
             background: #170706;
         }
 
-        #reading-progress span,
         h2.topic-title::after,
         .quote-card::before {
             background: var(--gold);
@@ -1099,7 +1068,7 @@
         }
 
         .quote-card.is-collapsible.is-collapsed .quote-card-body::after {
-            background: linear-gradient(to bottom, transparent, var(--paper));
+            display: none;
         }
 
         .share-btn:hover,
@@ -1391,14 +1360,17 @@
 <p class="quote-text">"Lasse sich niemand täuschen! Auch die himmlischen Mächte, die Herrlichkeit der Engel und die sichtbaren wie unsichtbaren Herrscher - wenn sie nicht an das Blut Christi glauben, kommt auch über sie das Gericht. Denn das Ganze ist Glaube und Liebe, die von nichts übertroffen werden."</p>
 <div class="quote-source">Brief an die Smyrnäer, 6</div>
 <br/>
-<p class="quote-text">"Von Eucharistie und Gebet halten sie sich fern, weil sie nicht bekennen, dass die Eucharistie das Fleisch unseres Erlösers Jesus Christus ist, das für unsere Sünden gelitten, das der Vater in seiner Güte auferweckt hat. Die sich nun der Gabe Gottes widersetzen, sterben an ihrem Streiten."</p>
+<p class="quote-text">"Von Eucharistie und Gebet halten sie sich fern, weil sie nicht bekennen, daß die Eucharistie das Fleisch unseres Erlösers Jesus Christus ist, das für unsere Sünden gelitten, das der Vater in seiner Güte auferweckt hat. Die sich nun der Gabe Gottes widersetzen, sterben an ihrem Streiten."</p>
 <div class="quote-source">Brief an die Smyrnäer, 7</div>
 <br/>
-<p class="quote-text">"Jene Eucharistie soll als zuverlässig gelten, die unter dem Bishof, oder, wem er es anvertraut, stattfindet."</p>
+<p class="quote-text">"Jene Eucharistie soll als zuverlässig gelten, die unter dem Bischof, oder, wem er es anvertraut, stattfindet."</p>
 <div class="quote-source">Brief an die Smyrnäer, 8</div>
 <br/>
 <p class="quote-text">Brot Gottes will ich, das ist das Fleisch Jesu Christi, der aus dem Samen Davids stammt, und zum Trank will ich sein Blut, das ist die unvergängliche Liebe."</p>
 <div class="quote-source">Brief an die Römer, 7</div>
+<br/>
+<p class="quote-text">"Bemühet euch, nur eine Eucharistie zu feiern; denn es ist nur ein Fleisch unseres Herrn Jesu Christi und nur ein Kelch zur Einigung mit seinem Blute, nur ein Altar."</p>
+<div class="quote-source">Brief an die Philadelphier, Kapitel 4; BKV, S. 143</div>
 </div>
 <!-- Justin -->
 <div class="quote-card">
@@ -1408,7 +1380,7 @@
 <img class="saint-avatar" src="profilbilder/justin_der_maertyrer.jpg"/>
 <div class="saint-info"><h3>Hl. Justin der Märtyrer</h3><span>(ca. 155 n. Chr.)</span></div>
 </div>
-<p class="quote-text">"Diese Nahrung heißt bei uns Eucharistie. Niemand darf daran teilnehmen, als wer unsere Lehren für wahr hält, das Bad zur Nachlassung der Sünden und zur Wiedergeburt empfangen hat und nach den Weisungen Christi lebt. Denn nicht als gemeines Brot und als gemeinen Trank nehmen wir sie; sondern wie Jesus Christus, unser Erlöser, als er durch Gottes Logos Fleisch wurde, Fleisch und Blut um unseres Heiles willen angenommen hat, so sind wir belehrt worden, dass die durch ein Gebet um den Logos, der von ihm ausgeht, unter Danksagung geweihte Nahrung, mit der unser Fleisch und Blut durch Umwandlung genährt wird, Fleisch und Blut jenes fleischgewordenen Jesus sei."</p>
+<p class="quote-text">"Diese Nahrung heißt bei uns Eucharistie. Niemand darf daran teilnehmen, als wer unsere Lehren für wahr hält, das Bad zur Nachlassung der Sünden und zur Wiedergeburt empfangen hat und nach den Weisungen Christi lebt. Denn nicht als gemeines Brot und als gemeinen Trank nehmen wir sie; sondern wie Jesus Christus, unser Erlöser, als er durch Gottes Logos Fleisch wurde, Fleisch und Blut um unseres Heiles willen angenommen hat, so sind wir belehrt worden, daß die durch ein Gebet um den Logos, der von ihm ausgeht, unter Danksagung geweihte Nahrung, mit der unser Fleisch und Blut durch Umwandlung genährt wird, Fleisch und Blut jenes fleischgewordenen Jesus sei."</p>
 <div class="quote-source">Erste Apologie, Kapitel 66</div>
 </div>
 <!-- Irenaeus -->
@@ -1419,16 +1391,30 @@
 <img class="saint-avatar" src="profilbilder/irenaeus_von_lyon.jpg"/>
 <div class="saint-info"><h3>Hl. Irenäus von Lyon</h3><span>(ca. 180 n. Chr.)</span></div>
 </div>
-<p class="quote-text">Als er deshalb die Gabe des Brotes nahm, sagte er Dank und sprach: „Das ist mein Leib. Und ähnlich bekannte er den Kelch, der aus dieser irdischen Schöpfung stammt, als sein Blut und machte ihn zur Opfergabe des Neuen Bundes, so daß ihn die Kirche, wie sie ihn von den Aposteln empfangen hat, auf der ganzen Welt Gott darbringt, ihm, der uns ernährt, als die Erstlinge seiner Gaben im Neuen Bunde.</p>
+<p class="quote-text">Als er deshalb die Gabe des Brotes nahm, sagte er Dank und sprach: „Das ist mein Leib“. Und ähnlich bekannte er den Kelch, der aus dieser irdischen Schöpfung stammt, als sein Blut und machte ihn zur Opfergabe des Neuen Bundes, sodaß ihn die Kirche, wie sie ihn von den Aposteln empfangen hat, auf der ganzen Welt Gott darbringt, ihm, der uns ernährt, als die Erstlinge seiner Gaben im Neuen Bunde.</p>
 <div class="quote-source">Gegen die Häresien, Buch 4, Kapitel 17, Absatz 5</div>
 <br/>
 <p class="quote-text">Wie hat dann der Herr, wenn er von einem andern Vater als die Schöpfung stammt, mit Recht jenes Brot, das zu dieser Schöpfung gehört, als seinen Leib bezeichnet und den Inhalt des Kelches als sein Blut?</p>
 <div class="quote-source">Gegen die Häresien, Buch 4, Kapitel 33, Absatz 2</div>
 <br/>
+<p class="quote-text">"Wie aber können sie wiederum sagen, das Fleisch verwese und habe keinen Anteil am Leben, wenn es mit dem Leibe und Blute des Herrn ernährt wird? Also mögen sie diese Lehre abändern oder nicht mehr die genannten Gaben darbringen! Unsere Lehre aber stimmt mit der Eucharistie überein, und die Eucharistie wiederum bestätigt unsere Lehre."</p>
+<div class="quote-source">Gegen die Häresien, Buch 4, Kapitel 18, Absatz 5; BKV, S. 380</div>
+<br/>
 <p class="quote-text">2. Töricht in jeder Hinsicht sind die, welche die gesamte Anordnung Gottes verachten, die Heiligung des Fleisches leugnen und seine Wiedergeburt verwerfen, indem sie behaupten, daß es der Unvergänglichkeit nicht fähig sei. Wird aber dies nicht erlöst, dann hat uns der Herr auch nicht mit seinem Blute erlöst, noch ist der eucharistische Kelch die Teilnahme an seinem Blute, das Brot, das wir brechen, die Teilnahme an seinem Leibe. Blut stammt nämlich nur von Fleisch und Adern und der übrigen menschlichen Substanz, die das Wort Gottes in Wahrheit angenommen hat. Mit seinem Blute erlöste er uns, wie auch der Apostel sagt: „In ihm haben wir die Erlösung, durch sein Blut Nachlaß der Sünden“. Und da wir seine Glieder sind, werden wir durch seine Schöpfung ernährt werden, und er selbst gewährt uns seine Schöpfung: läßt seine Sonne aufgehen und regnen, sagt, daß er uns den Kelch von seiner Schöpfung als sein eigenes Blut reiche, mit dem er unser Blut erquickt, und versichert, daß das Brot seiner Schöpfung sein eigener Leib ist, mit dem er unsere Leiber erhebt.</p>
 <br/>
 <p class="quote-text"> 3. Wenn nun also der gemischte Kelch und das zubereitete Brot das Wort Gottes aufnimmt und die Eucharistie zum Leibe Christi wird, woraus die Substanz unseres Fleisches Erhebung und Bestand erhält, wie können sie dann sagen, das Fleisch könne nicht aufnehmen die Gabe Gottes, die in dem ewigen Leben besteht, da es doch von dem Blute und Fleische des Herrn genährt wird und sein Glied ist? So sagt auch der selige Apostel Paulus in dem Briefe an die Epheser: „Wir sind Glieder seines Leibes, aus seinem Fleisch und seinem Gebein“. Das sagt er nicht von einem geistigen und unsichtbaren Leibe — denn „ein Geist hat weder Bein noch Knochen“ — sondern von einem wahrhaften menschlichen Organismus, der aus Fleisch, Nerven und Knochen besteht, der von dem Kelch seines Blutes ernährt und von dem Brot seines Leibes erhoben wird. Und wie das Holz der Weinrebe, in der Erde wurzelnd, zu seiner Zeit Frucht hervorbringt, und wie das Weizenkorn in die Erde fällt, sich auflöst und vielfältig aufersteht durch den Geist Gottes, der alles umfaßt — und alsdann kommt dieses weisheitsvoll in den Gebrauch der Menschen, nimmt auf das Wort Gottes und wird zur Eucharistie, welche der Leib und das Blut Christi ist — so werden auch unsere Körper aus ihr genährt, und wenn sie in der Erde geborgen und dort aufgelöst sein werden, dann werden sie zu ihrer Zeit auferstehen, indem das Wort Gottes ihnen verleiht, aufzuerstehen für die Herrlichkeit Gottes des Vaters. Er umgibt dieses Sterbliche mit Unsterblichkeit, schenkt dem Verweslichen aus Gnade seine Unverweslichkeit, da die Kraft Gottes in der Schwäche vollkommen wird, damit wir nicht in Undankbarkeit gegen Gott uns jemals hochmütig aufbliesen, gleich als ob wir das Leben aus uns selbst hätten. So sollte die Erfahrung uns lehren, daß wir aus seiner Größe, nicht kraft unserer Natur ewig fortdauern, so sollten wir Gottes Herrlichkeit, wie sie ist, uns vor Augen halten und unsere eigene Schwäche nicht verkennen. Sollten wissen, was Gott vermag, und was der Mensch Gutes empfängt, sollten niemals irregehen in der wahren Erkenntnis der Wirklichkeit, d. h. des Verhältnisses zwischen Gott und den Menschen. Ja freilich, deswegen hat Gott zugelassen, daß wir in Erde uns auflösen, damit wir allseitig erzogen, in Zukunft in allem gewissenhaft seien und unsere Stellung zu Gott nicht verkannten.</p>
 <div class="quote-source">Gegen die Häresien, Buch 5, Kapitel 2, Absatz 2-3</div>
+</div>
+<!-- Liturgischer Papyrus -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(25)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/messe_liturgischer_papyrus.jpg" data-avatar-alt="Messe des liturgischen Papyrus">LP</div>
+<div class="saint-info"><h3>Messe des liturgischen Papyrus</h3><span>(saec. II)</span></div>
+</div>
+<p class="quote-text">"Würdige uns, Deinen Hl. Geist auf diese irdischen Gaben herabzusenden, und mach dieses Brot zum Leibe unseres Herrn und Heilandes Jesus Christus und den Kelch zum Blute des N. B."</p>
+<div class="quote-source">Messe des liturgischen Papyrus (saec. II), Überleitung und Abendmahlsworte; BKV, S. 128-129</div>
 </div>
 </section>
 <!-- 3. Jahrhundert -->
@@ -1453,7 +1439,7 @@
 <img class="saint-avatar" src="profilbilder/clemens_von_alexandria.jpg"/>
 <div class="saint-info"><h3>Hl. Clemens von Alexandria</h3><span>(ca. 200 n. Chr.)</span></div>
 </div>
-<p class="quote-text">"Der Logos wird alles für das Kind, Vater und Mutter und Erzieher und Ernährer. 'Esset mein Fleisch', so steht geschrieben, 'und trinkt mein Blut!' Diese für uns geeignete Nahrung spendet der Herr, und Er reicht sein Fleisch dar und vergießt sein Blut."</p>
+<p class="quote-text">"Der Logos wird alles für das Kind, Vater und Mutter und Erzieher und Ernährer. „Esset mein Fleisch“, so steht geschrieben, „und trinkt mein Blut!“ Diese für uns geeignete Nahrung spendet der Herr, und er reicht sein Fleisch dar und vergießt sein Blut; und nichts fehlt den Kindern zum Wachstum."</p>
 <div class="quote-source">Der Erzieher, Buch 1</div>
 </div>
 <!-- Hippolytus -->
@@ -1464,8 +1450,8 @@
 <img class="saint-avatar" src="profilbilder/hippolytus_von_rom.jpg"/>
 <div class="saint-info"><h3>Hl. Hippolytus von Rom</h3><span>(ca. 235 n. Chr.)</span></div>
 </div>
-<p class="quote-text">"„Und sie hat ihren Tisch ausgestattet:“ dies bezeichnet die verheißene Erkenntnis der Heiligen Dreifaltigkeit; es bezieht sich auch auf seinen geehrten und unbefleckten Leib und sein Blut, welche Tag für Tag am geistlichen göttlichen Tisch verwaltet und opferhaft dargebracht werden, als ein Gedächtnis jenes ersten und immer-denkwürdigen Tisches des geistlichen göttlichen Mahles."</p>
-<div class="quote-source">Commentarii in Proverbia (Fragmenta)</div>
+<p class="quote-text">"And she hath furnished her table:" that denotes the promised knowledge of the Holy Trinity; it also refers to His honoured and undefiled body and blood, which day by day are administered and offered sacrificially at the spiritual divine table, as a memorial of that first and ever-memorable table of the spiritual divine supper.</p>
+<div class="quote-source">On Proverbs 9,1 (Fragment), englischer Quellenauszug</div>
 </div>
 <!-- Origenes -->
 <div class="quote-card">
@@ -1473,13 +1459,10 @@
 <button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
 <div class="card-header">
 <img class="saint-avatar" src="profilbilder/origenes.jpg"/>
-<div class="saint-info"><h3>Hl. Origenes</h3><span>(ca. 240 n. Chr.)</span></div>
+<div class="saint-info"><h3>Origenes</h3><span>(ca. 240 n. Chr.)</span></div>
 </div>
-<p class="quote-text">"Früher war „im Rätsel“ (andeutungsweise) die Taufe „in der Wolke und im Meer“, nun aber ist „in sichtbarer Gestalt“ die Wiedergeburt in Wasser und Heiligem Geist. Damals war „im Rätsel“ das Manna die Speise, nun aber ist „in sichtbarer Gestalt“ das Fleisch des Wortes Gottes die wahre Speise, so wie er selbst sagt: „Denn mein Fleisch ist wahrhaft Speise und mein Blut ist wahrhaft Trank“."</p>
-<div class="quote-source">Die Homilien zu Numeri, Homilie Nr.7</div>
-<br/>
-<p class="quote-text">"Ein jeder also, wie er es in seinem Herzen verstanden hat.“ Seht zu, ob ihr versteht, seht zu, ob ihr es festhaltet, damit nicht etwa das Gesagte vergeht und zu nichts wird. Ich wünsche euch mit Beispielen aus euren religiösen Übungen zu ermahnen. Ihr, die ihr gewohnt seid, an den göttlichen Mysterien teilzunehmen, wisst, wenn ihr den Leib des Herrn empfangt, mit welcher Vorsicht und Verehrung ihr ihn schützt, damit nicht irgendein kleines Teilchen davon herabfalle, damit nichts von der konsekrierten Gabe verloren gehe. Denn ihr glaubt – und mit Recht –, dass ihr verantwortlich seid, wenn durch Nachlässigkeit etwas davon herabfällt. Wenn ihr aber so sorgfältig bemüht seid, seinen Leib zu bewahren, und das mit Recht, wie meint ihr dann, dass es eine geringere Schuld sei, das Wort Gottes vernachlässigt zu haben, als seinen Leib vernachlässigt zu haben?</p>
-<div class="quote-source">Die Homilien zu Exodus, Homilie Nr.13</div>
+<p class="quote-text">"Wir aber, die wir dem Schöpfer des Weltalls Dank sagen, essen die mit Danksagung und Gebet über die Gaben dargereichten Brote, welche durch das Gebet ein gewisser heiliger Leib werden, der jene heiligt, die ihn mit verständigem Sinne genießen."</p>
+<div class="quote-source">Gegen Celsus, Buch 8, Kapitel 33; BKV, S. 770-771</div>
 </div>
 <!-- Cyprian von Karthago -->
 <div class="quote-card">
@@ -1492,8 +1475,28 @@
 <p class="quote-text">"Die todbringenden Speisen der Götzen stoßen ihnen fast noch auf, aber während noch ihr Schlund sein Verbrechen durch den Atem und die unheilvolle Befleckung durch den Geruch verrät, wagen sie sich an den Leib des Herrn. Und doch tritt ihnen die göttliche Schrift entgegen und ruft und sagt: „Jeder Reine soll von dem Fleische essen, und jede Seele, die von dem Fleische des Heilsopfers ißt, das dem Herrn zugehört, und hat eine Unreinigkeit an sich, diese Seele soll aus ihrem Volke verschwinden“, und auch der Apostel bezeugt und sagt: „Ihr könnt nicht den Kelch des Herrn trinken und den Kelch der bösen Geister; ihr könnt nicht am Tische des Herrn teilhaben und am Tische der bösen Geister.“"</p>
 <div class="quote-source">Über die Gefallenen (de lapsis), Kap. 15</div>
 <br/>
-<p class="quote-text">"Ohne jedoch auf dies alles zu achten und zu merken, bevor man noch den Frevel gesühnt und das Verbrechen offen eingestanden hat, ehe noch das Gewissen durch das Opfer und die Hand des Priesters gereinigt und der Groll des empörten und drohenden Herrn versöhnt ist, tut man seinem Leibe und Blute Gewalt an, und sie vergehen sich jetzt an dem Herrn mit Hand und Mund noch mehr als damals, als sie den Herrn verleugneten."</p>
+<p class="quote-text">"Ohne jedoch auf dies alles zu achten und zu merken, bevor man noch den Frevel gesühnt und das Verbrechen offen eingestanden hat, ehe noch das Gewissen durch das Opfer und die Hand des Priesters gereinigt und der Groll des empörten und drohenden Herrn versöhnt ist, tut man seinem Leibe und Blute Gewalt an, und sie vergehen sich jetzt an dem Herrn mit Hand und Mund noch mehr wie damals, als sie den Herrn verleugneten."</p>
 <div class="quote-source">Über die Gefallenen (de lapsis), Kap. 16</div>
+<br/>
+<p class="quote-text">"Das Brot des Lebens nämlich ist Christus, und dieses Brot gehört nicht allen, sondern nur uns. [...] Und deshalb bitten wir darum, daß unser Brot, das heißt: Christus, täglich uns gegeben werde, damit wir, die wir in Christus bleiben und leben, von seiner Heiligung und seinem Leibe uns nicht entfernen."</p>
+<div class="quote-source">Über das Gebet des Herrn, Kapitel 18; BKV, S. 181</div>
+<br/>
+<p class="quote-text">"Eure gottesfürchtigen Lippen haben von Christus Zeugnis abgelegt, an den sie einmal zu glauben bekannt haben. Eure unbefleckten Hände, die nur an göttliche Werke gewöhnt waren, haben sich den gotteslästerlichen Opfern widersetzt; der durch die himmlischen Speisen geheiligte Mund hat nach dem Genuß des Leibes und Blutes unseres Herrn die sündige Befleckung mit den Überresten der Götzenopfer voll Abscheu gemieden."</p>
+<div class="quote-source">Über die Gefallenen, Kapitel 2-3; BKV, S. 93</div>
+<br/>
+<p class="quote-text">"Als eine andere Frau ihr Kästchen, in dem sie den heiligen Leib des Herrn aufbewahrt hatte, mit ihren unreinen Händen zu öffnen versuchte, schlug Feuer daraus hervor. [...] Ein anderer vermochte den heiligen Leib des Herrn nicht zu genießen und zu berühren."</p>
+<div class="quote-source">Über die Gefallenen, Kapitel 26; BKV, S. 115-116</div>
+</div>
+<!-- Ägyptische Kirchenordnung -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(26)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/messe_aegyptische_kirchenordnung.jpg" data-avatar-alt="Messe der Ägyptischen Kirchenordnung">AK</div>
+<div class="saint-info"><h3>Messe der Ägyptischen Kirchenordnung</h3><span>(saec. II-III)</span></div>
+</div>
+<p class="quote-text">"Er nahm Brot, sagte Dir Dank und sprach: Nehmet, esset, das ist mein Leib, welcher für euch gebrochen wird. Ähnlich nahm er den Kelch und sprach: Das ist mein Blut, welches für euch vergossen wird."</p>
+<div class="quote-source">Messe der sog. Ägyptischen Kirchenordnung (saec. II-III), Abendmahlsworte; BKV, S. 128-129</div>
 </div>
 </section>
 <!-- 4. Jahrhundert -->
@@ -1513,6 +1516,107 @@
 <p class="quote-text">"Alle Gläubigen, welche in die hl. Kirche Gottes gehen und die hl. Schriften anhören, aber nicht beim Dankagungsgebet (Kanon) und der hl. Kommunion bleiben, sollen, weil in die Kirche Unordnung bringend, exkommunizirt werden."</p>
 <div class="quote-source">Kanon 7</div>
 </div>
+<!-- Apostolische Konstitutionen -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(24)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/apostolische_konstitutionen.jpg" data-avatar-alt="Apostolische Konstitutionen">AK</div>
+<div class="saint-info"><h3>Apostolische Konstitutionen</h3><span>(4. Jh.)</span></div>
+</div>
+<p class="quote-text">"Daß Du herabsendest Deinen heiligen Geist auf dieses Opfer, den Zeugen der Leiden des Herrn Jesus, damit er nachweise dieses Brot als den Leib Christi und diesen Kelch als das Blut Christi."</p>
+<div class="quote-source">Apostolische Konstitutionen, Buch VIII, 4.5; BKV, S. 50</div>
+<br/>
+<p class="quote-text">"Der Bischof reiche das Opfer mit den Worten: Der Leib Christi. Der Empfänger spreche: Amen. Und der Diakon reiche den Kelch und spreche: Das Blut Christi, der Kelch des Lebens."</p>
+<div class="quote-source">Apostolische Konstitutionen, Buch VIII, 4.9; BKV, S. 54</div>
+</div>
+<!-- Basilius von Cäsarea -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(14)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/basilius_von_caesarea.jpg" data-avatar-alt="Hl. Basilius von Cäsarea">B</div>
+<div class="saint-info"><h3>Hl. Basilius von Cäsarea</h3><span>(ca. 330-379 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Mit welcher Furcht, Überzeugung und Gesinnung sollen wir den Leib und das Blut Christi empfangen? Die Furcht lehrt uns der Apostel, indem er sagt: „Wer unwürdig ist und trinkt, der ißt und trinkt sich das Gericht.“ Die Überzeugung aber verleiht der Glaube an die Worte des Herrn, der da sprach: „Dieses ist mein Leib, der für euch hingegeben wird; Dieses tut zu meinem Andenken;“"</p>
+<div class="quote-source">313 kurzgefasste Vorschriften, Frage 172; BKV, S. 277-278</div>
+<br/>
+<p class="quote-text">"Täglich zu kommunizieren und am hl. Leibe und Blute Christi teilzunehmen, ist gut und nützlich, da er selbst ausdrücklich sagt: Wer mein Fleisch ißt und mein Blut trinkt, der hat das ewige Leben."</p>
+<div class="quote-source">Ausgewählte Briefe, Brief 93 an Cäsarea; BKV, S. 140-141</div>
+</div>
+<!-- Gregor von Nyssa -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(16)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/gregor_von_nyssa.jpg" data-avatar-alt="Hl. Gregor von Nyssa">G</div>
+<div class="saint-info"><h3>Hl. Gregor von Nyssa</h3><span>(ca. 335-395 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Was ist nun diese Speise? Keine andere als jener Leib, der den Tod überwunden und uns das Leben gebracht hat. [...] So formt umgekehrt der unsterbliche Leib jeden, der ihn aufnimmt, ganz nach seiner Natur um."</p>
+<div class="quote-source">Große Katechese, Kapitel 37, Nr. 3; BKV, S. 77-78</div>
+<br/>
+<p class="quote-text">"Mit Recht also glauben wir, daß auch jetzt das durch das Wort Gottes geheiligte Brot in den Leib des Wortes Gottes verwandelt werde. [...] so wird jetzt in gleicher Weise das Brot geheiligt, wie der Apostel sagt, durch das Wort Gottes und durch Gebet, jedoch nicht so, daß es erst durch Essen allmählich in den Leib des Wortes überging, sondern so, daß es sofort durch das Wort in den Leib verwandelt wird."</p>
+<div class="quote-source">Große Katechese, Kapitel 37, Nr. 4; BKV, S. 78</div>
+</div>
+<!-- Johannes Chrysostomus -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(21)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/johannes_chrysostomus.jpg" data-avatar-alt="Hl. Johannes Chrysostomus">JC</div>
+<div class="saint-info"><h3>Hl. Johannes Chrysostomus</h3><span>(ca. 349-407 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Denn auch sein heiliger Leib liegt jetzt vor uns; nicht bloß sein Kleid, sondern auch sein Leib; und nicht, damit wir ihn bloß berühren, sondern ihn auch essen und uns mit ihm sättigen."</p>
+<div class="quote-source">Kommentar zum Evangelium des Matthäus, eucharistische Anwendung; BKV, S. d717</div>
+<br/>
+<p class="quote-text">"Nehmet hin und esset, dieses ist mein Leib. [...] Er hebt das Hauptfest der Juden auf, indem er sie an einen anderen Tisch voll heiligen Schauers setzt."</p>
+<div class="quote-source">Kommentar zum Evangelium des Matthäus, Homilie 82; BKV, S. d1166-d1167</div>
+<br/>
+<p class="quote-text">"Wer also dieses Brot unwürdig ißt oder diesen Kelch unwürdig trinkt, der wird schuldig des Leibes und des Blutes des Herrn."</p>
+<div class="quote-source">Homilien über den ersten Korintherbrief, zu 1 Kor 11,27; BKV, S. 467-472</div>
+</div>
+<!-- Serapion von Thmuis -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(27)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/serapion_von_thmuis.jpg" data-avatar-alt="Serapion von Thmuis">ST</div>
+<div class="saint-info"><h3>Serapion von Thmuis</h3><span>(4. Jh.)</span></div>
+</div>
+<p class="quote-text">"Es soll herabkommen, o Gott der Wahrheit, Dein heiliger Logos über dieses Brot, auf daß dieses Brot der Leib des Logos werde, und über diesen Kelch, damit der Kelch das Blut der Wahrheit werde."</p>
+<div class="quote-source">Euchologium des Serapion, Abendmahlsliturgie; BKV, S. 148-149</div>
+</div>
+<!-- Griechische Liturgien -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(28)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/griechische_liturgien.jpg" data-avatar-alt="Griechische Liturgien">GL</div>
+<div class="saint-info"><h3>Griechische Liturgien</h3><span>(4.-5. Jh.)</span></div>
+</div>
+<p class="quote-text">"Ihn selbst, Deinen allheiligen Geist sende, Herr, auf uns und diese vorliegenden heiligen Gaben herab. [...] Damit er komme und durch seine heilige, gute und herrliche Ankunft dieses Brot heilige und zum heiligen Leibe Deines Christus mache."</p>
+<div class="quote-source">Griechische Jakobusliturgie; BKV, S. 108</div>
+<br/>
+<p class="quote-text">"Gott, sende Deinen Heiligen Geist auf diese Brote und diese Kelche, daß er sie heilige und vollende als Deinen heiligen Leib und Dein Blut."</p>
+<div class="quote-source">Griechische Markusliturgie; BKV, S. 180-181</div>
+<br/>
+<p class="quote-text">"Daß Dein Heiliger Geist auf uns und diese vorliegenden Gaben komme und sie segne, heilige und dieses Brot als den wahren kostbaren Leib unseres Herrn, Gottes und Heilandes Jesus Christus, und diesen Kelch als das wahre kostbare Blut unseres Herrn, Gottes und Heilandes Jesus Christus, das vergossen wurde für das Leben und Heil der ganzen Welt, zeige."</p>
+<div class="quote-source">Griechische Basiliusliturgie; BKV, S. 273</div>
+<br/>
+<p class="quote-text">"Mache dieses Brot zum kostbaren Leibe Deines Christus und das, was in diesem Kelche ist, zum kostbaren Blute Deines Christus."</p>
+<div class="quote-source">Griechische Chrysostomusliturgie; BKV, S. 253-256</div>
+</div>
+<!-- Ephraem zugeschrieben -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(34)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/ephraem_der_syrer.jpg" data-avatar-alt="Ephraem der Syrer zugeschrieben">E</div>
+<div class="saint-info"><h3>Ephraem der Syrer zugeschrieben</h3><span>(4. Jh.)</span></div>
+</div>
+<p class="quote-text">"Wo der wahre Leib ist, da befindet sich auch das wahre Blut. [...] Wenn sie aber wahres Brot brechen, so berühren sie seinen Leib wahrhaft und nicht bloß zum Scheine."</p>
+<div class="quote-source">Proben katholischer Polemik aus Ephräm, Rede XIV; BKV, S. 294-298</div>
+</div>
 <!-- Hl. Ambrosius von Mailand -->
 <div class="quote-card">
 <button class="pdf-btn" onclick="openPDF(12)"><i class="fa-solid fa-file-pdf"></i></button>
@@ -1521,13 +1625,7 @@
 <img class="saint-avatar" src="profilbilder/ambrosius_von_mailand.jpg"/>
 <div class="saint-info"><h3>Hl. Ambrosius von Mailand</h3><span>(ca. 380 n. Chr.)</span></div>
 </div>
-<p class="quote-text">"Wenn es das tägliche Brot ist, warum nimmst du es nur einmal im Jahr, wie es die Griechen im Osten zu tun pflegen? Nimm täglich, was dir täglich zum Heil gereicht. Lebe so, dass du würdig bist, es täglich zu empfangen. Wer nicht würdig ist, es täglich zu empfangen, ist auch nicht würdig, es einmal im Jahr zu empfangen. So brachte der heilige Hiob täglich ein Opfer für seine Söhne dar, damit sie nicht vielleicht in Gedanken oder Worten gesündigt hätten. Darum hörst du, dass sooft das Opfer dargebracht wird, der Tod des Herrn, die Auferstehung des Herrn, die Himmelfahrt des Herrn und die Vergebung der Sünden vergegenwärtigt werden – und du nimmst dieses Brot des Lebens nicht täglich? Wer eine Wunde hat, braucht ein Heilmittel. Die Wunde ist, dass wir unter der Sünde stehen; das Heilmittel ist das himmlische und ehrwürdige Sakrament."</p>
-<div class="quote-source">Über die Sakramente, Buch 5, Kapitel 3, Abschnitt 25</div>
-<br/>
-<p class="quote-text">"„Unser tägliches Brot gib uns heute.“ Wenn du täglich empfängst, dann ist für dich „heute“ gleichbedeutend mit „täglich“. Wenn Christus für dich „heute“ ist, dann steht er für dich auch täglich wieder auf. Wie das? „Du bist mein Sohn, heute habe ich dich gezeugt.“ Darum ist „heute“ der Tag, an dem Christus aufersteht. Gestern und heute ist er derselbe, sagt der Apostel Paulus. An anderer Stelle aber sagt er: „Die Nacht ist vorgerückt, der Tag ist nahe.“ Die vergangene Nacht ist vorüber, der gegenwärtige Tag ist angebrochen."</p>
-<div class="quote-source">Über die Sakramente, Buch 5, Kapitel 3, Abschnitt 26</div>
-<br/>
-<p class="quote-text">"So steht nachweislich fest, dass die Sakramente der Kirche älter sind. Jetzt erkenne ihre größere Vorzüglichkeit. Wahrhaft etwas Wunderbares ward der Mannaregen, den Gott den Vätern spendete, und die tägliche Himmelsspeise, mit der sie gesättigt wurden. Daher das Wort: „Das Brot der Engel aß der Mensch.“ Doch gleichwohl sind alle, die jenes Brot aßen, in der Wüste gestorben. Diese Speise aber, die du empfängst, dieses „lebendige Brot, das vom Himmel gekommen“, verleiht die Substanz des ewigen Lebens, und wer immer dieses Brot isst, wird nicht sterben in Ewigkeit. Es ist der Leib Christi."</p>
+<p class="quote-text">"So steht nachweislich fest, daß die Sakramente der Kirche älter sind. Jetzt erkenne ihre größere Vorzüglichkeit. Fürwahr etwas Wunderbares war der Mannaregen, den Gott den Vätern spendete, und die tägliche Himmelsspeise, mit der sie gesättigt wurden. Daher das Wort: „Das Brot der Engel aß der Mensch“. Doch gleichwohl sind alle, die jenes Brot aßen, in der Wüste gestorben. Diese Speise aber, die du empfängst, dieses „lebendige Brot, das vom Himmel gekommen“, verleiht die Substanz des ewigen Lebens, und wer immer dieses Brot ißt, wird nicht sterben in Ewigkeit. Es ist der Leib Christi."</p>
 <div class="quote-source">Über die Mysterien, Kapitel 8, Abschnitt 47</div>
 <br/>
 <p class="quote-text">"Erwäge jetzt, ob das Brot der Engel, oder aber das Fleisch Christi, der Leib des Lebens, vorzüglicher ist! Jenes Manna stammte vom Himmel, dieser (Leib) thront über dem Himmel; jenes war nur Himmelssubstanz, das ist der Leib des Herrn der Himmel; jenes war im Fall seiner Aufbewahrung bis zum folgenden Tage der Gefahr der Verwesung ausgesetzt, diesem ist alle Verwesung fremd: wird doch, wer immer es frommen Sinnes genießt, die Verwesung nicht kosten können; jenen strömte Wasser vom Felsen, dir aus Christus; jene tränkte das Wasser für eine Stunde, dich läutert das Blut auf ewig; der Jude trinkt und durstet, du wirst nicht dursten können, wenn du trinkst; jenes Brot endlich war nur der Schatten, dieses ist die Wahrheit.</p>
@@ -1618,7 +1716,7 @@
 <div class="quote-source">V. Mystagogische Katechese – Kapitel 20</div>
 <br/>
 <!-- V. Mystagogische Katechese - Kapitel 21 -->
-<p class="quote-text">"Trittst du vor, dann darfst du nicht die Hände flach ausstrecken und nicht die Finger spreizen. Da die rechte Hand den Leib zu empfangen hat, mache die linke Hand zum Throne für denselben! Nimm den Leib Christi mit hohler Hand entgegen und erwidere: Amen! Berühre behutsam mit dem heiligen Leibe deine Augen, um sie zu heiligen! Dann genieße ihn, doch habe acht, daß dir nichts davon auf den Boden falle! Was du davon fallen ließest, wäre natürlich so viel als Verlust eines deiner eigenen Glieder."</p>
+<p class="quote-text">"Trittst du vor, dann darfst du nicht die Hände flach ausstrecken und nicht die Finger spreizen. Da die rechte Hand den König in Empfang nehmen soll, so mache die linke Hand zum Throne für denselben! Nimm den Leib Christi mit hohler Hand entgegen und erwidere: Amen! Berühre behutsam mit dem heiligem Leibe deine Augen, um sie zu heiligen! Dann genieße ihn, doch habe acht, daß dir nichts davon auf den Boden falle! Was du davon fallen ließest, wäre natürlich so viel als Verlust eines deiner eigenen Glieder."</p>
 <div class="quote-source">V. Mystagogische Katechese – Kapitel 21</div>
 <br/>
 <!-- V. Mystagogische Katechese - Kapitel 22 -->
@@ -1649,14 +1747,85 @@
 <p class="quote-text">"Hat sich denn nicht Christus nur einmal in eigener Person geopfert? Und doch opfert er sich im Sakramente nicht nur an allen Osterfeiertagen, sondern jeden Tag für das Volk; nicht lügt also, wer auf eine Frage antwortet, Christus werde noch geopfert. Denn wenn die Sakramente nicht eine Ähnlichkeit mit jenen Dingen hätten, deren Sakramente sie sind, so wären sie überhaupt keine Sakramente. Um dieser Ähnlichkeit willen erhalten sie meistens den Namen jener Dinge selbst. Denn wie in gewisser Weise das Sakrament des Leibes Christi der Leib Christi, das Sakrament des Blutes Christi das Blut Christi ist, so ist auch das Sakrament des Glaubens der Glaube."</p>
 <div class="quote-source">Ausgewählte Briefe (Erster Teil), Brief 98: An Bonifatius, Kapitel 9</div>
 <br/>
-<p class="quote-text">"Dieses Brot, das du auf dem Altar sehen kannst, geheiligt durch das Wort Gottes, ist der Leib Christi. Dieser Kelch, oder vielmehr was der Kelch enthält, geheiligt durch das Wort Gottes, ist das Blut Christi. Es war durch diese Dinge, dass der Herr Christus uns seinen Leib und sein Blut darstellen wollte, das er für unsere Sünden vergossen hat."</p>
-<div class="quote-source">Predigt 227</div>
-<br/>
-<p class="quote-text">"Was du auf dem Altar sehen kannst, hast du letzte Nacht gesehen; aber was es war, was es bedeutete, welche große Realität es im Sakrament enthielt, hattest du noch nicht gehört. Was du also sehen kannst, ist Brot und ein Kelch; das ist es, was sogar deine Augen dir sagen; aber was dein Glaube zu verstehen bittet, ist Brot der Leib Christi."</p>
-<div class="quote-source">Predigt 272</div>
-<br/>
 <p class="quote-text">"Was hat aber die ganze Zeit, während der sie Stellung und Name eines Katechumenen haben, für einen anderen Zweck, als daß sie das Wesen des christlichen Glaubens und Lebens zu hören bekommen, damit sie, wenn sie sich selbst geprüft haben, vom Tische des Herrn essen und von seinem Blute trinken? Denn “ein jeder, der unwürdig davon ißt und trinkt, der ißt und trinkt sich das Gericht”."</p>
 <div class="quote-source">Vom Glauben und von den Werken, Kapitel 6, Abschnitt 9</div>
+<br/>
+<p class="quote-text">"Leib und Blut Christi nennen wir [...] nur jene Wirklichkeit, die aus den Früchten der Erde genommen, durch geheimnisvolles Gebet geheiligt, von uns nach heiligem Brauch zum geistlichen Heil empfangen wird."</p>
+<div class="quote-source">De Trinitate, Buch 3, Kapitel 10; BKV, S. 112</div>
+<br/>
+<p class="quote-text">"Dies alles also soll uns dazu vermögen, Geliebteste, daß wir das Fleisch Christi und das Blut Christi nicht bloß im Sakramente essen, was auch viele Böse tun, sondern daß wir bis zur Teilnahme am Geiste essen und trinken, damit wir im Leibe des Herrn als Glieder bleiben, damit wir von seinem Geiste genährt werden."</p>
+<div class="quote-source">Vorträge über das Johannesevangelium, zu Joh 6; BKV, S. 460-463</div>
+<br/>
+<p class="quote-text">"Welches der Tisch des Mächtigen ist, wißt ihr; daselbst ist der Leib und das Blut Christi. Wer zu diesem Tische geht, bereite solches vor."</p>
+<div class="quote-source">Vorträge über das Johannesevangelium, Traktat 47; BKV, S. 686</div>
+</div>
+<!-- Hieronymus -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(19)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/hieronymus.jpg" data-avatar-alt="Hl. Hieronymus">H</div>
+<div class="saint-info"><h3>Hl. Hieronymus</h3><span>(ca. 347-420 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Wie kann sich da der Diener der Tische und der Witwen unterfangen, sich hochnäsig über die Männer zu erheben, auf deren Gebet hin Leib und Blut Christi gegenwärtig werden?"</p>
+<div class="quote-source">Briefe, Brief 146 an Evangelus; BKV, S. 385</div>
+</div>
+<!-- Leo der Große -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(20)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/leo_der_grosse.jpg" data-avatar-alt="Hl. Leo der Große">L</div>
+<div class="saint-info"><h3>Hl. Leo der Große</h3><span>(ca. 400-461 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Damit sie unentdeckt bleiben könnten, genießen sie bisweilen unwürdig den Leib des Herrn, verschmähen es aber völlig, das Blut unserer Erlösung zu trinken."</p>
+<div class="quote-source">Sämtliche Sermonen, gegen die Manichäer; BKV, S. 211-212</div>
+</div>
+<!-- Johannes Mandakuni -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(32)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/johannes_mandakuni.jpg" data-avatar-alt="Johannes Mandakuni">JM</div>
+<div class="saint-info"><h3>Johannes Mandakuni</h3><span>(5. Jh.)</span></div>
+</div>
+<p class="quote-text">"Die Hungrigen speise mit dem Leibe Christi, die Durstigen tränke mit dem Blute Christi! [...] Ist dem nun so, dann beleidigt, wer einen Priester oder Lehrer verleumdet, Christus. [...] Wenn du ihn aber verachtest, versündigst du dich gegen Gott, der ihm die Weihe gab und durch ihn selbst das Sakrament und die Taufe vollzieht."</p>
+<div class="quote-source">Reden des Katholikos Johannes Mandakuni, über die Andacht beim Sakrament; BKV, S. 132-140</div>
+</div>
+<!-- Cyrillonas -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(33)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/cyrillonas.jpg" data-avatar-alt="Cyrillonas">C</div>
+<div class="saint-info"><h3>Cyrillonas</h3><span>(ca. 4.-5. Jh.)</span></div>
+</div>
+<p class="quote-text">"Unser Herr opferte seinen Leib zuerst selbst und erst nachher opferten ihn die Menschen. [...] Seht, der König teilt seinen Leib aus, kommt, eßt das Brot der Gnade."</p>
+<div class="quote-source">Sämtliche Gedichte des Cyrillonas, Erste Homilie über das Pascha Christi; BKV, S. 31-33</div>
+<br/>
+<p class="quote-text">"Das Brot war gesegnet und geweiht. Er selbst hatte es ja gesegnet und ihnen vorgelegt. [...] Nun hob er an zu verkündigen, was er verheißen hatte: Sehnlichst habe ich verlangt, dieses Pascha mit euch zu essen, bevor ich leide. Kommt, empfangt mich, denn ich bitte euch darum; esst mich, denn ich will es!"</p>
+<div class="quote-source">Sämtliche Gedichte des Cyrillonas, Erste Homilie über das Pascha Christi; BKV, S. 36-37</div>
+</div>
+</section>
+<!-- 8. Jahrhundert -->
+<section class="view-section" id="view-c8">
+<h2 class="topic-title">8. Jahrhundert</h2>
+<!-- Johannes von Damaskus -->
+<div class="quote-card">
+<button class="pdf-btn" onclick="openPDF(23)"><i class="fa-solid fa-file-pdf"></i></button>
+<button class="share-btn" onclick="shareQuote(this)"><i class="fa-solid fa-share-nodes"></i></button>
+<div class="card-header">
+<div class="saint-avatar avatar-placeholder" aria-hidden="true" data-avatar-src="profilbilder/johannes_von_damaskus.jpg" data-avatar-alt="Hl. Johannes von Damaskus">JD</div>
+<div class="saint-info"><h3>Hl. Johannes von Damaskus</h3><span>(ca. 675-749 n. Chr.)</span></div>
+</div>
+<p class="quote-text">"Das Brot und der Wein sind nicht ein Bild des Leibes und Blutes Christi — das sei ferne —, sondern der vergottete Leib des Herrn selbst. Denn der Herr selber sprach: Das ist mein Leib, nicht: Das ist ein Bild des Leibes."</p>
+<div class="quote-source">Genaue Darlegung des orthodoxen Glaubens, Buch 4, Kapitel 13; BKV, S. 211-212</div>
+<br/>
+<p class="quote-text">"Der Leib ist wahrhaft mit der Gottheit vereint, der Leib aus der heiligen Jungfrau, nicht als ob der in den Himmel aufgenommene Leib vom Himmel herabkäme, sondern weil das Brot und der Wein selbst in Leib und Blut Gottes verwandelt wird."</p>
+<div class="quote-source">Genaue Darlegung des orthodoxen Glaubens, Buch 4, Kapitel 13; BKV, S. 212-213</div>
+<br/>
+<p class="quote-text">"Denn mein Fleisch ist wahrhaftige Speise, und mein Blut ist wahrhaftiger Trank."</p>
+<div class="quote-source">Genaue Darlegung des orthodoxen Glaubens, Buch 4, Kapitel 13; BKV, S. 212</div>
 </div>
 </section>
 <section class="view-section" id="view-saved">
@@ -1681,11 +1850,12 @@
 <button id="btn-c3" onclick="switchTab('c3')"><i class="fa-solid fa-scroll"></i>3. Jhd.</button>
 <button id="btn-c4" onclick="switchTab('c4')"><i class="fa-solid fa-scroll"></i>4. Jhd.</button>
 <button id="btn-c5" onclick="switchTab('c5')"><i class="fa-solid fa-scroll"></i>5. Jhd.</button>
+<button id="btn-c8" onclick="switchTab('c8')"><i class="fa-solid fa-scroll"></i>8. Jhd.</button>
 <button id="btn-saved" onclick="switchTab('saved')"><i class="fa-solid fa-star"></i>Merkliste<span class="nav-count" id="saved-nav-count">0</span></button>
 </div>
 </nav>
 <script>
-        const tabs = ['c1', 'c2', 'c3', 'c4', 'c5', 'saved'];
+        const tabs = ['c1', 'c2', 'c3', 'c4', 'c5', 'c8', 'saved'];
         const appContainer = document.getElementById('app-container');
         const nav = document.querySelector('nav');
         const bookmarkKey = 'vox-patrum-bookmarks';
@@ -1696,6 +1866,7 @@
             c3: '3. Jahrhundert',
             c4: '4. Jahrhundert',
             c5: '5. Jahrhundert',
+            c8: '8. Jahrhundert',
             saved: 'Merkliste'
         };
 
@@ -1712,12 +1883,30 @@
 
         window.addEventListener('load', () => {
             applySavedTheme();
+            upgradeAvatarPlaceholders();
             hydrateCards();
             bindMotion();
             bindSearch();
             switchTab('c2', { silent: true });
             updateBookmarkSummary();
         });
+
+        function upgradeAvatarPlaceholders() {
+            document.querySelectorAll('.avatar-placeholder[data-avatar-src]').forEach(placeholder => {
+                const src = placeholder.dataset.avatarSrc;
+                if (!src) return;
+
+                const probe = new Image();
+                probe.onload = () => {
+                    const image = document.createElement('img');
+                    image.className = 'saint-avatar';
+                    image.src = src;
+                    image.alt = placeholder.dataset.avatarAlt || '';
+                    placeholder.replaceWith(image);
+                };
+                probe.src = src;
+            });
+        }
 
         function applySavedTheme() {
             const icon = document.getElementById('theme-icon');
